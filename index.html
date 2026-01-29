@@ -1833,7 +1833,10 @@
         // Load test map configuration
         async function loadTestMap(mapName) {
             try {
-                const response = await fetch(`test-maps/${mapName}.json`);
+                // Support both test-maps/ and story-geometry/ paths
+                // Allow relative paths like "../story-geometry/mapName"
+                const mapPath = mapName.includes('/') ? mapName : `test-maps/${mapName}`;
+                const response = await fetch(`${mapPath}.json`);
                 const config = await response.json();
                 game.testConfig = config;
 
@@ -2097,6 +2100,47 @@
             return game.terrain.has(`${Math.floor(x)},${Math.floor(y)},${Math.floor(z)}`);
         }
 
+        // TODO: REFACTOR - Simple barrier system (defer full constraint system)
+        // This is a temporary implementation for rope bridge railings.
+        // Future: Replace with full constraint interface pattern from CONSTRAINT-INTERFACE-PATTERN.md
+        // Future: Support directional constraints, zone-based barriers, visual representation
+        function checkBarriers(newX, newZ) {
+            if (!game.testConfig || !game.testConfig.barriers) {
+                return true; // No barriers = movement allowed
+            }
+
+            const barriers = game.testConfig.barriers;
+
+            // Simple rope railing check for bridge
+            if (barriers.ropeRailings) {
+                const railings = barriers.ropeRailings;
+                const xFloor = Math.floor(newX);
+
+                // Check if we're on the bridge (within X bounds)
+                if (railings.northSide &&
+                    xFloor >= railings.northSide.xMin &&
+                    xFloor <= railings.northSide.xMax) {
+
+                    // Block movement beyond north railing
+                    if (newZ < railings.northSide.zLine) {
+                        return false;
+                    }
+                }
+
+                if (railings.southSide &&
+                    xFloor >= railings.southSide.xMin &&
+                    xFloor <= railings.southSide.xMax) {
+
+                    // Block movement beyond south railing
+                    if (newZ > railings.southSide.zLine) {
+                        return false;
+                    }
+                }
+            }
+
+            return true; // No barrier blocking movement
+        }
+
         // Update player visual position
         function updatePlayerPosition() {
             game.player.position.set(
@@ -2159,6 +2203,12 @@
                 const currentY = Math.floor(game.playerPos.y);
                 const newXFloor = Math.floor(newX);
                 const newZFloor = Math.floor(newZ);
+
+                // TODO: REFACTOR - Barrier check added for rope railings
+                // Check barriers first (e.g., rope railings on bridge)
+                if (!checkBarriers(newX, newZ)) {
+                    return; // Movement blocked by barrier
+                }
 
                 // Check if target space at same height is empty
                 if (!hasVoxel(newXFloor, currentY, newZFloor)) {
