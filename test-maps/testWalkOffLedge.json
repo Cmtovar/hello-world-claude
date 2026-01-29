@@ -1,0 +1,25 @@
+{
+  "name": "Test Walk Off Ledge",
+  "description": "Walk off elevated platform edge and fall to lower ground",
+  "mechanic": "gravity",
+  "playerStart": {
+    "x": -2,
+    "y": 3,
+    "z": 0
+  },
+  "goal": {
+    "x": 2,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": -2, "y": 2, "z": 0, "color": 16753920},
+    {"x": -1, "y": 2, "z": 0, "color": 16753920},
+    {"x": 0, "y": 2, "z": 0, "color": 16753920},
+    {"x": 1, "y": 0, "z": 0, "color": 65280},
+    {"x": 2, "y": 0, "z": 0, "color": 65280}
+  ],
+  "expectedInputs": ["w", "w", "w"],
+  "constraints": {},
+  "notes": "Edge case test. Player walks off elevated orange platform (y=2) at x=0. Gravity takes effect, player falls 2 blocks down to green ground (y=0) at x=1-2. Tests gravity trigger when walking into empty space."
+}

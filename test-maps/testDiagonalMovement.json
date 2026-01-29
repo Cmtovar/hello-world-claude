@@ -1,0 +1,36 @@
+{
+  "name": "Test Diagonal Movement",
+  "description": "Player walks diagonally (combining W+D keys)",
+  "mechanic": "diagonal_movement",
+  "playerStart": {
+    "x": -2,
+    "y": 1,
+    "z": -2
+  },
+  "goal": {
+    "x": 2,
+    "y": 1,
+    "z": 2
+  },
+  "voxels": [
+    {"x": -2, "y": 0, "z": -2, "color": 65280},
+    {"x": -2, "y": 0, "z": -1, "color": 65280},
+    {"x": -2, "y": 0, "z": 0, "color": 65280},
+    {"x": -1, "y": 0, "z": -2, "color": 65280},
+    {"x": -1, "y": 0, "z": -1, "color": 65280},
+    {"x": -1, "y": 0, "z": 0, "color": 65280},
+    {"x": 0, "y": 0, "z": -2, "color": 65280},
+    {"x": 0, "y": 0, "z": -1, "color": 65280},
+    {"x": 0, "y": 0, "z": 0, "color": 65280},
+    {"x": 0, "y": 0, "z": 1, "color": 65280},
+    {"x": 0, "y": 0, "z": 2, "color": 65280},
+    {"x": 1, "y": 0, "z": 0, "color": 65280},
+    {"x": 1, "y": 0, "z": 1, "color": 65280},
+    {"x": 1, "y": 0, "z": 2, "color": 65280},
+    {"x": 2, "y": 0, "z": 0, "color": 65280},
+    {"x": 2, "y": 0, "z": 1, "color": 65280},
+    {"x": 2, "y": 0, "z": 2, "color": 16753920}
+  ],
+  "expectedInputs": ["w+d", "w+d", "w+d", "w+d"],
+  "notes": "Large L-shaped platform. Player starts at bottom-left, goal at top-right. Alternating W and D creates diagonal path."
+}

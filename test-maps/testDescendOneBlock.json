@@ -1,0 +1,25 @@
+{
+  "name": "Test Descend One Block",
+  "description": "Player starts on elevated platform, must descend 1 block down",
+  "mechanic": "descend_one",
+  "playerStart": {
+    "x": 0,
+    "y": 2,
+    "z": 0
+  },
+  "goal": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": 0, "y": 0, "z": 0, "color": 65280},
+    {"x": 0, "y": 1, "z": 0, "color": 16753920},
+    {"x": -1, "y": 0, "z": 0, "color": 11184810},
+    {"x": 1, "y": 0, "z": 0, "color": 11184810},
+    {"x": 0, "y": 0, "z": -1, "color": 11184810},
+    {"x": 0, "y": 0, "z": 1, "color": 11184810}
+  ],
+  "expectedInputs": ["Shift"],
+  "notes": "Simple test - player on 2-block-tall pillar, descend to 1-block height"
+}

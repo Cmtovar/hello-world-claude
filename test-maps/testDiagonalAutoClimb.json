@@ -1,0 +1,26 @@
+{
+  "name": "Test Diagonal Auto-Climb",
+  "description": "Move diagonally while auto-climbing 1-block obstacles",
+  "mechanic": "auto_climb",
+  "playerStart": {
+    "x": -2,
+    "y": 1,
+    "z": -2
+  },
+  "goal": {
+    "x": 2,
+    "y": 2,
+    "z": 2
+  },
+  "voxels": [
+    {"x": -2, "y": 0, "z": -2, "color": 65280},
+    {"x": -1, "y": 0, "z": -1, "color": 65280},
+    {"x": 0, "y": 0, "z": 0, "color": 16753920},
+    {"x": 0, "y": 1, "z": 0, "color": 16753920},
+    {"x": 1, "y": 1, "z": 1, "color": 16753920},
+    {"x": 2, "y": 1, "z": 2, "color": 16753920}
+  ],
+  "expectedInputs": ["w+d", "w+d", "w+d", "w+d"],
+  "constraints": {},
+  "notes": "Tests diagonal movement combined with auto-climb. Player starts at y=0, moves diagonally (NE) while encountering 1-block step at x=0,z=0. Should auto-climb from y=0 to y=1, then continue diagonally on elevated platform."
+}

@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Tactical Game Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+            background: #1a1a2e;
+        }
+        #gameCanvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+        #ui {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.6;
+            transition: opacity 0.3s ease;
+        }
+        #ui.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            line-height: 1.8;
+            transition: opacity 0.3s ease;
+        }
+        #controls.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .key {
+            display: inline-block;
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            margin: 0 2px;
+        }
+
+        /* Test Menu Overlay */
+        #testMenu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            z-index: 1000;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #testMenu.hidden {
+            display: none;
+        }
+
+        #menuTitle {
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        #menuSubtitle {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        #testGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            #testGrid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            #menuTitle {
+                font-size: 22px;
+            }
+
+            #menuSubtitle {
+                font-size: 12px;
+            }
+
+            .testCard {
+                padding: 15px;
+            }
+        }
+
+        .testCard {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .testCard:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .testCard.implemented {
+            border-left: 4px solid #4caf50;
+        }
+
+        .testCard.tested {
+            border-left: 4px solid #2196f3;
+        }
+
+        .testCard.not-implemented {
+            border-left: 4px solid #9e9e9e;
+            opacity: 0.7;
+        }
+
+        .testCard.buggy {
+            border-left: 4px solid #f44336;
+        }
+
+        .testTitle {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .testDescription {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .testStatus {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .testStatus.implemented {
+            background: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .testStatus.tested {
+            background: #bbdefb;
+            color: #1565c0;
+        }
+
+        .testStatus.not-implemented {
+            background: #e0e0e0;
+            color: #616161;
+        }
+
+        .testStatus.buggy {
+            background: #ffcdd2;
+            color: #c62828;
+        }
+
+        #closeMenu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        #closeMenu:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+
+        /* Test Preview Modal */
+        #testPreview {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            max-width: 600px;
+            height: 70vh;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #testPreview.active {
+            display: flex;
+        }
+
+        #previewHeader {
+            background: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #previewTitle {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #closePreview {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+
+        #previewContent {
+            flex: 1;
+            position: relative;
+            background: #1a1a2e;
+        }
+
+        #previewCanvas {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Mobile controls for test preview */
+        #previewMobileControls {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 180px;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px), (hover: none) {
+            #previewMobileControls {
+                display: block;
+            }
+        }
+
+        #previewJoystickContainer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            pointer-events: all;
+        }
+
+        #previewJoystickBase {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #previewJoystickStick {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 1);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s;
+        }
+
+        #previewActionButtons {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: all;
+        }
+
+        #previewInfo {
+            padding: 15px 20px;
+            background: #f5f5f5;
+            border-top: 1px solid #ddd;
+        }
+
+        #previewDescription {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        #feedbackBox {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        #feedbackBox.active {
+            display: block;
+        }
+
+        #feedbackBox h4 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .feedbackOption {
+            display: block;
+            margin: 6px 0;
+            font-size: 13px;
+        }
+
+        .feedbackOption input {
+            margin-right: 8px;
+        }
+
+        #feedbackOtherText {
+            width: 100%;
+            margin-top: 8px;
+            padding: 6px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+
+        #feedbackOtherText.active {
+            display: block;
+        }
+
+        #submitFeedbackBtn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        #submitFeedbackBtn:hover {
+            background: #1976d2;
+        }
+
+        #previewActions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .previewBtn {
+            background: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .previewBtn:hover {
+            background: #45a049;
+        }
+
+        .previewBtn.secondary {
+            background: #2196f3;
+        }
+
+        .previewBtn.secondary:hover {
+            background: #1976d2;
+        }
+
+        .previewBtn:disabled {
+            background: #9e9e9e;
+            cursor: not-allowed;
+        }
+
+        #animationStatus {
+            padding: 8px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #856404;
+            margin-top: 10px;
+            display: none;
+        }
+
+        #animationStatus.active {
+            display: block;
+        }
+
+        /* Mobile Virtual Joystick */
+        #mobileControls {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            pointer-events: none;
+            z-index: 500;
+        }
+
+        @media (max-width: 768px), (hover: none) {
+            #mobileControls {
+                display: block;
+            }
+        }
+
+        #joystickContainer {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            pointer-events: all;
+        }
+
+        #joystickBase {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        #joystickStick {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 1);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s;
+        }
+
+        #actionButtons {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: all;
+        }
+
+        .actionButton {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+        }
+
+        .actionButton:active {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Mobile Virtual Joystick -->
+    <div id="mobileControls">
+        <div id="joystickContainer">
+            <div id="joystickBase">
+                <div id="joystickStick"></div>
+            </div>
+        </div>
+        <div id="actionButtons">
+            <div class="actionButton" id="climbButton">↑</div>
+            <div class="actionButton" id="descendButton">↓</div>
+        </div>
+    </div>
+
+    <!-- Test Menu Overlay -->
+    <div id="testMenu">
+        <button id="closeMenu">&times;</button>
+        <h1 id="menuTitle">Movement Mechanics Test Suite</h1>
+        <p id="menuSubtitle">Select a mechanic to preview its test</p>
+        <div id="testGrid"></div>
+    </div>
+
+    <!-- Test Preview Modal -->
+    <div id="testPreview">
+        <div id="previewHeader">
+            <div id="previewTitle">Test Preview</div>
+            <button id="closePreview">&times;</button>
+        </div>
+        <div id="previewContent">
+            <canvas id="previewCanvas"></canvas>
+            <!-- Mobile controls for test preview -->
+            <div id="previewMobileControls">
+                <div id="previewJoystickContainer">
+                    <div id="previewJoystickBase">
+                        <div id="previewJoystickStick"></div>
+                    </div>
+                </div>
+                <div id="previewActionButtons">
+                    <div class="actionButton" id="previewClimbButton">↑</div>
+                    <div class="actionButton" id="previewDescendButton">↓</div>
+                </div>
+            </div>
+        </div>
+        <div id="previewInfo">
+            <div id="previewDescription"></div>
+            <div id="previewActions">
+                <button class="previewBtn" id="playAnimationBtn">▶ Run Animation</button>
+                <button class="previewBtn secondary" id="playManualBtn">🎮 Play Manually</button>
+            </div>
+            <div id="animationStatus"></div>
+            <div id="feedbackBox">
+                <h4>What happened during testing?</h4>
+                <label class="feedbackOption">
+                    <input type="radio" name="feedback" value="didnt_work">
+                    Movement didn't work as expected
+                </label>
+                <label class="feedbackOption">
+                    <input type="radio" name="feedback" value="controls_confusing">
+                    Controls were confusing
+                </label>
+                <label class="feedbackOption">
+                    <input type="radio" name="feedback" value="couldnt_proceed">
+                    I couldn't figure out how to proceed
+                </label>
+                <label class="feedbackOption">
+                    <input type="radio" name="feedback" value="worked_fine">
+                    It worked fine, just exploring
+                </label>
+                <label class="feedbackOption">
+                    <input type="radio" name="feedback" value="other">
+                    Other
+                </label>
+                <textarea id="feedbackOtherText" placeholder="Please describe what happened..." rows="3"></textarea>
+                <button id="submitFeedbackBtn">Submit Feedback</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="ui">
+        <div><strong>3D Tactical Prototype</strong></div>
+        <div>Position: <span id="position">0, 0, 0</span></div>
+        <div>Height: <span id="height">0</span></div>
+        <div>Mode: <span id="mode">Ground</span></div>
+    </div>
+
+    <div id="controls">
+        <strong>Controls:</strong><br>
+        <span class="key">WASD</span> Move<br>
+        <span class="key">Space</span> Jump/Climb Up<br>
+        <span class="key">Shift</span> Descend<br>
+        <span class="key">Mouse Drag</span> Rotate Camera<br>
+        <span class="key">Scroll</span> Zoom
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // Game state
+        const game = {
+            scene: null,
+            camera: null,
+            renderer: null,
+            controls: null,
+            player: null,
+            terrain: new Map(), // Store voxel positions as "x,y,z" -> voxel data
+            playerPos: { x: 0, y: 1, z: 0 },
+            keys: {},
+            clock: new THREE.Clock(),
+            testMode: false,
+            testConfig: null,
+            menuOpen: false,
+            mechanicsData: null,
+            previewScene: null,
+            previewCamera: null,
+            previewRenderer: null,
+            previewPlayer: null,
+            previewPlayerPos: null,
+            previewGoalMarker: null,
+            previewTerrain: new Map(),
+            currentMechanic: null,
+            animationRunning: false,
+            animationInterval: null,
+            manualPlayMode: false,
+            previewKeys: {}
+        };
+
+        // Expose game state globally for testing
+        window.game = game;
+
+        // Parse URL parameters for test mode
+        const urlParams = new URLSearchParams(window.location.search);
+        const testMap = urlParams.get('test');
+        if (testMap) {
+            game.testMode = true;
+            console.log('Test mode enabled:', testMap);
+        } else {
+            // Show menu by default
+            game.menuOpen = true;
+        }
+
+        // Load mechanics graph and populate menu
+        async function loadMechanicsGraph() {
+            try {
+                const response = await fetch('mechanics-graph.json');
+                game.mechanicsData = await response.json();
+                populateTestMenu();
+            } catch (error) {
+                console.error('Failed to load mechanics graph:', error);
+            }
+        }
+
+        // Populate test menu with mechanics
+        function populateTestMenu() {
+            const testGrid = document.getElementById('testGrid');
+            testGrid.innerHTML = '';
+
+            const mechanics = game.mechanicsData.mechanics;
+            for (const [id, mechanic] of Object.entries(mechanics)) {
+                const card = document.createElement('div');
+                card.className = `testCard ${mechanic.status}`;
+                if (mechanic.tested) card.classList.add('tested');
+
+                card.innerHTML = `
+                    <div class="testTitle">${mechanic.name}</div>
+                    <div class="testDescription">${mechanic.description}</div>
+                    <span class="testStatus ${mechanic.status}">${mechanic.status.replace('_', ' ')}</span>
+                    ${mechanic.tested ? '<span class="testStatus tested">Tested</span>' : ''}
+                `;
+
+                card.addEventListener('click', () => openTestPreview(mechanic));
+                testGrid.appendChild(card);
+            }
+        }
+
+        // Open test preview modal
+        function openTestPreview(mechanic) {
+            const preview = document.getElementById('testPreview');
+            const title = document.getElementById('previewTitle');
+            const description = document.getElementById('previewDescription');
+
+            game.currentMechanic = mechanic;
+
+            title.textContent = mechanic.name;
+            description.innerHTML = `
+                <strong>Description:</strong> ${mechanic.description}<br>
+                <strong>Status:</strong> ${mechanic.status}<br>
+                <strong>Dependencies:</strong> ${mechanic.dependencies.join(', ') || 'None'}<br>
+                <strong>Tests:</strong> ${mechanic.tests.length > 0 ? mechanic.tests.join(', ') : 'No tests yet'}
+            `;
+
+            // Enable/disable buttons based on test availability
+            const hasTest = mechanic.tests && mechanic.tests.length > 0;
+            document.getElementById('playAnimationBtn').disabled = !hasTest;
+            document.getElementById('playManualBtn').disabled = !hasTest;
+
+            preview.classList.add('active');
+
+            // Reset animation state
+            stopAnimation();
+
+            // Initialize preview scene if first time
+            if (!game.previewScene) {
+                initPreviewScene(mechanic);
+            } else {
+                updatePreviewScene(mechanic);
+            }
+        }
+
+        // Initialize preview Three.js scene
+        function initPreviewScene(mechanic) {
+            console.log('Initializing preview scene for:', mechanic.name);
+            const canvas = document.getElementById('previewCanvas');
+            const container = document.getElementById('previewContent');
+
+            console.log('Canvas:', canvas, 'Container:', container);
+            console.log('Container size:', container.clientWidth, 'x', container.clientHeight);
+
+            // Scene
+            game.previewScene = new THREE.Scene();
+            game.previewScene.background = new THREE.Color(0x87ceeb);
+
+            // Camera
+            game.previewCamera = new THREE.PerspectiveCamera(
+                60,
+                container.clientWidth / container.clientHeight,
+                0.1,
+                100
+            );
+            game.previewCamera.position.set(5, 8, 5);
+            game.previewCamera.lookAt(0, 0, 0);
+
+            // Renderer
+            game.previewRenderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+            game.previewRenderer.setSize(container.clientWidth, container.clientHeight);
+
+            console.log('Preview renderer created:', game.previewRenderer);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            game.previewScene.add(ambientLight);
+
+            const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            sunLight.position.set(10, 20, 10);
+            game.previewScene.add(sunLight);
+
+            console.log('Lights added. Scene children:', game.previewScene.children.length);
+
+            updatePreviewScene(mechanic);
+            animatePreview();
+        }
+
+        // Update preview scene with test map
+        async function updatePreviewScene(mechanic) {
+            console.log('Updating preview scene for mechanic:', mechanic);
+
+            // Clear existing objects
+            while (game.previewScene.children.length > 2) {
+                game.previewScene.remove(game.previewScene.children[2]);
+            }
+
+            // Clear preview terrain map
+            game.previewTerrain.clear();
+
+            // Load test map if exists
+            if (mechanic.tests && mechanic.tests.length > 0) {
+                const testName = mechanic.tests[0];
+                console.log('Loading test map:', testName);
+                try {
+                    const response = await fetch(`test-maps/${testName}.json`);
+                    const config = await response.json();
+                    console.log('Test config loaded:', config);
+
+                    // Create voxels and track in terrain map
+                    console.log('Creating', config.voxels.length, 'voxels');
+                    config.voxels.forEach(v => {
+                        const geometry = new THREE.BoxGeometry(1, 1, 1);
+                        const material = new THREE.MeshLambertMaterial({ color: v.color || 0x808080 });
+                        const mesh = new THREE.Mesh(geometry, material);
+                        mesh.position.set(v.x, v.y, v.z);
+                        game.previewScene.add(mesh);
+
+                        // Track in terrain map for collision
+                        game.previewTerrain.set(`${v.x},${v.y},${v.z}`, { x: v.x, y: v.y, z: v.z });
+                    });
+                    console.log('Voxels added. Scene now has', game.previewScene.children.length, 'children');
+
+                    // Create player marker
+                    console.log('Creating player at', config.playerStart);
+                    const playerGeometry = new THREE.ConeGeometry(0.4, 1.2, 4);
+                    const playerMaterial = new THREE.MeshLambertMaterial({ color: 0xff4444 });
+                    game.previewPlayer = new THREE.Mesh(playerGeometry, playerMaterial);
+                    game.previewPlayerPos = { ...config.playerStart };
+                    game.previewPlayer.position.set(
+                        config.playerStart.x,
+                        config.playerStart.y + 0.6,
+                        config.playerStart.z
+                    );
+                    game.previewScene.add(game.previewPlayer);
+                    console.log('Player added at position:', game.previewPlayer.position);
+
+                    // Create goal marker
+                    if (config.goal) {
+                        const goalGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+                        const goalMaterial = new THREE.MeshBasicMaterial({
+                            color: 0x00ff00,
+                            transparent: true,
+                            opacity: 0.5,
+                            wireframe: true
+                        });
+                        game.previewGoalMarker = new THREE.Mesh(goalGeometry, goalMaterial);
+                        game.previewGoalMarker.position.set(
+                            config.goal.x,
+                            config.goal.y + 0.6,
+                            config.goal.z
+                        );
+                        game.previewScene.add(game.previewGoalMarker);
+                    }
+
+                    // Store config for animation
+                    game.testConfig = config;
+                } catch (error) {
+                    console.error('Failed to load test map:', error);
+                    // Show placeholder
+                    const geometry = new THREE.BoxGeometry(1, 1, 1);
+                    const material = new THREE.MeshLambertMaterial({ color: 0x808080 });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    game.previewScene.add(mesh);
+                }
+            } else {
+                // No test available - show placeholder
+                const geometry = new THREE.BoxGeometry(1, 1, 1);
+                const material = new THREE.MeshLambertMaterial({ color: 0x808080 });
+                const mesh = new THREE.Mesh(geometry, material);
+                game.previewScene.add(mesh);
+            }
+        }
+
+        // Animate preview scene
+        let previewAnimationStarted = false;
+        function animatePreview() {
+            if (!previewAnimationStarted) {
+                console.log('Preview animation loop started');
+                previewAnimationStarted = true;
+            }
+
+            requestAnimationFrame(animatePreview);
+
+            if (game.previewRenderer && game.previewScene && game.previewCamera) {
+                // Rotate camera only if not in manual mode
+                if (!game.manualPlayMode) {
+                    const time = Date.now() * 0.0005;
+                    game.previewCamera.position.x = Math.cos(time) * 8;
+                    game.previewCamera.position.z = Math.sin(time) * 8;
+                    game.previewCamera.lookAt(0, 2, 0);
+                } else {
+                    // Keep camera focused on player in manual mode
+                    game.previewCamera.lookAt(
+                        game.previewPlayerPos.x,
+                        game.previewPlayerPos.y,
+                        game.previewPlayerPos.z
+                    );
+                }
+
+                game.previewRenderer.render(game.previewScene, game.previewCamera);
+            }
+        }
+
+        // Close preview modal
+        function closeTestPreview() {
+            stopAnimation();
+            if (game.manualPlayMode) {
+                stopManualMode();
+            }
+            document.getElementById('testPreview').classList.remove('active');
+        }
+
+        // Play test animation
+        async function playTestAnimation() {
+            if (!game.testConfig || !game.previewPlayer || game.animationRunning) return;
+
+            game.animationRunning = true;
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.classList.add('active');
+            statusEl.style.background = '#fff3cd';
+            statusEl.style.borderColor = '#ffc107';
+            statusEl.style.color = '#856404';
+
+            // Disable buttons during animation
+            document.getElementById('playAnimationBtn').disabled = true;
+            document.getElementById('playManualBtn').disabled = true;
+
+            // Reset player to start position
+            console.log('=== Test Animation Starting ===');
+            console.log('Start position:', game.testConfig.playerStart);
+            console.log('Goal position:', game.testConfig.goal);
+            console.log('Terrain voxels:', Array.from(game.previewTerrain.keys()));
+
+            game.previewPlayerPos = { ...game.testConfig.playerStart };
+            updatePreviewPlayerPosition();
+            statusEl.textContent = `Starting at position (${game.previewPlayerPos.x}, ${game.previewPlayerPos.y}, ${game.previewPlayerPos.z})`;
+
+            await sleep(1000);
+
+            // Simulate inputs from test config
+            const inputs = game.testConfig.expectedInputs || ['Shift'];
+
+            for (let i = 0; i < inputs.length; i++) {
+                const input = inputs[i];
+                statusEl.textContent = `Animation: Pressing ${input}... (${i + 1}/${inputs.length})`;
+
+                // Wait before input
+                await sleep(800);
+
+                // Store position before
+                const posBefore = { ...game.previewPlayerPos };
+
+                // Simulate key press
+                await simulateInput(input);
+
+                // Check if position changed
+                const posAfter = { ...game.previewPlayerPos };
+                if (posBefore.y !== posAfter.y) {
+                    statusEl.textContent = `Moved from y=${posBefore.y} to y=${posAfter.y}`;
+                } else {
+                    statusEl.textContent = `No movement (still at y=${posBefore.y})`;
+                }
+
+                // Wait after input
+                await sleep(800);
+            }
+
+            console.log('Final position:', game.previewPlayerPos);
+
+            // Check if goal reached
+            if (game.testConfig.goal) {
+                const distance = calculatePreviewDistance(
+                    game.previewPlayerPos,
+                    game.testConfig.goal
+                );
+                const tolerance = Math.max(1.0, distance * 0.05);
+                const success = distance <= tolerance;
+
+                console.log(`Distance to goal: ${distance.toFixed(2)}, Tolerance: ${tolerance.toFixed(2)}, Success: ${success}`);
+
+                if (success) {
+                    statusEl.textContent = `✓ Test Passed! Reached (${game.previewPlayerPos.x}, ${game.previewPlayerPos.y}, ${game.previewPlayerPos.z})`;
+                    statusEl.style.background = '#d4edda';
+                    statusEl.style.borderColor = '#c3e6cb';
+                    statusEl.style.color = '#155724';
+                } else {
+                    statusEl.textContent = `✗ Test Failed. Distance to goal: ${distance.toFixed(2)} (need < ${tolerance.toFixed(2)})`;
+                    statusEl.style.background = '#f8d7da';
+                    statusEl.style.borderColor = '#f5c6cb';
+                    statusEl.style.color = '#721c24';
+                }
+            } else {
+                statusEl.textContent = '✓ Animation complete';
+            }
+
+            console.log('=== Test Animation Complete ===');
+
+            // Re-enable buttons
+            setTimeout(() => {
+                document.getElementById('playAnimationBtn').disabled = false;
+                document.getElementById('playManualBtn').disabled = false;
+                game.animationRunning = false;
+            }, 3000);
+        }
+
+        // Check if voxel exists in preview terrain
+        function hasPreviewVoxel(x, y, z) {
+            return game.previewTerrain.has(`${Math.floor(x)},${Math.floor(y)},${Math.floor(z)}`);
+        }
+
+        // Simulate keyboard input in preview
+        async function simulateInput(key) {
+            const currentY = Math.floor(game.previewPlayerPos.y);
+            const x = game.previewPlayerPos.x;
+            const z = game.previewPlayerPos.z;
+
+            console.log(`Simulating ${key} at position (${x.toFixed(1)}, ${currentY}, ${z.toFixed(1)})`);
+
+            // Handle diagonal inputs (e.g., "w+d")
+            if (key.includes('+')) {
+                const keys = key.split('+');
+                let moveX = 0;
+                let moveZ = 0;
+
+                keys.forEach(k => {
+                    if (k === 'w') moveX += 1;
+                    if (k === 's') moveX -= 1;
+                    if (k === 'a') moveZ -= 1;
+                    if (k === 'd') moveZ += 1;
+                });
+
+                // Normalize to unit vector
+                const magnitude = Math.sqrt(moveX * moveX + moveZ * moveZ);
+                if (magnitude > 0) {
+                    moveX /= magnitude;
+                    moveZ /= magnitude;
+                }
+
+                const newX = x + moveX;
+                const newZ = z + moveZ;
+                const newXFloor = Math.floor(newX);
+                const newZFloor = Math.floor(newZ);
+
+                // Try to move (same logic as manual mode)
+                if (!hasPreviewVoxel(newXFloor, currentY, newZFloor)) {
+                    if (hasPreviewVoxel(newXFloor, currentY - 1, newZFloor)) {
+                        game.previewPlayerPos.x = newX;
+                        game.previewPlayerPos.z = newZ;
+                        console.log(`Diagonal move to (${newX.toFixed(2)}, ${currentY}, ${newZ.toFixed(2)})`);
+                        updatePreviewPlayerPosition(true);
+                        await sleep(600);
+                        return;
+                    }
+                }
+
+                console.log(`Cannot move diagonally`);
+                return;
+            }
+
+            if (key === 'Shift') {
+                // Manual descent logic (matches main game)
+                const nextY = currentY - 1;
+
+                if (nextY >= 1) {
+                    // Check if there's a voxel to stand on at nextY-1
+                    if (hasPreviewVoxel(x, nextY - 1, z)) {
+                        console.log(`Manual descending from ${currentY} to ${nextY}`);
+                        game.previewPlayerPos.y = nextY;
+                        updatePreviewPlayerPosition(true);
+                        await sleep(600);
+                    } else {
+                        console.log(`Cannot descend: no voxel at ${nextY - 1}`);
+                    }
+                } else {
+                    console.log(`Cannot descend: nextY=${nextY} < 1`);
+                }
+            } else if (key === ' ' || key === 'Space') {
+                // Climb logic
+                const nextY = currentY + 1;
+                if (!hasPreviewVoxel(x, nextY, z)) {
+                    if (hasPreviewVoxel(x, nextY - 1, z)) {
+                        console.log(`Climbing from ${currentY} to ${nextY}`);
+                        game.previewPlayerPos.y = nextY;
+                        updatePreviewPlayerPosition(true);
+                        await sleep(600);
+                    } else {
+                        console.log(`Cannot climb: no voxel at ${nextY - 1}`);
+                    }
+                } else {
+                    console.log(`Cannot climb: voxel blocks at ${nextY}`);
+                }
+            } else if (key === 'w' || key === 's' || key === 'a' || key === 'd') {
+                // WASD movement
+                let newX = x;
+                let newZ = z;
+                const moveDistance = 1;
+
+                // For preview, we'll just move in cardinal directions
+                if (key === 'w') newX += moveDistance;
+                if (key === 's') newX -= moveDistance;
+                if (key === 'a') newZ -= moveDistance;
+                if (key === 'd') newZ += moveDistance;
+
+                console.log(`Attempting to move from (${x.toFixed(1)}, ${currentY}, ${z.toFixed(1)}) to (${newX.toFixed(1)}, ${currentY}, ${newZ.toFixed(1)})`);
+
+                // Check if new position is walkable
+                const newXFloor = Math.floor(newX);
+                const newZFloor = Math.floor(newZ);
+
+                // Check if target space at same height is empty
+                if (!hasPreviewVoxel(newXFloor, currentY, newZFloor)) {
+                    // Check if there's ground below (at currentY - 1)
+                    if (hasPreviewVoxel(newXFloor, currentY - 1, newZFloor)) {
+                        // Can walk there (same level)
+                        console.log(`Walking to (${newX.toFixed(1)}, ${currentY}, ${newZ.toFixed(1)})`);
+                        game.previewPlayerPos.x = newX;
+                        game.previewPlayerPos.z = newZ;
+                        updatePreviewPlayerPosition(true);
+                        await sleep(600);
+                    } else {
+                        // No ground at same level, check one level down (auto-descent)
+                        const lowerY = currentY - 1;
+                        if (lowerY >= 1 && !hasPreviewVoxel(newXFloor, lowerY, newZFloor)) {
+                            if (hasPreviewVoxel(newXFloor, lowerY - 1, newZFloor)) {
+                                // Auto-descend while walking
+                                console.log(`Auto-descending while walking to (${newX.toFixed(1)}, ${lowerY}, ${newZ.toFixed(1)})`);
+                                game.previewPlayerPos.x = newX;
+                                game.previewPlayerPos.z = newZ;
+                                game.previewPlayerPos.y = lowerY;
+                                updatePreviewPlayerPosition(true);
+                                await sleep(600);
+                            } else {
+                                console.log(`Cannot move: no ground at lower level`);
+                            }
+                        } else {
+                            console.log(`Cannot move: no ground below`);
+                        }
+                    }
+                } else {
+                    // There's a voxel in the way at current height
+                    // Try auto-climb
+                    const higherY = currentY + 1;
+                    if (!hasPreviewVoxel(newXFloor, higherY, newZFloor)) {
+                        if (hasPreviewVoxel(newXFloor, higherY - 1, newZFloor)) {
+                            console.log(`Auto-climbing while walking to (${newX.toFixed(1)}, ${higherY}, ${newZ.toFixed(1)})`);
+                            game.previewPlayerPos.x = newX;
+                            game.previewPlayerPos.z = newZ;
+                            game.previewPlayerPos.y = higherY;
+                            updatePreviewPlayerPosition(true);
+                            await sleep(600);
+                        } else {
+                            console.log(`Cannot move: voxel blocks path and can't auto-climb`);
+                        }
+                    } else {
+                        console.log(`Cannot move: voxel blocks path`);
+                    }
+                }
+            }
+        }
+
+        // Update preview player visual position (with smooth animation)
+        function updatePreviewPlayerPosition(animate = false) {
+            if (game.previewPlayer && game.previewPlayerPos) {
+                const targetX = game.previewPlayerPos.x;
+                const targetY = game.previewPlayerPos.y + 0.6;
+                const targetZ = game.previewPlayerPos.z;
+
+                if (animate) {
+                    // Smooth animation for all axes
+                    const startX = game.previewPlayer.position.x;
+                    const startY = game.previewPlayer.position.y;
+                    const startZ = game.previewPlayer.position.z;
+                    const duration = 500; // ms
+                    const startTime = Date.now();
+
+                    function animateMovement() {
+                        const elapsed = Date.now() - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+
+                        // Easing function
+                        const eased = progress < 0.5
+                            ? 2 * progress * progress
+                            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                        game.previewPlayer.position.x = startX + (targetX - startX) * eased;
+                        game.previewPlayer.position.y = startY + (targetY - startY) * eased;
+                        game.previewPlayer.position.z = startZ + (targetZ - startZ) * eased;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animateMovement);
+                        }
+                    }
+
+                    animateMovement();
+                } else {
+                    // Instant
+                    game.previewPlayer.position.set(targetX, targetY, targetZ);
+                }
+            }
+        }
+
+        // Calculate distance in preview
+        function calculatePreviewDistance(pos1, pos2) {
+            const dx = pos1.x - pos2.x;
+            const dy = pos1.y - pos2.y;
+            const dz = pos1.z - pos2.z;
+            return Math.sqrt(dx * dx + dy * dy + dz * dz);
+        }
+
+        // Stop animation
+        function stopAnimation() {
+            game.animationRunning = false;
+            if (game.animationInterval) {
+                clearInterval(game.animationInterval);
+                game.animationInterval = null;
+            }
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.classList.remove('active');
+            statusEl.style.background = '#fff3cd';
+            statusEl.style.borderColor = '#ffc107';
+            statusEl.style.color = '#856404';
+        }
+
+        // Play test manually (in preview window)
+        // Check if input is allowed by test constraints
+        function isInputAllowed(key) {
+            if (!game.testConfig || !game.testConfig.constraints || !game.testConfig.constraints.allowedInputs) {
+                return true; // No constraints = all inputs allowed
+            }
+
+            const allowed = game.testConfig.constraints.allowedInputs;
+
+            // Check single key
+            if (allowed.includes(key)) return true;
+
+            // Check for combination (e.g., "w+d")
+            const currentKeys = Object.keys(game.previewKeys).filter(k => game.previewKeys[k]);
+            if (currentKeys.length === 2) {
+                const combo1 = currentKeys.sort().join('+');
+                const combo2 = currentKeys[0] + '+' + currentKeys[1];
+                const combo3 = currentKeys[1] + '+' + currentKeys[0];
+
+                if (allowed.includes(combo1) || allowed.includes(combo2) || allowed.includes(combo3)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // Setup mobile controls for test preview
+        let previewMobileTouchHandlers = null;
+
+        function setupPreviewMobileControls() {
+            const joystickContainer = document.getElementById('previewJoystickContainer');
+            const joystickStick = document.getElementById('previewJoystickStick');
+            const climbButton = document.getElementById('previewClimbButton');
+            const descendButton = document.getElementById('previewDescendButton');
+
+            if (!joystickContainer) return;
+
+            let joystickActive = false;
+            let joystickStartPos = { x: 0, y: 0 };
+
+            // Store handlers for cleanup
+            previewMobileTouchHandlers = {
+                joystickStart: (e) => {
+                    e.preventDefault();
+                    joystickActive = true;
+                    const touch = e.touches[0];
+                    const rect = joystickContainer.getBoundingClientRect();
+                    joystickStartPos = {
+                        x: rect.left + rect.width / 2,
+                        y: rect.top + rect.height / 2
+                    };
+                    updatePreviewJoystick(touch.clientX, touch.clientY);
+                },
+                joystickMove: (e) => {
+                    e.preventDefault();
+                    if (!joystickActive) return;
+                    const touch = e.touches[0];
+                    updatePreviewJoystick(touch.clientX, touch.clientY);
+                },
+                joystickEnd: (e) => {
+                    e.preventDefault();
+                    joystickActive = false;
+                    resetPreviewJoystick();
+                },
+                climbStart: (e) => {
+                    e.preventDefault();
+                    if (isInputAllowed(' ')) {
+                        game.previewKeys[' '] = true;
+                        processPreviewInput(' ');
+                    }
+                },
+                climbEnd: (e) => {
+                    e.preventDefault();
+                    game.previewKeys[' '] = false;
+                },
+                descendStart: (e) => {
+                    e.preventDefault();
+                    if (isInputAllowed('shift')) {
+                        game.previewKeys['shift'] = true;
+                        processPreviewInput('shift');
+                    }
+                },
+                descendEnd: (e) => {
+                    e.preventDefault();
+                    game.previewKeys['shift'] = false;
+                }
+            };
+
+            function updatePreviewJoystick(touchX, touchY) {
+                const deltaX = touchX - joystickStartPos.x;
+                const deltaY = touchY - joystickStartPos.y;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const maxDistance = 35;
+
+                const clampedDistance = Math.min(distance, maxDistance);
+                const angle = Math.atan2(deltaY, deltaX);
+                const stickX = Math.cos(angle) * clampedDistance;
+                const stickY = Math.sin(angle) * clampedDistance;
+
+                joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
+
+                const normalizedX = stickX / maxDistance;
+                const normalizedY = stickY / maxDistance;
+                const threshold = 0.3;
+
+                // Clear all directional keys first
+                game.previewKeys['w'] = false;
+                game.previewKeys['s'] = false;
+                game.previewKeys['a'] = false;
+                game.previewKeys['d'] = false;
+
+                // Set keys based on joystick direction (with constraint checking)
+                if (Math.abs(normalizedY) > threshold) {
+                    if (normalizedY < 0 && isInputAllowed('w')) game.previewKeys['w'] = true;
+                    if (normalizedY > 0 && isInputAllowed('s')) game.previewKeys['s'] = true;
+                }
+                if (Math.abs(normalizedX) > threshold) {
+                    if (normalizedX > 0 && isInputAllowed('d')) game.previewKeys['d'] = true;
+                    if (normalizedX < 0 && isInputAllowed('a')) game.previewKeys['a'] = true;
+                }
+
+                // Trigger movement
+                const activeKeys = Object.keys(game.previewKeys).filter(k => game.previewKeys[k]);
+                if (activeKeys.length > 0) {
+                    processPreviewInput(activeKeys[0]);
+                }
+            }
+
+            function resetPreviewJoystick() {
+                joystickStick.style.transform = 'translate(-50%, -50%)';
+                game.previewKeys['w'] = false;
+                game.previewKeys['s'] = false;
+                game.previewKeys['a'] = false;
+                game.previewKeys['d'] = false;
+            }
+
+            // Attach event listeners
+            joystickContainer.addEventListener('touchstart', previewMobileTouchHandlers.joystickStart);
+            joystickContainer.addEventListener('touchmove', previewMobileTouchHandlers.joystickMove);
+            joystickContainer.addEventListener('touchend', previewMobileTouchHandlers.joystickEnd);
+
+            climbButton.addEventListener('touchstart', previewMobileTouchHandlers.climbStart);
+            climbButton.addEventListener('touchend', previewMobileTouchHandlers.climbEnd);
+
+            descendButton.addEventListener('touchstart', previewMobileTouchHandlers.descendStart);
+            descendButton.addEventListener('touchend', previewMobileTouchHandlers.descendEnd);
+        }
+
+        function cleanupPreviewMobileControls() {
+            if (!previewMobileTouchHandlers) return;
+
+            const joystickContainer = document.getElementById('previewJoystickContainer');
+            const climbButton = document.getElementById('previewClimbButton');
+            const descendButton = document.getElementById('previewDescendButton');
+
+            if (joystickContainer) {
+                joystickContainer.removeEventListener('touchstart', previewMobileTouchHandlers.joystickStart);
+                joystickContainer.removeEventListener('touchmove', previewMobileTouchHandlers.joystickMove);
+                joystickContainer.removeEventListener('touchend', previewMobileTouchHandlers.joystickEnd);
+            }
+
+            if (climbButton) {
+                climbButton.removeEventListener('touchstart', previewMobileTouchHandlers.climbStart);
+                climbButton.removeEventListener('touchend', previewMobileTouchHandlers.climbEnd);
+            }
+
+            if (descendButton) {
+                descendButton.removeEventListener('touchstart', previewMobileTouchHandlers.descendStart);
+                descendButton.removeEventListener('touchend', previewMobileTouchHandlers.descendEnd);
+            }
+
+            previewMobileTouchHandlers = null;
+        }
+
+        function playTestManually() {
+            console.log('playTestManually called, manualPlayMode:', game.manualPlayMode);
+
+            if (!game.currentMechanic || !game.currentMechanic.tests || game.currentMechanic.tests.length === 0) {
+                alert('No test available for this mechanic');
+                return;
+            }
+
+            // If already in manual mode, stop it first
+            if (game.manualPlayMode) {
+                console.log('Already in manual mode, stopping first');
+                stopManualMode();
+                return;
+            }
+
+            // Reset player to start
+            if (game.testConfig) {
+                game.previewPlayerPos = { ...game.testConfig.playerStart };
+                updatePreviewPlayerPosition(false); // Instant reset
+            }
+
+            // Enter manual play mode
+            game.manualPlayMode = true;
+            game.animationRunning = false;
+            game.previewKeys = {};
+
+            // Update UI
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.classList.add('active');
+            statusEl.textContent = '🎮 Manual Mode: WASD (move) | Space (climb) | Shift (descend)';
+            statusEl.style.background = '#d1ecf1';
+            statusEl.style.borderColor = '#bee5eb';
+            statusEl.style.color = '#0c5460';
+
+            // Update button states
+            const playBtn = document.getElementById('playAnimationBtn');
+            const manualBtn = document.getElementById('playManualBtn');
+
+            playBtn.disabled = true;
+            manualBtn.textContent = '⏹ Stop Manual Mode';
+
+            // Add keyboard listeners (remove old ones first to avoid duplicates)
+            document.removeEventListener('keydown', handlePreviewKeyDown);
+            document.removeEventListener('keyup', handlePreviewKeyUp);
+            document.addEventListener('keydown', handlePreviewKeyDown);
+            document.addEventListener('keyup', handlePreviewKeyUp);
+
+            // Setup mobile controls for preview
+            setupPreviewMobileControls();
+
+            console.log('Manual play mode enabled');
+        }
+
+        // Stop manual play mode
+        function stopManualMode() {
+            console.log('stopManualMode called');
+
+            if (!game.manualPlayMode) {
+                console.log('Not in manual mode, nothing to stop');
+                return;
+            }
+
+            // Check if goal was reached
+            const goalReached = game.testConfig && game.testConfig.goal &&
+                                calculatePreviewDistance(game.previewPlayerPos, game.testConfig.goal) <=
+                                Math.max(1.0, calculatePreviewDistance(game.previewPlayerPos, game.testConfig.goal) * 0.05);
+
+            game.manualPlayMode = false;
+            game.previewKeys = {};
+
+            // Remove keyboard listeners
+            document.removeEventListener('keydown', handlePreviewKeyDown);
+            document.removeEventListener('keyup', handlePreviewKeyUp);
+
+            // Cleanup mobile controls
+            cleanupPreviewMobileControls();
+
+            // Update UI
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.classList.remove('active');
+
+            // Reset buttons
+            const playBtn = document.getElementById('playAnimationBtn');
+            const manualBtn = document.getElementById('playManualBtn');
+
+            playBtn.disabled = false;
+            manualBtn.textContent = '🎮 Play Manually';
+
+            // Show feedback box if goal not reached
+            if (!goalReached && game.testConfig && game.testConfig.goal) {
+                showFeedbackBox();
+            }
+
+            console.log('Manual play mode disabled');
+        }
+
+        // Show feedback box
+        function showFeedbackBox() {
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.classList.add('active');
+
+            // Reset form
+            document.querySelectorAll('input[name="feedback"]').forEach(radio => radio.checked = false);
+            document.getElementById('feedbackOtherText').classList.remove('active');
+            document.getElementById('feedbackOtherText').value = '';
+        }
+
+        // Hide feedback box
+        function hideFeedbackBox() {
+            document.getElementById('feedbackBox').classList.remove('active');
+        }
+
+        // Handle feedback submission
+        function submitFeedback() {
+            const selected = document.querySelector('input[name="feedback"]:checked');
+            if (!selected) {
+                alert('Please select an option');
+                return;
+            }
+
+            const feedbackValue = selected.value;
+            const otherText = document.getElementById('feedbackOtherText').value;
+
+            const feedback = {
+                mechanic: game.currentMechanic ? game.currentMechanic.id : 'unknown',
+                test: game.testConfig ? game.testConfig.name : 'unknown',
+                result: feedbackValue,
+                details: feedbackValue === 'other' ? otherText : null,
+                playerPosition: game.previewPlayerPos,
+                goalPosition: game.testConfig ? game.testConfig.goal : null,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('=== User Feedback ===');
+            console.log(JSON.stringify(feedback, null, 2));
+            console.log('====================');
+
+            // Show confirmation
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.classList.add('active');
+            statusEl.textContent = '✓ Feedback recorded. Thank you!';
+            statusEl.style.background = '#d4edda';
+            statusEl.style.borderColor = '#c3e6cb';
+            statusEl.style.color = '#155724';
+
+            hideFeedbackBox();
+
+            // Clear status after a moment
+            setTimeout(() => {
+                statusEl.classList.remove('active');
+            }, 3000);
+        }
+
+        // Handle preview keyboard input
+        function handlePreviewKeyDown(e) {
+            if (!game.manualPlayMode) return;
+
+            const key = e.key.toLowerCase();
+
+            // Check if input is allowed by constraints
+            if (!isInputAllowed(key)) {
+                console.log(`Input "${key}" blocked by constraints`);
+                return;
+            }
+
+            if (!game.previewKeys[key]) {
+                game.previewKeys[key] = true;
+
+                // Process input immediately
+                processPreviewInput(key);
+            }
+        }
+
+        function handlePreviewKeyUp(e) {
+            if (!game.manualPlayMode) return;
+            game.previewKeys[e.key.toLowerCase()] = false;
+        }
+
+        // Process manual input in preview (with diagonal support)
+        function processPreviewInput(key) {
+            const currentY = Math.floor(game.previewPlayerPos.y);
+            const x = game.previewPlayerPos.x;
+            const z = game.previewPlayerPos.z;
+
+            let moved = false;
+
+            // Handle WASD movement (check for diagonals)
+            if (key === 'w' || key === 's' || key === 'a' || key === 'd') {
+                // Accumulate movement from all currently pressed WASD keys
+                let moveX = 0;
+                let moveZ = 0;
+
+                if (game.previewKeys['w']) moveX += 1;
+                if (game.previewKeys['s']) moveX -= 1;
+                if (game.previewKeys['a']) moveZ -= 1;
+                if (game.previewKeys['d']) moveZ += 1;
+
+                if (moveX !== 0 || moveZ !== 0) {
+                    // Normalize to unit vector FIRST (consistent 1.0 length)
+                    const magnitude = Math.sqrt(moveX * moveX + moveZ * moveZ);
+                    moveX /= magnitude;
+                    moveZ /= magnitude;
+
+                    const newX = x + moveX;
+                    const newZ = z + moveZ;
+                    const newXFloor = Math.floor(newX);
+                    const newZFloor = Math.floor(newZ);
+
+                    // Try to move
+                    if (!hasPreviewVoxel(newXFloor, currentY, newZFloor)) {
+                        if (hasPreviewVoxel(newXFloor, currentY - 1, newZFloor)) {
+                            // Same level
+                            game.previewPlayerPos.x = newX;
+                            game.previewPlayerPos.z = newZ;
+                            moved = true;
+                            console.log(`Moved to (${newX.toFixed(2)}, ${currentY}, ${newZ.toFixed(2)})`);
+                        } else {
+                            // Auto-descent
+                            const lowerY = currentY - 1;
+                            if (lowerY >= 1 && hasPreviewVoxel(newXFloor, lowerY - 1, newZFloor)) {
+                                game.previewPlayerPos.x = newX;
+                                game.previewPlayerPos.z = newZ;
+                                game.previewPlayerPos.y = lowerY;
+                                moved = true;
+                                console.log(`Auto-descended to (${newX.toFixed(2)}, ${lowerY}, ${newZ.toFixed(2)})`);
+                            }
+                        }
+                    } else {
+                        // Auto-climb
+                        const higherY = currentY + 1;
+                        if (!hasPreviewVoxel(newXFloor, higherY, newZFloor) &&
+                            hasPreviewVoxel(newXFloor, higherY - 1, newZFloor)) {
+                            game.previewPlayerPos.x = newX;
+                            game.previewPlayerPos.z = newZ;
+                            game.previewPlayerPos.y = higherY;
+                            moved = true;
+                            console.log(`Auto-climbed to (${newX.toFixed(2)}, ${higherY}, ${newZ.toFixed(2)})`);
+                        }
+                    }
+                }
+
+                if (moved) {
+                    updatePreviewPlayerPosition(true);
+                    checkPreviewGoalReached();
+                }
+                return; // Early return for WASD
+            }
+
+            // Vertical movement
+            if (key === 'shift') {
+                // Manual descend
+                const nextY = currentY - 1;
+                if (nextY >= 1 && hasPreviewVoxel(Math.floor(x), nextY - 1, Math.floor(z))) {
+                    game.previewPlayerPos.y = nextY;
+                    moved = true;
+                    console.log(`Manual descended to ${nextY}`);
+                }
+            } else if (key === ' ') {
+                // Climb
+                const nextY = currentY + 1;
+                if (!hasPreviewVoxel(Math.floor(x), nextY, Math.floor(z)) &&
+                    hasPreviewVoxel(Math.floor(x), nextY - 1, Math.floor(z))) {
+                    game.previewPlayerPos.y = nextY;
+                    moved = true;
+                    console.log(`Climbed to ${nextY}`);
+                }
+            }
+
+            if (moved) {
+                updatePreviewPlayerPosition(true);
+                checkPreviewGoalReached();
+            }
+        }
+
+        // Check if goal reached in manual mode
+        function checkPreviewGoalReached() {
+            if (!game.testConfig || !game.testConfig.goal) return;
+
+            const distance = calculatePreviewDistance(
+                game.previewPlayerPos,
+                game.testConfig.goal
+            );
+            const tolerance = Math.max(1.0, distance * 0.05);
+
+            const statusEl = document.getElementById('animationStatus');
+            statusEl.textContent = `🎮 Manual Mode | Position: (${game.previewPlayerPos.x.toFixed(1)}, ${game.previewPlayerPos.y.toFixed(1)}, ${game.previewPlayerPos.z.toFixed(1)}) | Distance to goal: ${distance.toFixed(2)}`;
+
+            if (distance <= tolerance) {
+                statusEl.textContent = '✓ Goal Reached! 🎉';
+                statusEl.style.background = '#d4edda';
+                statusEl.style.borderColor = '#c3e6cb';
+                statusEl.style.color = '#155724';
+
+                // Celebrate with goal marker animation
+                if (game.previewGoalMarker) {
+                    game.previewGoalMarker.material.opacity = 1.0;
+                }
+
+                // Ask user to confirm what they saw
+                setTimeout(() => {
+                    askUserWhatHappened();
+                }, 1000);
+            }
+        }
+
+        // Ask user to confirm the test result
+        function askUserWhatHappened() {
+            const response = confirm(
+                "Did you successfully descend from the orange platform to the green base?\n\n" +
+                "Click OK if the red triangle (player) moved down.\n" +
+                "Click Cancel if something went wrong or you're unsure."
+            );
+
+            const statusEl = document.getElementById('animationStatus');
+            if (response) {
+                statusEl.textContent = '✓ User Confirmed: Test Passed! 🎉';
+                statusEl.style.background = '#d4edda';
+                statusEl.style.borderColor = '#c3e6cb';
+                statusEl.style.color = '#155724';
+            } else {
+                statusEl.textContent = '⚠ User Report: Something went wrong or unclear';
+                statusEl.style.background = '#fff3cd';
+                statusEl.style.borderColor = '#ffc107';
+                statusEl.style.color = '#856404';
+
+                // Offer to report issue
+                setTimeout(() => {
+                    const details = prompt("What happened? (This helps us improve the test)");
+                    if (details) {
+                        console.log('User feedback:', details);
+                        statusEl.textContent = '📝 Feedback recorded: ' + details;
+                    }
+                }, 500);
+            }
+        }
+
+        // Helper: sleep function
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Initialize Three.js
+        async function init() {
+            // Scene
+            game.scene = new THREE.Scene();
+            game.scene.background = new THREE.Color(0x87ceeb); // Sky blue
+            game.scene.fog = new THREE.Fog(0x87ceeb, 50, 200);
+
+            // Camera
+            game.camera = new THREE.PerspectiveCamera(
+                60,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                1000
+            );
+            game.camera.position.set(15, 20, 15);
+
+            // Renderer
+            const canvas = document.getElementById('gameCanvas');
+            game.renderer = new THREE.WebGLRenderer({
+                canvas,
+                antialias: true
+            });
+            game.renderer.setSize(window.innerWidth, window.innerHeight);
+            game.renderer.shadowMap.enabled = true;
+            game.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            game.scene.add(ambientLight);
+
+            const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            sunLight.position.set(50, 100, 50);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 2048;
+            sunLight.shadow.mapSize.height = 2048;
+            sunLight.shadow.camera.far = 200;
+            sunLight.shadow.camera.left = -50;
+            sunLight.shadow.camera.right = 50;
+            sunLight.shadow.camera.top = 50;
+            sunLight.shadow.camera.bottom = -50;
+            game.scene.add(sunLight);
+
+            // Orbit controls
+            game.controls = new OrbitControls(game.camera, canvas);
+            game.controls.enableDamping = true;
+            game.controls.dampingFactor = 0.05;
+            game.controls.minDistance = 5;
+            game.controls.maxDistance = 50;
+            game.controls.maxPolarAngle = Math.PI / 2.2;
+
+            // Create terrain (test map or default)
+            if (game.testMode && testMap) {
+                await loadTestMap(testMap);
+            } else {
+                createTerrain();
+            }
+
+            // Create player
+            createPlayer();
+
+            // Event listeners
+            window.addEventListener('resize', onResize);
+            window.addEventListener('keydown', (e) => game.keys[e.key.toLowerCase()] = true);
+            window.addEventListener('keyup', (e) => game.keys[e.key.toLowerCase()] = false);
+
+            // Mobile touch controls
+            setupMobileControls();
+
+            // Start animation loop
+            animate();
+        }
+
+        // Load test map configuration
+        async function loadTestMap(mapName) {
+            try {
+                const response = await fetch(`test-maps/${mapName}.json`);
+                const config = await response.json();
+                game.testConfig = config;
+
+                console.log('Loading test map:', config);
+
+                // Set player start position
+                if (config.playerStart) {
+                    game.playerPos = { ...config.playerStart };
+                }
+
+                // Create voxels from config
+                if (config.voxels) {
+                    config.voxels.forEach(v => {
+                        createVoxel(v.x, v.y, v.z, v.color);
+                    });
+                }
+
+                // Create goal marker if specified
+                if (config.goal) {
+                    createGoalMarker(config.goal.x, config.goal.y, config.goal.z);
+                }
+
+                console.log('Test map loaded successfully');
+            } catch (error) {
+                console.error('Failed to load test map:', error);
+                // Fall back to default terrain
+                createTerrain();
+            }
+        }
+
+        // Create goal marker for tests
+        function createGoalMarker(x, y, z) {
+            const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x00ff00,
+                transparent: true,
+                opacity: 0.5,
+                wireframe: true
+            });
+            const marker = new THREE.Mesh(geometry, material);
+            marker.position.set(x, y + 0.6, z);
+            game.scene.add(marker);
+
+            // Store for test validation
+            window.testGoal = { x, y, z };
+        }
+
+        // Test helper: Check if player reached goal (5% tolerance)
+        window.isPlayerAtGoal = function() {
+            if (!window.testGoal) return false;
+
+            const dx = game.playerPos.x - window.testGoal.x;
+            const dy = game.playerPos.y - window.testGoal.y;
+            const dz = game.playerPos.z - window.testGoal.z;
+            const distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
+
+            // Calculate 5% of the starting distance (or use 1.0 as minimum)
+            const tolerance = Math.max(1.0, distance * 0.05);
+
+            return distance <= tolerance;
+        };
+
+        // Setup mobile touch controls
+        function setupMobileControls() {
+            const joystickContainer = document.getElementById('joystickContainer');
+            const joystickStick = document.getElementById('joystickStick');
+            const climbButton = document.getElementById('climbButton');
+            const descendButton = document.getElementById('descendButton');
+
+            let joystickActive = false;
+            let joystickStartPos = { x: 0, y: 0 };
+
+            // Joystick touch handling
+            joystickContainer.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                joystickActive = true;
+                const touch = e.touches[0];
+                const rect = joystickContainer.getBoundingClientRect();
+                joystickStartPos = {
+                    x: rect.left + rect.width / 2,
+                    y: rect.top + rect.height / 2
+                };
+                updateJoystick(touch.clientX, touch.clientY);
+            });
+
+            joystickContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (!joystickActive) return;
+                const touch = e.touches[0];
+                updateJoystick(touch.clientX, touch.clientY);
+            });
+
+            joystickContainer.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                joystickActive = false;
+                resetJoystick();
+            });
+
+            function updateJoystick(touchX, touchY) {
+                const deltaX = touchX - joystickStartPos.x;
+                const deltaY = touchY - joystickStartPos.y;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const maxDistance = 40;
+
+                // Clamp to max distance
+                const clampedDistance = Math.min(distance, maxDistance);
+                const angle = Math.atan2(deltaY, deltaX);
+                const stickX = Math.cos(angle) * clampedDistance;
+                const stickY = Math.sin(angle) * clampedDistance;
+
+                // Update stick position
+                joystickStick.style.transform = `translate(calc(-50% + ${stickX}px), calc(-50% + ${stickY}px))`;
+
+                // Update game keys based on joystick position
+                const normalizedX = stickX / maxDistance;
+                const normalizedY = stickY / maxDistance;
+                const threshold = 0.3;
+
+                // Clear all directional keys first
+                game.keys['w'] = false;
+                game.keys['s'] = false;
+                game.keys['a'] = false;
+                game.keys['d'] = false;
+
+                // Set keys based on joystick direction
+                if (Math.abs(normalizedY) > threshold) {
+                    if (normalizedY < 0) game.keys['w'] = true;  // Up = forward
+                    if (normalizedY > 0) game.keys['s'] = true;  // Down = backward
+                }
+                if (Math.abs(normalizedX) > threshold) {
+                    if (normalizedX > 0) game.keys['d'] = true;  // Right
+                    if (normalizedX < 0) game.keys['a'] = true;  // Left
+                }
+            }
+
+            function resetJoystick() {
+                joystickStick.style.transform = 'translate(-50%, -50%)';
+                game.keys['w'] = false;
+                game.keys['s'] = false;
+                game.keys['a'] = false;
+                game.keys['d'] = false;
+            }
+
+            // Action buttons
+            climbButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                game.keys[' '] = true;
+            });
+
+            climbButton.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                game.keys[' '] = false;
+            });
+
+            descendButton.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                game.keys['shift'] = true;
+            });
+
+            descendButton.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                game.keys['shift'] = false;
+            });
+        }
+
+        // Create voxel terrain
+        function createTerrain() {
+            const terrainSize = 20;
+            const voxelSize = 1;
+
+            // Create varied height terrain
+            for (let x = -terrainSize; x < terrainSize; x++) {
+                for (let z = -terrainSize; z < terrainSize; z++) {
+                    // Generate height using simple noise-like function
+                    const distance = Math.sqrt(x * x + z * z);
+                    const height = Math.floor(
+                        Math.sin(x * 0.3) * 2 +
+                        Math.cos(z * 0.3) * 2 +
+                        Math.sin(distance * 0.2) * 3
+                    );
+
+                    // Create vertical column of voxels
+                    for (let y = 0; y <= Math.max(0, height); y++) {
+                        createVoxel(x, y, z);
+                    }
+
+                    // Add some tall pillars (cliff-like structures)
+                    if (Math.random() < 0.05) {
+                        const pillarHeight = Math.floor(Math.random() * 8) + 5;
+                        for (let y = height + 1; y <= height + pillarHeight; y++) {
+                            createVoxel(x, y, z);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Create a single voxel
+        function createVoxel(x, y, z, customColor = null) {
+            const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+            // Color based on height or custom color
+            let color;
+            if (customColor !== null) {
+                color = customColor;
+            } else if (y === 0) {
+                color = 0x8b7355; // Brown (ground)
+            } else if (y < 2) {
+                color = 0x228b22; // Dark green
+            } else if (y < 5) {
+                color = 0x90ee90; // Light green
+            } else if (y < 8) {
+                color = 0x808080; // Gray (stone)
+            } else {
+                color = 0xffffff; // White (snow peaks)
+            }
+
+            const material = new THREE.MeshLambertMaterial({ color });
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.position.set(x, y, z);
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+
+            game.scene.add(mesh);
+            game.terrain.set(`${x},${y},${z}`, { x, y, z, mesh });
+        }
+
+        // Create player unit
+        function createPlayer() {
+            const geometry = new THREE.ConeGeometry(0.4, 1.2, 4);
+            const material = new THREE.MeshLambertMaterial({ color: 0xff4444 });
+            game.player = new THREE.Mesh(geometry, material);
+            game.player.castShadow = true;
+
+            // Set player position if not already set by test map
+            if (!game.playerPos || !game.testMode) {
+                // Start on a ground voxel
+                const startHeight = getTerrainHeightAt(0, 0);
+                game.playerPos = { x: 0, y: startHeight + 1, z: 0 };
+            }
+            updatePlayerPosition();
+
+            game.scene.add(game.player);
+        }
+
+        // Get terrain height at x, z position
+        function getTerrainHeightAt(x, z) {
+            let maxY = -1;
+            for (let y = 20; y >= 0; y--) {
+                if (game.terrain.has(`${x},${y},${z}`)) {
+                    maxY = y;
+                    break;
+                }
+            }
+            return maxY;
+        }
+
+        // Check if voxel exists at position
+        function hasVoxel(x, y, z) {
+            return game.terrain.has(`${Math.floor(x)},${Math.floor(y)},${Math.floor(z)}`);
+        }
+
+        // Update player visual position
+        function updatePlayerPosition() {
+            game.player.position.set(
+                game.playerPos.x,
+                game.playerPos.y + 0.6,
+                game.playerPos.z
+            );
+
+            // Update camera target
+            game.controls.target.set(
+                game.playerPos.x,
+                game.playerPos.y,
+                game.playerPos.z
+            );
+
+            // Update UI
+            document.getElementById('position').textContent =
+                `${Math.floor(game.playerPos.x)}, ${Math.floor(game.playerPos.y)}, ${Math.floor(game.playerPos.z)}`;
+            document.getElementById('height').textContent =
+                Math.floor(game.playerPos.y);
+        }
+
+        // Handle player movement
+        function handleMovement(delta) {
+            const moveSpeed = 3;
+            const moveDistance = moveSpeed * delta;
+
+            let dx = 0, dz = 0;
+
+            // WASD movement relative to camera
+            const forward = new THREE.Vector3();
+            const right = new THREE.Vector3();
+
+            game.camera.getWorldDirection(forward);
+            forward.y = 0;
+            forward.normalize();
+            right.crossVectors(forward, new THREE.Vector3(0, 1, 0));
+
+            if (game.keys['w']) {
+                dx += forward.x * moveDistance;
+                dz += forward.z * moveDistance;
+            }
+            if (game.keys['s']) {
+                dx -= forward.x * moveDistance;
+                dz -= forward.z * moveDistance;
+            }
+            if (game.keys['a']) {
+                dx -= right.x * moveDistance;
+                dz -= right.z * moveDistance;
+            }
+            if (game.keys['d']) {
+                dx += right.x * moveDistance;
+                dz += right.z * moveDistance;
+            }
+
+            // Try to move horizontally (UNIFIED LOGIC - matches test preview)
+            if (dx !== 0 || dz !== 0) {
+                const newX = game.playerPos.x + dx;
+                const newZ = game.playerPos.z + dz;
+                const currentY = Math.floor(game.playerPos.y);
+                const newXFloor = Math.floor(newX);
+                const newZFloor = Math.floor(newZ);
+
+                // Check if target space at same height is empty
+                if (!hasVoxel(newXFloor, currentY, newZFloor)) {
+                    // Check if there's ground at same level
+                    if (hasVoxel(newXFloor, currentY - 1, newZFloor)) {
+                        // Can walk there (same level)
+                        game.playerPos.x = newX;
+                        game.playerPos.z = newZ;
+                    } else {
+                        // No ground at same level, check one level down (auto-descent)
+                        const lowerY = currentY - 1;
+                        if (lowerY >= 1 && !hasVoxel(newXFloor, lowerY, newZFloor)) {
+                            if (hasVoxel(newXFloor, lowerY - 1, newZFloor)) {
+                                // Auto-descend while walking
+                                game.playerPos.x = newX;
+                                game.playerPos.z = newZ;
+                                game.playerPos.y = lowerY;
+                            }
+                        }
+                    }
+                } else {
+                    // There's a voxel in the way at current height
+                    // Try auto-climb (1 block only)
+                    const higherY = currentY + 1;
+                    if (!hasVoxel(newXFloor, higherY, newZFloor)) {
+                        if (hasVoxel(newXFloor, higherY - 1, newZFloor)) {
+                            // Auto-climb
+                            game.playerPos.x = newX;
+                            game.playerPos.z = newZ;
+                            game.playerPos.y = higherY;
+                        }
+                    }
+                }
+            }
+
+            // Vertical movement
+            if (game.keys[' ']) { // Space - climb up
+                const nextY = Math.floor(game.playerPos.y) + 1;
+                if (!hasVoxel(game.playerPos.x, nextY, game.playerPos.z)) {
+                    // Check if there's a voxel to climb onto
+                    if (hasVoxel(game.playerPos.x, nextY - 1, game.playerPos.z)) {
+                        game.playerPos.y = nextY;
+                    }
+                }
+            }
+            if (game.keys['shift']) { // Shift - descend
+                const currentY = Math.floor(game.playerPos.y);
+                const nextY = currentY - 1;
+
+                if (nextY >= 1) { // Can't go below y=1 (standing on y=0)
+                    // Check if there's a voxel to stand on at nextY-1
+                    if (hasVoxel(game.playerPos.x, nextY - 1, game.playerPos.z)) {
+                        // Allow descending even if there's a voxel at nextY
+                        // (we might be descending down the side of it)
+                        game.playerPos.y = nextY;
+                    }
+                }
+            }
+
+            // Gravity simulation - fall if no ground below
+            const groundY = getTerrainHeightAt(
+                Math.floor(game.playerPos.x),
+                Math.floor(game.playerPos.z)
+            );
+
+            if (groundY >= 0) {
+                const targetY = groundY + 1;
+                if (game.playerPos.y > targetY) {
+                    const oldY = game.playerPos.y;
+                    game.playerPos.y = Math.max(targetY, game.playerPos.y - 10 * delta);
+                    if (Math.abs(oldY - game.playerPos.y) > 0.01) {
+                        console.log(`Falling: y=${oldY.toFixed(2)} -> ${game.playerPos.y.toFixed(2)} (ground at y=${groundY})`);
+                    }
+                }
+            }
+
+            updatePlayerPosition();
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const delta = game.clock.getDelta();
+
+            // Rotate camera slowly when menu is open
+            if (game.menuOpen) {
+                const time = Date.now() * 0.0001;
+                const radius = 20;
+                game.camera.position.x = Math.cos(time) * radius;
+                game.camera.position.z = Math.sin(time) * radius;
+                game.camera.lookAt(0, 5, 0);
+                game.controls.enabled = false;
+            } else {
+                game.controls.enabled = true;
+                handleMovement(delta);
+            }
+
+            game.controls.update();
+            game.renderer.render(game.scene, game.camera);
+        }
+
+        // Handle window resize
+        function onResize() {
+            game.camera.aspect = window.innerWidth / window.innerHeight;
+            game.camera.updateProjectionMatrix();
+            game.renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Initialize menu event listeners
+        function initMenuControls() {
+            document.getElementById('closeMenu').addEventListener('click', () => {
+                document.getElementById('testMenu').classList.add('hidden');
+                document.getElementById('ui').classList.remove('hidden');
+                document.getElementById('controls').classList.remove('hidden');
+                game.menuOpen = false;
+                game.controls.enabled = true;
+            });
+
+            document.getElementById('closePreview').addEventListener('click', closeTestPreview);
+
+            // Set up button click handlers (not onclick property)
+            const playAnimationBtn = document.getElementById('playAnimationBtn');
+            const playManualBtn = document.getElementById('playManualBtn');
+
+            playAnimationBtn.addEventListener('click', playTestAnimation);
+            playManualBtn.addEventListener('click', () => {
+                if (game.manualPlayMode) {
+                    stopManualMode();
+                } else {
+                    playTestManually();
+                }
+            });
+
+            // Feedback box handlers
+            document.querySelectorAll('input[name="feedback"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    const otherTextBox = document.getElementById('feedbackOtherText');
+                    if (e.target.value === 'other') {
+                        otherTextBox.classList.add('active');
+                    } else {
+                        otherTextBox.classList.remove('active');
+                    }
+                });
+            });
+
+            document.getElementById('submitFeedbackBtn').addEventListener('click', submitFeedback);
+
+            // Show menu by default if not in test mode
+            if (!game.testMode) {
+                document.getElementById('testMenu').classList.remove('hidden');
+                document.getElementById('ui').classList.add('hidden');
+                document.getElementById('controls').classList.add('hidden');
+                game.menuOpen = true;
+            } else {
+                document.getElementById('testMenu').classList.add('hidden');
+                document.getElementById('ui').classList.remove('hidden');
+                document.getElementById('controls').classList.remove('hidden');
+            }
+        }
+
+        // Start the game
+        init();
+        loadMechanicsGraph();
+        initMenuControls();
+    </script>
+</body>
+</html>

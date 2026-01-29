@@ -1,0 +1,32 @@
+{
+  "name": "Test Walk Down Terrain",
+  "description": "Player walks forward and automatically descends when terrain drops",
+  "mechanic": "auto_descent",
+  "playerStart": {
+    "x": -2,
+    "y": 2,
+    "z": 0
+  },
+  "goal": {
+    "x": 2,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": -3, "y": 0, "z": 0, "color": 11184810},
+    {"x": -3, "y": 1, "z": 0, "color": 16753920},
+    {"x": -2, "y": 0, "z": 0, "color": 11184810},
+    {"x": -2, "y": 1, "z": 0, "color": 16753920},
+    {"x": -1, "y": 0, "z": 0, "color": 11184810},
+    {"x": -1, "y": 1, "z": 0, "color": 16753920},
+    {"x": 0, "y": 0, "z": 0, "color": 65280},
+    {"x": 1, "y": 0, "z": 0, "color": 65280},
+    {"x": 2, "y": 0, "z": 0, "color": 65280},
+    {"x": -3, "y": 0, "z": -1, "color": 11184810},
+    {"x": -3, "y": 0, "z": 1, "color": 11184810},
+    {"x": 2, "y": 0, "z": -1, "color": 11184810},
+    {"x": 2, "y": 0, "z": 1, "color": 11184810}
+  ],
+  "expectedInputs": ["w", "w", "w", "w"],
+  "notes": "Player starts on orange platform (y=2), walks forward 4 times. Should automatically drop to green platform (y=1) at the step. Tests auto-descent when walking."
+}

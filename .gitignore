@@ -1,0 +1,33 @@
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies (if we add build step later)
+node_modules/
+package-lock.json
+
+# Build output (future)
+dist/
+build/
+
+# Temporary files
+.tmp/
+*.tmp
+
+# Claude Code session data (optional - you might want to keep these)
+# .claude/
+
+# Environment variables (if we add backend)
+.env
+.env.local

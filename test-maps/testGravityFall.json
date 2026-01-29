@@ -1,0 +1,29 @@
+{
+  "name": "Test Gravity Fall",
+  "description": "Player spawns in mid-air and falls to ground",
+  "mechanic": "gravity",
+  "playerStart": {
+    "x": 0,
+    "y": 5,
+    "z": 0
+  },
+  "goal": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": -1, "y": 0, "z": -1, "color": 65280},
+    {"x": -1, "y": 0, "z": 0, "color": 65280},
+    {"x": -1, "y": 0, "z": 1, "color": 65280},
+    {"x": 0, "y": 0, "z": -1, "color": 65280},
+    {"x": 0, "y": 0, "z": 0, "color": 16753920},
+    {"x": 0, "y": 0, "z": 1, "color": 65280},
+    {"x": 1, "y": 0, "z": -1, "color": 65280},
+    {"x": 1, "y": 0, "z": 0, "color": 65280},
+    {"x": 1, "y": 0, "z": 1, "color": 65280}
+  ],
+  "expectedInputs": [],
+  "constraints": {},
+  "notes": "Tests gravity mechanic. Player spawns at y=5 with no ground below, should fall to y=1 (standing on ground at y=0). Orange center tile marks landing zone."
+}

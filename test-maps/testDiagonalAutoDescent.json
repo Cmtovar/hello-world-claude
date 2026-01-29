@@ -1,0 +1,25 @@
+{
+  "name": "Test Diagonal Auto-Descent",
+  "description": "Move diagonally while auto-descending to lower terrain",
+  "mechanic": "auto_descent",
+  "playerStart": {
+    "x": -2,
+    "y": 2,
+    "z": -2
+  },
+  "goal": {
+    "x": 2,
+    "y": 1,
+    "z": 2
+  },
+  "voxels": [
+    {"x": -2, "y": 1, "z": -2, "color": 16753920},
+    {"x": -1, "y": 1, "z": -1, "color": 16753920},
+    {"x": 0, "y": 1, "z": 0, "color": 16753920},
+    {"x": 1, "y": 0, "z": 1, "color": 65280},
+    {"x": 2, "y": 0, "z": 2, "color": 65280}
+  ],
+  "expectedInputs": ["w+d", "w+d", "w+d", "w+d"],
+  "constraints": {},
+  "notes": "Tests diagonal movement combined with auto-descent. Player starts on elevated orange platform (y=1), moves diagonally (NE). At x=0,z=0, terrain drops to y=0 (green). Should auto-descend while maintaining diagonal movement."
+}

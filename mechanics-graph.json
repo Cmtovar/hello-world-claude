@@ -1,0 +1,170 @@
+{
+  "mechanics": {
+    "basic_movement": {
+      "id": "basic_movement",
+      "name": "Basic Movement (4 cardinal directions)",
+      "description": "Move north, south, east, west on flat terrain",
+      "dependencies": [],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testBasicMovement"],
+      "notes": "Foundation for all movement. Uses WASD keys."
+    },
+    "diagonal_movement": {
+      "id": "diagonal_movement",
+      "name": "Diagonal Movement",
+      "description": "Move in 8 directions (NE, NW, SE, SW)",
+      "dependencies": ["basic_movement"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testDiagonalMovement"],
+      "notes": "Combines cardinal movements. W+D = northeast, etc."
+    },
+    "climb_up_one": {
+      "id": "climb_up_one",
+      "name": "Climb Up 1 Block",
+      "description": "Manually climb up exactly 1 voxel height",
+      "dependencies": ["basic_movement"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testClimbUpOne"],
+      "notes": "Uses Space key. Player must be standing next to elevated block."
+    },
+    "descend_one": {
+      "id": "descend_one",
+      "name": "Descend 1 Block",
+      "description": "Manually descend exactly 1 voxel height",
+      "dependencies": ["basic_movement"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testDescendOneBlock", "testMultipleDescents"],
+      "notes": "Fixed: removed check for empty space at target. Uses Shift key. testMultipleDescents tests sequential descents."
+    },
+    "auto_descent": {
+      "id": "auto_descent",
+      "name": "Auto-Descent (Walk Down)",
+      "description": "Automatically descend when walking onto lower terrain",
+      "dependencies": ["basic_movement"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testWalkDownTerrain", "testDiagonalAutoDescent"],
+      "notes": "Different from manual descent (Shift key). This happens automatically when walking forward onto lower ground. testDiagonalAutoDescent tests diagonal + descent."
+    },
+    "auto_climb": {
+      "id": "auto_climb",
+      "name": "Auto-Climb 1 Block",
+      "description": "Automatically climb when walking into 1-block obstacle",
+      "dependencies": ["basic_movement", "climb_up_one"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testAutoClimb", "testDiagonalAutoClimb", "testComplexTerrain"],
+      "notes": "Quality of life feature. Happens automatically when walking (WASD) into 1-block step. testDiagonalAutoClimb tests diagonal + climb, testComplexTerrain tests multiple elevation changes."
+    },
+    "gravity": {
+      "id": "gravity",
+      "name": "Gravity/Falling",
+      "description": "Fall to ground level when no voxel below",
+      "dependencies": ["basic_movement"],
+      "status": "implemented",
+      "tested": true,
+      "tests": ["testGravityFall", "testWalkOffLedge"],
+      "notes": "Applies constant downward force. testGravityFall tests spawning in mid-air, testWalkOffLedge tests falling after walking off edge."
+    },
+    "jump": {
+      "id": "jump",
+      "name": "Jump (Horizontal + Vertical)",
+      "description": "Jump across gaps and up simultaneously",
+      "dependencies": ["basic_movement", "climb_up_one"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "Would allow gap crossing"
+    },
+    "flight_basic": {
+      "id": "flight_basic",
+      "name": "Basic Flight",
+      "description": "Free 3D movement in all directions, ignore terrain",
+      "dependencies": ["basic_movement", "climb_up_one", "descend_one"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "For flier unit type"
+    },
+    "flight_nosedive": {
+      "id": "flight_nosedive",
+      "name": "Flight Nosedive",
+      "description": "Initiate flight from elevated position by descending",
+      "dependencies": ["flight_basic", "descend_one"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "Advanced flier technique - requires descent to activate"
+    },
+    "grappling_hook": {
+      "id": "grappling_hook",
+      "name": "Grappling Hook (ODM-style)",
+      "description": "Target and swing to distant elevated points",
+      "dependencies": ["basic_movement"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "Attack on Titan style mobility"
+    },
+    "climb_wall": {
+      "id": "climb_wall",
+      "name": "Wall Climbing (Multi-block)",
+      "description": "Climb vertical surfaces multiple blocks high",
+      "dependencies": ["basic_movement", "climb_up_one"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "For climber unit type"
+    },
+    "stand_on_dynamic": {
+      "id": "stand_on_dynamic",
+      "name": "Stand on Dynamic Objects",
+      "description": "Stand on moving objects (tornado debris, platforms)",
+      "dependencies": ["basic_movement", "gravity"],
+      "status": "not_implemented",
+      "tested": false,
+      "tests": [],
+      "notes": "Physics challenge - requires parent-child relationship"
+    }
+  },
+  "testPriority": [
+    "basic_movement",
+    "descend_one",
+    "climb_up_one",
+    "auto_climb",
+    "gravity",
+    "diagonal_movement",
+    "jump",
+    "climb_wall",
+    "flight_basic",
+    "flight_nosedive",
+    "grappling_hook",
+    "stand_on_dynamic"
+  ],
+  "criticalPath": {
+    "description": "Mechanics that block the most other features",
+    "mechanics": ["basic_movement", "descend_one", "climb_up_one"]
+  },
+  "unitTypes": {
+    "ground": {
+      "name": "Ground Unit",
+      "requiredMechanics": ["basic_movement", "climb_up_one", "descend_one", "auto_climb", "gravity"]
+    },
+    "flier": {
+      "name": "Flying Unit",
+      "requiredMechanics": ["basic_movement", "flight_basic", "flight_nosedive"]
+    },
+    "climber": {
+      "name": "Climbing Unit",
+      "requiredMechanics": ["basic_movement", "climb_up_one", "descend_one", "climb_wall", "gravity"]
+    },
+    "grappler": {
+      "name": "Grappling Unit (ODM)",
+      "requiredMechanics": ["basic_movement", "grappling_hook", "gravity"]
+    }
+  }
+}

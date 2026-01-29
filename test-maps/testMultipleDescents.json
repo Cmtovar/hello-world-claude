@@ -1,0 +1,28 @@
+{
+  "name": "Test Multiple Descents",
+  "description": "Manually descend multiple levels in sequence using Shift key",
+  "mechanic": "descend_one",
+  "playerStart": {
+    "x": 0,
+    "y": 4,
+    "z": 0
+  },
+  "goal": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": 0, "y": 0, "z": 0, "color": 65280},
+    {"x": 0, "y": 1, "z": 0, "color": 16753920},
+    {"x": 0, "y": 2, "z": 0, "color": 16753920},
+    {"x": 0, "y": 3, "z": 0, "color": 16753920},
+    {"x": -1, "y": 0, "z": 0, "color": 11184810},
+    {"x": 1, "y": 0, "z": 0, "color": 11184810},
+    {"x": 0, "y": 0, "z": -1, "color": 11184810},
+    {"x": 0, "y": 0, "z": 1, "color": 11184810}
+  ],
+  "expectedInputs": ["Shift", "Shift", "Shift"],
+  "constraints": {},
+  "notes": "Tests repeated manual descent. Player starts at top of 4-block pillar (y=4), must press Shift three times to descend from y=4 -> y=3 -> y=2 -> y=1 (goal). Gray tiles show surrounding ground level."
+}

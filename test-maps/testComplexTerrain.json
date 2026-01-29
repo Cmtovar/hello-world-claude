@@ -1,0 +1,32 @@
+{
+  "name": "Test Complex Terrain Navigation",
+  "description": "Navigate through multiple elevation changes: up, flat, down, up again",
+  "mechanic": "auto_climb",
+  "playerStart": {
+    "x": -4,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 4,
+    "y": 3,
+    "z": 0
+  },
+  "voxels": [
+    {"x": -4, "y": 0, "z": 0, "color": 65280},
+    {"x": -3, "y": 0, "z": 0, "color": 65280},
+    {"x": -2, "y": 0, "z": 0, "color": 16753920},
+    {"x": -2, "y": 1, "z": 0, "color": 16753920},
+    {"x": -1, "y": 1, "z": 0, "color": 16753920},
+    {"x": 0, "y": 1, "z": 0, "color": 16753920},
+    {"x": 1, "y": 0, "z": 0, "color": 65280},
+    {"x": 2, "y": 0, "z": 0, "color": 16753920},
+    {"x": 2, "y": 1, "z": 0, "color": 16753920},
+    {"x": 2, "y": 2, "z": 0, "color": 16753920},
+    {"x": 3, "y": 2, "z": 0, "color": 16753920},
+    {"x": 4, "y": 2, "z": 0, "color": 16753920}
+  ],
+  "expectedInputs": ["w", "w", "w", "w", "w", "w", "w", "w"],
+  "constraints": {},
+  "notes": "Complex terrain path: Start at y=0, auto-climb to y=1 (orange platform), walk flat, auto-descend to y=0 (green), then auto-climb twice to reach y=2 platform (goal). Tests multiple mechanic combinations."
+}
