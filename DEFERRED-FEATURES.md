@@ -316,3 +316,13 @@
 **Last Updated:** 2026-01-29
 **Next Review:** After river and ruins implemented
 **Maintained By:** Claude sessions (update after each keyframe)
+## Manual Mode - Gravity Not Implemented
+
+**Issue:** Manual play mode in test preview doesn't simulate gravity
+**Status:** Deferred
+**Why:** Focus on building story geometry keyframes first
+**When to fix:** After river + ruins complete, before full gameplay
+
+**Location:** Test preview manual mode handler
+**Fix needed:** Add gravity check in manual movement loop
+
