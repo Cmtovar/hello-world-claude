@@ -1,8 +1,8 @@
 # START HERE - For Future Claude Sessions
 
-**Last Updated:** 2026-01-30 (added recovery infrastructure)
+**Last Updated:** 2026-01-30 (project reorganization complete)
 **Current Branch:** master
-**Status:** All work committed and pushed to GitHub
+**Status:** Clean working tree - all work committed and pushed to GitHub
 
 ---
 
@@ -97,11 +97,17 @@ Plus: Complete narrative framework for first map "The Bridge at Old Fort Crossin
 ├── test-builder.js                  # Test generation factory
 ├── mechanics-graph.json             # Mechanic dependency graph
 │
-├── test-maps/                       # 12 micro-map tests (JSON)
+├── story-geometry/                  # Story content + generation tools
+│   ├── *.json                       # Scene files (complete-scene, ruins, river, etc.)
+│   ├── *.py                         # Scene generation scripts (22 scripts)
+│   └── README.md                    # Story geometry documentation
+│
+├── test-maps/                       # Micro-map tests + cutscene elements (JSON)
 │   ├── testBasicMovement.json
 │   ├── testDiagonalMovement.json
-│   ├── testClimbUpOne.json
-│   └── ... (9 more)
+│   ├── character-01-scholar.json
+│   ├── enemy-zombie.json
+│   └── ... (many more)
 │
 └── tests/                           # Playwright test suite (future)
     ├── package.json
@@ -230,12 +236,13 @@ A: Player can design any template from the start. But templates require specific
 ## Git Information
 
 **Repository:** https://github.com/Cmtovar/hello-world-claude.git
-**Current Commit:** 4950403 (Major game systems design session)
+**Current Commit:** 47f4253 (Project reorganization - scene generation tools)
 **Branch:** master
 
 **Recent Commits:**
+- `47f4253` - Organize project structure - consolidate scene generation tools (48 files, 19,540 insertions)
+- `ab8cc59` - Combine bridge and forest floor into complete scene
 - `4950403` - Major game systems design (14,731 insertions!)
-- `c7fe4cb` - Initial hello world README
 
 **To Continue Work:**
 ```bash
