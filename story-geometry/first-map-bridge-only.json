@@ -13,34 +13,20 @@
     "z": 0
   },
   "voxels": [
-    // Left cobblestone support structure
     {"x": 0, "y": 0, "z": 0, "color": 11184810},
     {"x": 0, "y": 1, "z": 0, "color": 11184810},
     {"x": 0, "y": 0, "z": -1, "color": 11184810},
     {"x": 0, "y": 0, "z": 1, "color": 11184810},
-
-    // Left ramp planks (approach to bridge)
     {"x": 1, "y": 1, "z": 0, "color": 9127187},
     {"x": 2, "y": 2, "z": 0, "color": 9127187},
-
-    // Main span - wooden planks with dip
-    // Rising to peak
     {"x": 3, "y": 3, "z": 0, "color": 9127187},
     {"x": 4, "y": 3, "z": 0, "color": 9127187},
-
-    // Dip in middle (lower elevation)
     {"x": 5, "y": 2, "z": 0, "color": 9127187},
     {"x": 6, "y": 2, "z": 0, "color": 9127187},
-
-    // Rising from dip
     {"x": 7, "y": 3, "z": 0, "color": 9127187},
     {"x": 8, "y": 3, "z": 0, "color": 9127187},
-
-    // Right ramp planks (descent from bridge)
     {"x": 9, "y": 2, "z": 0, "color": 9127187},
     {"x": 10, "y": 1, "z": 0, "color": 9127187},
-
-    // Right cobblestone support structure
     {"x": 11, "y": 0, "z": 0, "color": 11184810},
     {"x": 11, "y": 1, "z": 0, "color": 11184810},
     {"x": 11, "y": 0, "z": -1, "color": 11184810},
