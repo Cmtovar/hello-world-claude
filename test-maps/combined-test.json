@@ -1,0 +1,119 @@
+{
+  "name": "Bridge Over Forest Floor",
+  "description": "Complete scene: Rope bridge spanning over vegetated forest floor. First map geometry combined.",
+  "category": "story-geometry",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 11,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": 0, "y": 0, "z": -1, "color": 11184810},
+    {"x": 0, "y": 0, "z": 0, "color": 11184810},
+    {"x": 0, "y": 0, "z": 1, "color": 11184810},
+    {"x": 0, "y": 1, "z": 0, "color": 11184810},
+    {"x": 1, "y": 0, "z": -1, "color": 2263842},
+    {"x": 1, "y": 0, "z": 0, "color": 2263842},
+    {"x": 1, "y": 0, "z": 1, "color": 9127187},
+    {"x": 1, "y": 1, "z": 0, "color": 9127187},
+    {"x": 2, "y": 0, "z": -2, "color": 9127187},
+    {"x": 2, "y": 0, "z": -1, "color": 2263842},
+    {"x": 2, "y": 0, "z": 0, "color": 2263842},
+    {"x": 2, "y": 0, "z": 1, "color": 2263842},
+    {"x": 2, "y": 0, "z": 2, "color": 9127187},
+    {"x": 2, "y": 2, "z": 0, "color": 9127187},
+    {"x": 3, "y": -1, "z": -1, "color": 2263842},
+    {"x": 3, "y": -1, "z": 0, "color": 9127187},
+    {"x": 3, "y": -1, "z": 1, "color": 2263842},
+    {"x": 3, "y": 0, "z": -2, "color": 9127187},
+    {"x": 3, "y": 0, "z": 2, "color": 9127187},
+    {"x": 3, "y": 3, "z": 0, "color": 9127187},
+    {"x": 4, "y": -1, "z": -1, "color": 2263842},
+    {"x": 4, "y": -1, "z": 0, "color": 2263842},
+    {"x": 4, "y": -1, "z": 1, "color": 9127187},
+    {"x": 4, "y": 0, "z": -2, "color": 9127187},
+    {"x": 4, "y": 0, "z": 2, "color": 9127187},
+    {"x": 4, "y": 3, "z": 0, "color": 9127187},
+    {"x": 5, "y": -1, "z": -1, "color": 9127187},
+    {"x": 5, "y": -1, "z": 0, "color": 2263842},
+    {"x": 5, "y": -1, "z": 1, "color": 2263842},
+    {"x": 5, "y": 0, "z": -2, "color": 9127187},
+    {"x": 5, "y": 0, "z": 2, "color": 9127187},
+    {"x": 5, "y": 2, "z": 0, "color": 9127187},
+    {"x": 6, "y": -1, "z": -1, "color": 2263842},
+    {"x": 6, "y": -1, "z": 0, "color": 2263842},
+    {"x": 6, "y": -1, "z": 1, "color": 9127187},
+    {"x": 6, "y": 0, "z": -2, "color": 9127187},
+    {"x": 6, "y": 0, "z": 2, "color": 9127187},
+    {"x": 6, "y": 2, "z": 0, "color": 9127187},
+    {"x": 7, "y": -1, "z": -1, "color": 2263842},
+    {"x": 7, "y": -1, "z": 0, "color": 9127187},
+    {"x": 7, "y": -1, "z": 1, "color": 2263842},
+    {"x": 7, "y": 0, "z": -2, "color": 9127187},
+    {"x": 7, "y": 0, "z": 2, "color": 9127187},
+    {"x": 7, "y": 3, "z": 0, "color": 9127187},
+    {"x": 8, "y": -1, "z": -1, "color": 2263842},
+    {"x": 8, "y": -1, "z": 0, "color": 2263842},
+    {"x": 8, "y": -1, "z": 1, "color": 9127187},
+    {"x": 8, "y": 0, "z": -2, "color": 9127187},
+    {"x": 8, "y": 0, "z": 2, "color": 9127187},
+    {"x": 8, "y": 3, "z": 0, "color": 9127187},
+    {"x": 9, "y": 0, "z": -1, "color": 2263842},
+    {"x": 9, "y": 0, "z": 0, "color": 2263842},
+    {"x": 9, "y": 0, "z": 1, "color": 9127187},
+    {"x": 9, "y": 2, "z": 0, "color": 9127187},
+    {"x": 10, "y": 0, "z": -1, "color": 2263842},
+    {"x": 10, "y": 0, "z": 0, "color": 9127187},
+    {"x": 10, "y": 0, "z": 1, "color": 2263842},
+    {"x": 10, "y": 1, "z": 0, "color": 9127187},
+    {"x": 11, "y": 0, "z": -1, "color": 11184810},
+    {"x": 11, "y": 0, "z": 0, "color": 11184810},
+    {"x": 11, "y": 0, "z": 1, "color": 11184810},
+    {"x": 11, "y": 1, "z": 0, "color": 11184810}
+  ],
+  "barriers": {
+    "ropeRailings": {
+      "note": "Simple barrier system - prevents falling off bridge sides",
+      "northSide": {
+        "xMin": 1,
+        "xMax": 10,
+        "zLine": -0.45,
+        "description": "North rope railing (blocks movement beyond Z=-0.45)"
+      },
+      "southSide": {
+        "xMin": 1,
+        "xMax": 10,
+        "zLine": 0.45,
+        "description": "South rope railing (blocks movement beyond Z=0.45)"
+      }
+    }
+  },
+  "notes": {
+    "colors": {
+      "cobblestone": "11184810 (gray - bridge supports)",
+      "wooden_planks": "9127187 (brown - bridge planks)",
+      "forest_green": "2263842 (dark green - forest floor)",
+      "muddy_brown": "9127187 (brown - forest mud patches)"
+    },
+    "structure": "Bridge (Y: 1-3) spanning over forest floor (Y: -1 to 0). Cobblestone supports at X=0,11. Vegetated low ground beneath.",
+    "combined_elements": [
+      "Rope bridge with dip (Y: 1-3, centerline)",
+      "Forest floor banks (Y: 0, edges)",
+      "Forest floor channel (Y: -1, center)",
+      "Cobblestone supports replace forest floor at ends"
+    ],
+    "total_voxels": 64,
+    "deferred": [
+      "Visual rope railings",
+      "Vegetation models (cattails, ferns)",
+      "Rising water mechanics (rain event)",
+      "Rope sway animation",
+      "Full constraint system"
+    ]
+  }
+}
