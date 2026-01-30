@@ -1,0 +1,47 @@
+{
+  "name": "Enemy - Zombie",
+  "description": "Zombie model test: Submerged casualties that rise from water",
+  "category": "cutscene-test",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 5,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 8421504
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 6736998
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "z": 0,
+      "color": 5197615
+    }
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=-1 to 0) - starts submerged",
+    "colors": {
+      "submerged": "32768 (dark green - underwater/decay)",
+      "body": "6736998 (gray-green - undead flesh)",
+      "head": "5197615 (pale gray-green - skull/face)"
+    },
+    "spawn_behavior": "Starts at Y=-1 (submerged), rises to Y=0+ when water rises",
+    "test_path": "X: 2 (submerged start) \u2192 emerge \u2192 move toward characters",
+    "enemy_role": "Zombie - rises from water, hordes toward group",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 301-303, 545-548"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Character 05 - Storyteller",
+  "description": "Character model test: The Storyteller (goes to bar/tavern)",
+  "category": "cutscene-test",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 5,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 8421504
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 5263440
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "z": 0,
+      "color": 11546150
+    }
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=0-1)",
+    "colors": {
+      "feet": "5263440 (brown - boots)",
+      "body": "11546150 (tan-yellow - vest/clothing)",
+      "head": "16752762 (pink-tan - skin tone)"
+    },
+    "test_path": "X: 2 (start) \u2192 5 (goal)",
+    "character_role": "Storyteller - goes to bar to tell tales",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 231-236",
+    "note": "Could represent 2-3 storytellers (group)"
+  }
+}

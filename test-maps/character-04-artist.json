@@ -1,0 +1,46 @@
+{
+  "name": "Character 04 - Artist",
+  "description": "Character model test: The Artist (draws creature from memory)",
+  "category": "cutscene-test",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 5,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 8421504
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 4210752
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "z": 0,
+      "color": 10027008
+    }
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=0-1)",
+    "colors": {
+      "feet": "4210752 (gray - boots)",
+      "body": "10027008 (purple-gray - artist smock)",
+      "head": "16738048 (tan - skin tone)"
+    },
+    "test_path": "X: 2 (start) \u2192 5 (goal)",
+    "character_role": "Artist - draws the creature from memory",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 227-229"
+  }
+}

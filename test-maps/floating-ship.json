@@ -1,0 +1,445 @@
+{
+  "name": "Floating Ship Structure",
+  "description": "Unintentional ship-like structure from bridge development. Suspended wooden planks with torches - could be airship, floating platform, or sky vessel.",
+  "category": "artifacts",
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 2,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 0,
+      "y": 1,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 2,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 11,
+      "y": 1,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 4,
+      "y": 3,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 6,
+      "y": 2,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 8,
+      "y": 3,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 10,
+      "y": 4,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 1,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 3,
+      "y": 3,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 3,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 2,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 7,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "z": -2,
+      "color": 16744192
+    },
+    {
+      "x": 2,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 2,
+      "y": 5,
+      "z": 2,
+      "color": 16744192
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "z": -2,
+      "color": 16744192
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 4,
+      "z": 2,
+      "color": 16744192
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "z": -2,
+      "color": 16744192
+    },
+    {
+      "x": 9,
+      "y": 4,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 9,
+      "y": 5,
+      "z": 2,
+      "color": 16744192
+    },
+    {
+      "x": 3,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 8,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    }
+  ],
+  "notes": {
+    "origin": "Created 2026-01-30 during bridge development",
+    "why_saved": "Looks like floating ship rather than grounded bridge",
+    "features": [
+      "Wooden plank deck (3-wide)",
+      "Torches at intervals (orange glow)",
+      "Rope-like railings on sides",
+      "Dipping/curved deck",
+      "Support pillars (could be masts/rigging points)"
+    ],
+    "potential_uses": [
+      "Airship/flying vessel",
+      "Floating platform puzzle element",
+      "Sky ruins",
+      "Suspended walkway in different context",
+      "Magic floating bridge"
+    ],
+    "voxel_count": 69,
+    "colors": {
+      "wood": "9127187 (brown)",
+      "stone_anchors": "11184810 (gray)",
+      "torches": "16744192 (orange)"
+    }
+  }
+}

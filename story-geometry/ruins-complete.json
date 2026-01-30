@@ -1,0 +1,1682 @@
+{
+  "name": "Old Fort Ruins (Complete)",
+  "description": "Expanded ruins with architectural artifacts. Fallen walls, columns, foundations, benches - tells story of old fort's extent.",
+  "category": "story-geometry",
+  "playerStart": {
+    "x": 12,
+    "y": 0,
+    "z": 0
+  },
+  "goal": {
+    "x": 20,
+    "y": 2,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 24,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 1,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 1,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 2,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 2,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 3,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 2,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 3,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": 2,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": -1,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 2,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 3,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 1,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 2,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 2,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 3,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 2,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 3,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 4,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 2,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 3,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 23,
+      "y": 1,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": -6,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 1,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 1,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -7,
+      "color": 11184810
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 8,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 7,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 6,
+      "color": 11184810
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -4,
+      "color": 2263842
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 0,
+      "color": 2263842
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 4,
+      "color": 2263842
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -6,
+      "color": 9127187
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 3,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 2,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 6,
+      "color": 2263842
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": -2,
+      "color": 2263842
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": -4,
+      "color": 9127187
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 5,
+      "color": 2263842
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": -4,
+      "color": 2263842
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 2,
+      "color": 2263842
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 5,
+      "color": 2263842
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -10,
+      "color": 2263842
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -11,
+      "color": 2263842
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -7,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -12,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -8,
+      "color": 2263842
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -9,
+      "color": 2263842
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -10,
+      "color": 2263842
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -11,
+      "color": 2263842
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -7,
+      "color": 2263842
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -12,
+      "color": 2263842
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -8,
+      "color": 2263842
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": -9,
+      "color": 2263842
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": -10,
+      "color": 2263842
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": -11,
+      "color": 2263842
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": -7,
+      "color": 2263842
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -12,
+      "color": 2263842
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": -8,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -9,
+      "color": 2263842
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 10,
+      "color": 2263842
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 9,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 8,
+      "color": 2263842
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 12,
+      "color": 2263842
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 7,
+      "color": 2263842
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 11,
+      "color": 2263842
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 10,
+      "color": 2263842
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 9,
+      "color": 2263842
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 8,
+      "color": 2263842
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 12,
+      "color": 2263842
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 7,
+      "color": 2263842
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 11,
+      "color": 2263842
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 10,
+      "color": 2263842
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 9,
+      "color": 2263842
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 8,
+      "color": 2263842
+    },
+    {
+      "x": 24,
+      "y": 0,
+      "z": 12,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 7,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 11,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -5,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -1,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 3,
+      "color": 2263842
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 7,
+      "color": 2263842
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": -6,
+      "color": 2263842
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": -2,
+      "color": 2263842
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": 2,
+      "color": 2263842
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": 6,
+      "color": 2263842
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": -7,
+      "color": 2263842
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": -3,
+      "color": 2263842
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": 1,
+      "color": 2263842
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": 5,
+      "color": 2263842
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": -8,
+      "color": 2263842
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": -4,
+      "color": 2263842
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": 0,
+      "color": 2263842
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": 4,
+      "color": 2263842
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": 8,
+      "color": 2263842
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": 0,
+      "color": 2263842
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 0,
+      "color": 2263842
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 0,
+      "color": 9127187
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -9,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -9,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 1,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -9,
+      "color": 11184810
+    },
+    {
+      "x": 15,
+      "y": 1,
+      "z": -9,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -10,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": -10,
+      "color": 11184810
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 1,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 10,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 10,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": 8,
+      "color": 11184810
+    },
+    {
+      "x": 21,
+      "y": 1,
+      "z": 8,
+      "color": 11184810
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -2,
+      "color": 11184810
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": -1,
+      "color": 11184810
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 25,
+      "y": 0,
+      "z": 1,
+      "color": 11184810
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": 2,
+      "color": 11184810
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": 3,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 8,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 17,
+      "y": 1,
+      "z": 8,
+      "color": 11184810
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 20,
+      "y": 0,
+      "z": 10,
+      "color": 11184810
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": -4,
+      "color": 11184810
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": 4,
+      "color": 11184810
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 28,
+      "y": 1,
+      "z": 0,
+      "color": 11184810
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -8,
+      "color": 9127187
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -8,
+      "color": 9127187
+    },
+    {
+      "x": 21,
+      "y": 0,
+      "z": -7,
+      "color": 9127187
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 8,
+      "color": 9127187
+    },
+    {
+      "x": 22,
+      "y": 0,
+      "z": 9,
+      "color": 9127187
+    },
+    {
+      "x": 23,
+      "y": 0,
+      "z": 9,
+      "color": 9127187
+    },
+    {
+      "x": 26,
+      "y": 0,
+      "z": -2,
+      "color": 9127187
+    },
+    {
+      "x": 27,
+      "y": 0,
+      "z": 1,
+      "color": 9127187
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -7,
+      "color": 11184810
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "z": -7,
+      "color": 11184810
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -8,
+      "color": 11184810
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 7,
+      "color": 11184810
+    },
+    {
+      "x": 14,
+      "y": 1,
+      "z": 7,
+      "color": 11184810
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 9,
+      "color": 11184810
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": -5,
+      "color": 11184810
+    },
+    {
+      "x": 28,
+      "y": 0,
+      "z": 5,
+      "color": 11184810
+    },
+    {
+      "x": 29,
+      "y": 0,
+      "z": -3,
+      "color": 11184810
+    },
+    {
+      "x": 29,
+      "y": 0,
+      "z": 3,
+      "color": 11184810
+    }
+  ],
+  "notes": {
+    "colors": {
+      "cobblestone": "11184810 (gray - walls, collapsed tower stone)",
+      "wooden_planks": "9127187 (brown - interior floors, debris)"
+    },
+    "structure_breakdown": {
+      "standing_tower_base": {
+        "location": "X: 14-16, Z: -3 to 3 (center at X=15, Z=0)",
+        "description": "Square tower footprint with cobblestone walls",
+        "features": [
+          "Walls at Y=0-1 forming perimeter",
+          "Entry gap on west side (away from bridge)",
+          "Wooden mezzanine floor at Y=2 inside (5x5 brown planks)",
+          "Upper wall remnants at Y=3 (partial)",
+          "Dark interior space below mezzanine at back (anomaly hiding spot)"
+        ],
+        "voxel_count": "~50 (walls + floor)"
+      },
+      "collapsed_tower": {
+        "location": "X: 18-21, Z: 3-5 (southeast area)",
+        "description": "Tower that fell sideways creating natural stone platforms",
+        "features": [
+          "Rubble at ground level (Y=0)",
+          "Angled stone platforms at Y=1, Y=2, Y=3",
+          "Highest point at Y=4 (summit of rubble pile)",
+          "All cobblestone - stone you can stand on",
+          "Irregular stacking creates climbing route"
+        ],
+        "voxel_count": "~35 (stone blocks)"
+      },
+      "battlement_walls": {
+        "location": "North (Z=-6) and South (Z=6) perimeter",
+        "description": "Partial defensive walls with crumbled gaps",
+        "features": [
+          "Runs X: 13-20 on both sides",
+          "Gaps every 2-3 blocks (decay/age)",
+          "Some sections Y=0 only, others Y=0-1",
+          "Cobblestone construction",
+          "Connects main structures"
+        ],
+        "voxel_count": "~20 (wall sections)"
+      },
+      "connecting_rubble": {
+        "location": "Scattered between structures",
+        "description": "Debris and fallen stones",
+        "features": [
+          "Ground level (Y=0) primarily",
+          "Some elevated debris (Y=1)",
+          "Mix of cobblestone and wood",
+          "Fills gaps between main structures"
+        ],
+        "voxel_count": "~20 (scattered)"
+      }
+    },
+    "total_voxels": 256,
+    "elevations": {
+      "Y=0": "Ground level, wall bases, rubble",
+      "Y=1": "Low platforms, wall tops, debris",
+      "Y=2": "Wooden mezzanine floor (inside tower), mid-level rubble",
+      "Y=3": "Upper wall remnants, high rubble platforms",
+      "Y=4": "Summit of collapsed tower (highest point)"
+    },
+    "dark_spaces": [
+      "Inside standing tower base (below Y=2 mezzanine)",
+      "Under collapsed tower overhang",
+      "Between battlement wall sections",
+      "Interior corners of tower"
+    ],
+    "gameplay_features": {
+      "platforms": "Multiple standing surfaces at different heights",
+      "cover": "Walls and rubble provide line-of-sight blocking",
+      "hiding_spots": "Dark interior spaces for anomaly encounter",
+      "vertical_variety": "5 elevation levels (Y=0 to Y=4)",
+      "navigation": "Multiple paths through structure"
+    },
+    "architectural_logic": {
+      "standing_interior": "Wooden floors (mezzanines inside intact structures)",
+      "collapsed_exterior": "Stone platforms (standing on fallen tower sides)",
+      "walls": "Cobblestone (military construction)",
+      "debris": "Mix of stone and wood (decay over time)"
+    },
+    "deferred": [
+      "Torch placement (light sources)",
+      "Vegetation overgrowth (ivy, moss)",
+      "Additional wooden debris (collapsed beams)",
+      "More detailed wall texturing",
+      "Ceiling remnants (if any)",
+      "Multiple rooms/chambers"
+    ],
+    "rotation_applied": "180 degrees around center (17, 0)",
+    "translation": "+3 in X direction (away from bridge)",
+    "additions": {
+      "scattered_rubble": "10 single cobblestone blocks on periphery",
+      "surrounding_grass": "Green (2263842) and brown (9127187) scattered pattern",
+      "total_additions": "~30 voxels (rubble + grass)"
+    },
+    "scattered_grass": {
+      "count": 57,
+      "pattern": "Sparse with air gaps (not every position filled)",
+      "locations": [
+        "North side (Z < -6)",
+        "South side (Z > 6)",
+        "East side (X > 24)",
+        "Front buffer"
+      ],
+      "colors": "Green (2263842) and brown (9127187) alternating",
+      "purpose": "Disperse focus away from strict bridge-to-ruins pipeline"
+    },
+    "expansion_artifacts": {
+      "count": 53,
+      "types": [
+        "Fallen wall sections (defensive perimeter collapsed outward)",
+        "Foundation stones and corner pieces",
+        "Collapsed column/pillar (broken in sections)",
+        "Stone furniture remnants (benches, possible courtyard)",
+        "Wooden structural debris (beams, roof fragments)",
+        "Perimeter wall fragments (suggests larger fort)",
+        "Old pathway stones (eastern approach)"
+      ],
+      "purpose": "Occupy space naturally, show fort's original extent, create exploration interest",
+      "placement": "Extended into north/south/east grass areas",
+      "design_philosophy": "Artifacts tell story - this was a functioning fort with courtyard, defenses, structures"
+    },
+    "design_reference": "See IMPLEMENTATION-STATUS.md for design intent vs implementation",
+    "design_sources": [
+      "FIRST-MAP-NARRATIVE.md (lines 46-54)",
+      "MAP-DESIGN-CONCEPTS.md (ruins architecture)"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Character 01 - Scholar",
+  "description": "Character model test: The Scholar (goes to library after mission)",
+  "category": "cutscene-test",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 5,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 8421504
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 6710886
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "z": 0,
+      "color": 3355443
+    }
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=0-1)",
+    "colors": {
+      "feet": "6710886 (brown - boots)",
+      "body": "3355443 (dark gray - robes)",
+      "head": "16753920 (tan/orange - skin tone)"
+    },
+    "test_path": "X: 2 (start) \u2192 5 (goal)",
+    "character_role": "Scholar - goes to library after mission",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 238-240"
+  }
+}

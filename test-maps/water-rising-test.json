@@ -1,0 +1,47 @@
+{
+  "name": "Water Rising Test",
+  "description": "Test water level animation: River rises during rain event",
+  "category": "cutscene-test",
+  "playerStart": {"x": 5, "y": 2, "z": 0},
+  "goal": {"x": 5, "y": 2, "z": 0},
+  "voxels": [
+    {"x": 5, "y": 0, "z": 0, "color": 8421504},
+    {"x": 5, "y": 1, "z": 0, "color": 8421504},
+    {"x": 5, "y": 2, "z": 0, "color": 8421504},
+
+    {"x": 0, "y": -2, "z": 0, "color": 255},
+    {"x": 1, "y": -2, "z": 0, "color": 255},
+    {"x": 2, "y": -2, "z": 0, "color": 255},
+    {"x": 3, "y": -2, "z": 0, "color": 255},
+    {"x": 4, "y": -2, "z": 0, "color": 255},
+
+    {"x": 0, "y": -1, "z": 1, "color": 65535},
+    {"x": 1, "y": -1, "z": 1, "color": 65535},
+    {"x": 2, "y": -1, "z": 1, "color": 65535},
+    {"x": 3, "y": -1, "z": 1, "color": 65535},
+    {"x": 4, "y": -1, "z": 1, "color": 65535},
+
+    {"x": 0, "y": 0, "z": 2, "color": 16776960},
+    {"x": 1, "y": 0, "z": 2, "color": 16776960},
+    {"x": 2, "y": 0, "z": 2, "color": 16776960},
+    {"x": 3, "y": 0, "z": 2, "color": 16776960},
+    {"x": 4, "y": 0, "z": 2, "color": 16776960}
+  ],
+  "notes": {
+    "test_concept": "Water levels at different heights showing rising animation",
+    "water_levels": {
+      "initial": "Y=-2 (blue - low water, submerged zombies)",
+      "rising": "Y=-1 (cyan - water level increasing)",
+      "flood": "Y=0 (yellow/warning - dangerous flood level)"
+    },
+    "animation_sequence": "Y=-2 → Y=-1 → Y=0 (incremental rise)",
+    "colors": {
+      "low_water": "255 (blue)",
+      "mid_water": "65535 (cyan)",
+      "flood_water": "16776960 (yellow - warning)"
+    },
+    "zombie_reveal": "Zombies at Y=-2 become visible as water rises to Y=-1, Y=0",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 65-74, 163-176",
+    "gameplay_impact": "Forces players to higher ground, blocks retreat"
+  }
+}

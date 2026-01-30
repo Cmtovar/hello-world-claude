@@ -1,0 +1,26 @@
+{
+  "name": "Baby Anomaly",
+  "description": "Baby anomaly model test: Small creature that stokes rain when startled",
+  "category": "cutscene-test",
+  "playerStart": {"x": 0, "y": 1, "z": 0},
+  "goal": {"x": 5, "y": 1, "z": 0},
+  "voxels": [
+    {"x": 0, "y": 0, "z": 0, "color": 8421504},
+
+    {"x": 2, "y": 0, "z": 0, "color": 8388736},
+    {"x": 2, "y": 1, "z": 0, "color": 11141290}
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=0-1) - small creature",
+    "colors": {
+      "body": "8388736 (purple - anomalous/magical)",
+      "head/glow": "11141290 (light purple - ethereal)"
+    },
+    "behavior": "Startles when approached, reflexively stokes rain, runs away",
+    "test_path": "X: 2 (hiding) → startled → runs to X: 8-10 (away)",
+    "creature_role": "Baby anomaly - triggers rain event",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 142-150, 294-295",
+    "size_note": "Small, vulnerable appearance - not threatening",
+    "visual_effect": "Purple viscous residue left behind"
+  }
+}

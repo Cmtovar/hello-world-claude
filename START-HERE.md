@@ -1,6 +1,6 @@
 # START HERE - For Future Claude Sessions
 
-**Last Updated:** 2026-01-29
+**Last Updated:** 2026-01-30 (added recovery infrastructure)
 **Current Branch:** master
 **Status:** All work committed and pushed to GitHub
 
@@ -15,6 +15,11 @@ This is a **3D tactical Fire Emblem-inspired game** with vertical traversal, bui
 - ✅ Complete game systems designed (6 major interconnected systems)
 - ✅ First map narrative framework complete
 - 🚧 Ready to implement: First map OR AP/blueprint system
+
+**⚠️ Recovery Infrastructure:**
+- **SESSION-CONTINUITY.md** - Critical practices for session recovery (tested 2026-01-30)
+- **COMMON-ISSUES.md** - Known problems and solutions
+- **.claude/dev-server.md** - Dev server config (tailscale IP: 100.93.126.24)
 
 ---
 
@@ -243,18 +248,23 @@ git log     # See commit history
 
 ## If Session Closes Unexpectedly
 
-**Everything is saved:**
+**Recovery Infrastructure Is In Place:**
 - ✅ All design documents committed
 - ✅ Pushed to GitHub
 - ✅ Comprehensive session summary written
-- ✅ This START-HERE guide created
+- ✅ SESSION-CONTINUITY.md documents recovery practices
+- ✅ This START-HERE guide provides entry point
 
-**To Resume:**
-1. Read this file (START-HERE.md)
-2. Read SESSION-2026-01-29.md (what was accomplished)
-3. Choose path: Implement map, implement systems, or continue design
-4. Reference appropriate concept documents
-5. Follow anthropological documentation pattern for new work
+**To Resume (Recovery Procedure):**
+1. Read **SESSION-CONTINUITY.md** first (recovery practices)
+2. Check `git status` for uncommitted work
+3. Read most recent SESSION-*.md file
+4. Read this file (START-HERE.md) for project context
+5. Review uncommitted files for embedded documentation (JSON `notes` fields)
+6. Choose path: Implement map, implement systems, or continue design
+7. Follow anthropological documentation pattern for new work
+
+**Tested:** 2026-01-30 battery death recovery - SUCCESS ✅
 
 ---
 

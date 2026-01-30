@@ -1,0 +1,46 @@
+{
+  "name": "Character 02 - Apprentice",
+  "description": "Character model test: The Apprentice (stays with alchemist)",
+  "category": "cutscene-test",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 5,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 8421504
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 5987163
+    },
+    {
+      "x": 2,
+      "y": 1,
+      "z": 0,
+      "color": 8421376
+    }
+  ],
+  "notes": {
+    "character_height": "2 voxels (Y=0-1)",
+    "colors": {
+      "feet": "5987163 (gray-brown - boots)",
+      "body": "8421376 (green - tunic)",
+      "head": "16760576 (peach - skin tone)"
+    },
+    "test_path": "X: 2 (start) \u2192 5 (goal)",
+    "character_role": "Apprentice - stays with alchemist",
+    "from_narrative": "FIRST-MAP-NARRATIVE.md lines 242-245"
+  }
+}
