@@ -27,12 +27,20 @@
 - Rope railings along sides
 - Torches along bridge length
 
-### The River/Creek
-- Low ground beneath bridge
-- Sandy banks
-- Cattail-like foliage growing from marshy wet soil
-- Normally shallow (dried creek bed areas)
-- **Dynamic:** Water level rises during rain event
+### The River/Creek (Actually: Forest Floor)
+**Normally (Pre-Rain):**
+- Low ground beneath bridge (vegetated forest floor)
+- Green grass and brown muddy patches
+- Foliage growing from the ground (ferns, cattails, forest plants)
+- Looks like a dried creek bed that nature has reclaimed
+- **Key visual:** Like a forest floor that CAN flood
+
+**During Rain Event:**
+- Water level rises, submerging the vegetation
+- Creates "underwater forest" effect (plants visible beneath water)
+- Like incredible underwater forest biomes caught on camera
+- Normally-exposed plants now submerged and swaying
+- Rising water forces players to higher ground
 
 ### The Ruins (Far Side)
 - Old military battlement

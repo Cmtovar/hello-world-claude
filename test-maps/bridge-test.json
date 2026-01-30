@@ -1,0 +1,66 @@
+{
+  "name": "Rope Bridge (Isolated Test)",
+  "description": "Just the bridge, suspended over void. First geometry for 'The Bridge at Old Fort Crossing' map.",
+  "category": "story-geometry",
+  "playerStart": {
+    "x": 0,
+    "y": 1,
+    "z": 0
+  },
+  "goal": {
+    "x": 11,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {"x": 0, "y": 0, "z": 0, "color": 11184810},
+    {"x": 0, "y": 1, "z": 0, "color": 11184810},
+    {"x": 0, "y": 0, "z": -1, "color": 11184810},
+    {"x": 0, "y": 0, "z": 1, "color": 11184810},
+    {"x": 1, "y": 1, "z": 0, "color": 9127187},
+    {"x": 2, "y": 2, "z": 0, "color": 9127187},
+    {"x": 3, "y": 3, "z": 0, "color": 9127187},
+    {"x": 4, "y": 3, "z": 0, "color": 9127187},
+    {"x": 5, "y": 2, "z": 0, "color": 9127187},
+    {"x": 6, "y": 2, "z": 0, "color": 9127187},
+    {"x": 7, "y": 3, "z": 0, "color": 9127187},
+    {"x": 8, "y": 3, "z": 0, "color": 9127187},
+    {"x": 9, "y": 2, "z": 0, "color": 9127187},
+    {"x": 10, "y": 1, "z": 0, "color": 9127187},
+    {"x": 11, "y": 0, "z": 0, "color": 11184810},
+    {"x": 11, "y": 1, "z": 0, "color": 11184810},
+    {"x": 11, "y": 0, "z": -1, "color": 11184810},
+    {"x": 11, "y": 0, "z": 1, "color": 11184810}
+  ],
+  "barriers": {
+    "ropeRailings": {
+      "note": "Simple barrier system - prevents falling off bridge sides",
+      "northSide": {
+        "xMin": 1,
+        "xMax": 10,
+        "zLine": -0.45,
+        "description": "North rope railing (blocks movement beyond Z=-0.45)"
+      },
+      "southSide": {
+        "xMin": 1,
+        "xMax": 10,
+        "zLine": 0.45,
+        "description": "South rope railing (blocks movement beyond Z=0.45)"
+      }
+    }
+  },
+  "notes": {
+    "colors": {
+      "cobblestone": "11184810 (gray)",
+      "wooden_planks": "9127187 (brown)"
+    },
+    "structure": "12 units long (X: 0-11), walkway along Z=0, dips from Y=3 to Y=2 in middle",
+    "deferred": [
+      "Visual rope railing meshes (currently invisible barriers)",
+      "Full constraint system (using simple Z-axis bounds check)",
+      "Rope sway animation",
+      "Plank gap/spacing details",
+      "Weathering/texture variation"
+    ]
+  }
+}
