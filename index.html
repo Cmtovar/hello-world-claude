@@ -958,8 +958,16 @@
 
             await sleep(1000);
 
+            // Check for initial gravity (spawn in air)
+            statusEl.textContent = 'Checking gravity...';
+            const fell = await simulatePreviewGravity();
+            if (fell) {
+                statusEl.textContent = `Fell to Y=${game.previewPlayerPos.y}`;
+                await sleep(800);
+            }
+
             // Simulate inputs from test config
-            const inputs = game.testConfig.expectedInputs || ['Shift'];
+            const inputs = game.testConfig.expectedInputs || [];
 
             for (let i = 0; i < inputs.length; i++) {
                 const input = inputs[i];
@@ -984,6 +992,13 @@
 
                 // Wait after input
                 await sleep(800);
+
+                // Check for gravity after movement (walk off ledge)
+                const fellAfterMove = await simulatePreviewGravity();
+                if (fellAfterMove) {
+                    statusEl.textContent = `Fell to Y=${game.previewPlayerPos.y} after movement`;
+                    await sleep(800);
+                }
             }
 
             console.log('Final position:', game.previewPlayerPos);
@@ -1027,6 +1042,36 @@
         // Check if voxel exists in preview terrain
         function hasPreviewVoxel(x, y, z) {
             return game.previewTerrain.has(`${Math.floor(x)},${Math.floor(y)},${Math.floor(z)}`);
+        }
+
+        // TODO: REFACTOR - Preview gravity simulation (mirrors main game gravity)
+        // Simulate gravity in preview mode - check if player should fall
+        async function simulatePreviewGravity() {
+            const x = Math.floor(game.previewPlayerPos.x);
+            const z = Math.floor(game.previewPlayerPos.z);
+            const currentY = Math.floor(game.previewPlayerPos.y);
+
+            // Find ground height below player
+            let groundY = -1;
+            for (let y = currentY - 1; y >= 0; y--) {
+                if (hasPreviewVoxel(x, y, z)) {
+                    groundY = y;
+                    break;
+                }
+            }
+
+            // If there's ground below and player is above it, fall
+            if (groundY >= 0) {
+                const targetY = groundY + 1; // Stand on top of ground voxel
+                if (currentY > targetY) {
+                    console.log(`Gravity: Falling from Y=${currentY} to Y=${targetY} (ground at Y=${groundY})`);
+                    game.previewPlayerPos.y = targetY;
+                    updatePreviewPlayerPosition(true);
+                    await sleep(600); // Animation time for fall
+                    return true; // Fell
+                }
+            }
+            return false; // No fall
         }
 
         // Simulate keyboard input in preview
