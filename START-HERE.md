@@ -1,8 +1,45 @@
 # START HERE - For Future Claude Sessions
 
-**Last Updated:** 2026-01-30 (project reorganization complete)
+**Last Updated:** 2026-02-01 (AI Agent Conduct established)
 **Current Branch:** master
 **Status:** Clean working tree - all work committed and pushed to GitHub
+
+---
+
+## ⚠️ MANDATORY SESSION INITIALIZATION
+
+**BEFORE doing ANY work, you MUST:**
+
+```bash
+cd ~/projects/claude-code/1
+git log -1 --format="%ar | %h | %s"
+git status
+```
+
+**Then respond with:**
+```
+Session initialized - [DATE TIME]
+
+Last commit: [TIME] ago ([HASH])
+Working tree: [clean / X files changed]
+Action: [Committed changes / Clean, proceeding / Asking user about uncommitted work]
+
+Current focus: [from CURRENT-WORK.md or "What Was Just Accomplished"]
+```
+
+**REQUIRED READING (15 minutes):**
+1. **AI-AGENT-CONDUCT.md** ⚠️ MANDATORY - Code of conduct for all sessions
+2. **CURRENT-WORK.md** (if exists) - In-progress feature
+3. This file - Project context
+
+**Core Rules:**
+- ✅ Commit every 30-60 minutes (WIP commits allowed)
+- ✅ Commit BEFORE asking user questions
+- ✅ Push after every commit
+- ✅ Complete one feature before starting another
+- ✅ Define "done" before starting work
+
+**See AI-AGENT-CONDUCT.md for complete protocol**
 
 ---
 
@@ -24,21 +61,38 @@ This is a **3D tactical Fire Emblem-inspired game** with vertical traversal, bui
 
 ---
 
-## What Was Just Accomplished (2026-01-30)
+## What Was Just Accomplished (2026-02-01)
+
+**Session recovery + AI Agent Conduct established:**
+
+1. **Recovered Uncommitted Work** - 5375 lines from Jan 30-31 cutscene implementation
+2. **Committed Cutscene System** - Action queue pattern, Test 01 working, JSON validation
+3. **Established Code of Conduct** - AI-AGENT-CONDUCT.md with mandatory protocols
+4. **Enhanced Git Hygiene** - WIP commit pattern, 30-60min frequency, commit-before-ask rule
+
+**Files Changed:**
+- AI-AGENT-CONDUCT.md (NEW) - Mandatory protocols for all sessions
+- START-HERE.md - Added session initialization checklist
+- SESSION-RECOVERY-2026-02-01.md - Recovery analysis
+- SESSION-SUMMARY-2026-02-01.md - Health assessment
+
+**Next Step:** Complete CURRENT-WORK.md template, then choose feature to complete (first map bridge OR cutscene Test 02)
+
+**Critical Change:** All future sessions MUST follow AI-AGENT-CONDUCT.md protocols
+
+---
+
+## What Was Accomplished (2026-01-30)
 
 **Cutscene system implementation** with action queue pattern and JSON validation:
 
 1. **Cutscene Infrastructure** - Action queue consumption, parallel character movement
 2. **Test 01 Complete** - 5 characters moving in parallel (working reference)
 3. **JSON Standard & Validation** - Prevention system for recurring hex color errors
-   - **validate-test-json.py** - Detect hex colors before they break
-   - **fix-hex-colors.py** - Auto-convert hex → decimal
-   - **TEST-JSON-STANDARD.md** - Complete format specification
 
 **⚠️ CRITICAL for future sessions:**
 - ALWAYS use decimal colors in JSON (2263842), NEVER hex (0x228b22)
 - Hex notation breaks JSON parsing with cryptic error
-- This has been a recurring issue across sessions - now prevented
 
 **Status:** Test 01 working, ready for Test 02 (complex choreography) or Acts 1-3
 
