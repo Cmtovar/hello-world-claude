@@ -89,10 +89,10 @@ git log --since="2026-02-01" --format="%ar" | head -10
 
 | Metric | Target | Actual | Status |
 |--------|--------|--------|--------|
-| Commits per day | 5+ | TBD | 🟡 |
+| Commits per day | 4-6 | TBD | 🟡 |
 | WIP commit % | 60%+ | 0% | 🔴 New protocol |
 | Completion commits/week | 2+ | 2 | ✅ |
-| Avg time between commits | <2hr | <1hr | ✅ |
+| Avg time between commits | 90min (max 2hr) | <1hr | ✅ |
 | Feature completion rate | 70%+ | 100% | ✅ |
 
 ---

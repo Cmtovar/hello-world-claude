@@ -358,8 +358,8 @@ Ready to proceed. [Question about direction if needed]
 
 ### Commit Frequency Targets
 
-**Minimum:** Every 90 minutes
-**Target:** Every 30-60 minutes
+**Minimum:** Every 2 hours (hard limit)
+**Target:** Every 90 minutes
 **Ideal:** After every meaningful progress unit
 
 **Meaningful progress unit:**
@@ -467,7 +467,7 @@ Would you like me to proceed with the alternative, or override?
 1. Session start → Check git status
 2. Review current work → Commit if needed
 3. Read CURRENT-WORK.md → Know the goal
-4. Make progress → 30-60min of work
+4. Make progress → ~90min of work
 5. Commit WIP → Push to GitHub
 6. Continue OR ask question
 7. Repeat 4-6
@@ -539,7 +539,7 @@ git log --since="1 week ago" --format="%ar" | head -20
 1. **Long coding sessions without commits**
    - Makes you say: "I'll commit when it's working"
    - Problem: Sessions can crash, work is lost
-   - Do instead: WIP commits every 30-60min
+   - Do instead: WIP commits every 90min (or before asking questions)
 
 2. **Starting new features before finishing current**
    - Makes you say: "I'll finish that later"
@@ -571,7 +571,7 @@ git log --since="1 week ago" --format="%ar" | head -20
 - [ ] Read current work status
 - [ ] Greet and confirm direction
 
-### Every 30-60 Minutes
+### Every 90 Minutes (or Before Questions)
 - [ ] WIP commit
 - [ ] Push to GitHub
 
@@ -597,6 +597,44 @@ git log --since="1 week ago" --format="%ar" | head -20
 
 **This is not optional. This is how we work.**
 
-**Version:** 1.0
+---
+
+## Protocol Evolution
+
+**Current Version:** 1.1
 **Last Updated:** 2026-02-01
 **Status:** MANDATORY for all AI agents
+
+### Version History
+
+**v1.1 (2026-02-01):**
+- Relaxed commit frequency from 30-60min to 90min
+- Added documentation workspace management
+- Clarified version history as storage philosophy
+
+**v1.0 (2026-02-01):**
+- Initial protocol established
+
+### Evolution Policy
+
+This protocol evolves with the project. See **PROTOCOL-EVOLUTION-NOTES.md** for:
+- Rationale for changes
+- Future considerations
+- Open questions
+- Quarterly review process
+
+**Exception Policy:**
+User can override any rule with explicit statement:
+> "Override protocol for [specific action]"
+
+When overridden, document the exception in commit message:
+```bash
+git commit -m "[Feature] - Complete
+
+[Normal description]
+
+Protocol Override: [What was overridden and why]
+User requested: [Quote user's override instruction]
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+```
