@@ -1,0 +1,963 @@
+{
+  "name": "Cutscene Test 01 - Parallel Forward Movement",
+  "description": "Test parallel character movement. 5 characters in rows, all move forward together.",
+  "notes": "Validates action queue consumption and parallel execution.",
+  "designReference": "DECLARATIVE-EVENT-SYSTEM-NOTES.md - Reference implementation for hardcoded cutscene",
+  "playerStart": {
+    "x": 2,
+    "y": 1,
+    "z": 0
+  },
+  "goalPosition": {
+    "x": 18,
+    "y": 1,
+    "z": 0
+  },
+  "voxels": [
+    {
+      "x": 0,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": -1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 0,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 1,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 0,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 1,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 2,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 3,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 4,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 5,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 6,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 7,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 8,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 9,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 10,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 11,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 13,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 14,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 15,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 16,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 17,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 18,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    },
+    {
+      "x": 19,
+      "y": 0,
+      "z": 2,
+      "color": 2263842,
+      "type": "grass"
+    }
+  ],
+  "cutsceneMode": true,
+  "characterGroup": {
+    "characters": [
+      {
+        "id": "character-01",
+        "name": "Scholar",
+        "startPosition": {
+          "x": 2,
+          "y": 1,
+          "z": -2
+        },
+        "colors": {
+          "boots": 9127187,
+          "body": 6908265,
+          "head": 13808780
+        },
+        "actionQueue": [
+          {
+            "type": "move",
+            "to": {
+              "x": 6,
+              "y": 1,
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 10,
+              "y": 1,
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": -2
+            }
+          }
+        ]
+      },
+      {
+        "id": "character-02",
+        "name": "Apprentice",
+        "startPosition": {
+          "x": 2,
+          "y": 1,
+          "z": -1
+        },
+        "colors": {
+          "boots": 7039815,
+          "body": 7048739,
+          "head": 16767673
+        },
+        "actionQueue": [
+          {
+            "type": "move",
+            "to": {
+              "x": 6,
+              "y": 1,
+              "z": -1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 10,
+              "y": 1,
+              "z": -1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": -1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": -1
+            }
+          }
+        ]
+      },
+      {
+        "id": "character-03",
+        "name": "Youth",
+        "startPosition": {
+          "x": 2,
+          "y": 1,
+          "z": 0
+        },
+        "colors": {
+          "boots": 10506797,
+          "body": 4286945,
+          "head": 16771751
+        },
+        "actionQueue": [
+          {
+            "type": "move",
+            "to": {
+              "x": 6,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 10,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": 0
+            }
+          }
+        ]
+      },
+      {
+        "id": "character-04",
+        "name": "Artist",
+        "startPosition": {
+          "x": 2,
+          "y": 1,
+          "z": 1
+        },
+        "colors": {
+          "boots": 8421504,
+          "body": 9662683,
+          "head": 13808780
+        },
+        "actionQueue": [
+          {
+            "type": "move",
+            "to": {
+              "x": 6,
+              "y": 1,
+              "z": 1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 10,
+              "y": 1,
+              "z": 1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": 1
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": 1
+            }
+          }
+        ]
+      },
+      {
+        "id": "character-05",
+        "name": "Storyteller",
+        "startPosition": {
+          "x": 2,
+          "y": 1,
+          "z": 2
+        },
+        "colors": {
+          "boots": 9127187,
+          "body": 14329120,
+          "head": 16758465
+        },
+        "actionQueue": [
+          {
+            "type": "move",
+            "to": {
+              "x": 6,
+              "y": 1,
+              "z": 2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 10,
+              "y": 1,
+              "z": 2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": 2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": 2
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

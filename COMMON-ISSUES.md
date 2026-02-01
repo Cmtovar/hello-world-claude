@@ -3,7 +3,7 @@
 **Purpose:** Document known problems and their ACTUAL solutions (not workarounds).
 
 **Date Created:** 2026-01-29
-**Last Updated:** 2026-01-29
+**Last Updated:** 2026-01-30
 
 ---
 
@@ -124,7 +124,86 @@ Use `notes` field instead:
 
 ---
 
-## 4. [Template for Future Issues]
+## 4. Hex Color Notation Breaks JSON Parsing
+
+### Problem
+**CRITICAL RECURRING ERROR:** Using JavaScript hex notation (0x...) in JSON test maps causes "Syntax error: the string did not match the expected pattern" when loading.
+
+### Symptoms
+- Test map fetch succeeds (file exists)
+- Error occurs at `response.json()` parsing step
+- Console shows: "Syntax error the string did not match the expected pattern"
+- Error message: "Failed to load test map" (line ~1937)
+- Map falls back to default terrain
+
+### Root Cause
+JSON specification does NOT support hex notation. JavaScript allows `0x228b22` but JSON only accepts decimal integers.
+
+**This is a RECURRING ERROR across multiple sessions** because:
+1. Three.js uses hex colors (0x...) naturally
+2. It's easy to copy hex values when creating test maps
+3. JSON files look syntactically correct at a glance
+4. Error message is cryptic (doesn't mention "hex")
+
+**Code location:** Any JSON file with color values
+```json
+// ❌ WRONG (breaks JSON)
+{"color": 0x228b22}
+
+// ✅ CORRECT (valid JSON)
+{"color": 2263842}
+```
+
+### Current Workaround
+None - MUST be fixed to load map.
+
+### Actual Solution
+**Status:** Implemented ✅
+
+**Prevention System:**
+1. **TEST-JSON-STANDARD.md** - Standard format and conversion reference
+2. **validate-test-json.py** - Detect hex colors before they break
+3. **fix-hex-colors.py** - Auto-convert hex → decimal
+
+**Usage:**
+```bash
+# Before committing new test maps
+python3 validate-test-json.py test-maps/your-test.json
+
+# If hex colors detected, auto-fix
+python3 fix-hex-colors.py test-maps/your-test.json
+
+# Validate all test maps
+python3 validate-test-json.py test-maps/*.json
+```
+
+**Manual fix if needed:**
+```bash
+# Quick fix for single file
+python3 << 'EOF'
+import json, re
+with open('test-maps/your-file.json', 'r') as f:
+    content = f.read()
+content = re.sub(r'0x([0-9a-fA-F]+)', lambda m: str(int(m.group(1), 16)), content)
+data = json.loads(content)
+with open('test-maps/your-file.json', 'w') as f:
+    json.dump(data, f, indent=2)
+EOF
+```
+
+**Color Conversion Reference:**
+- 0x228b22 = 2263842 (forest green)
+- 0x8b4513 = 9127187 (brown)
+- 0xd2b48c = 13808780 (tan)
+- Online: https://www.binaryhexconverter.com/hex-to-decimal-converter
+
+**Impact:** HIGH - Breaks test loading completely, recurring across sessions
+
+**Git commit:** Session 2026-01-30 (cutscene system implementation)
+
+---
+
+## 5. [Template for Future Issues]
 
 ### Problem
 [Brief description]
@@ -175,6 +254,7 @@ const mapPath = mapName.includes('/') ? mapName : `test-maps/${mapName}`;
 ## Issue Priority
 
 **High Priority (Fix ASAP):**
+- ✅ Hex color notation (#4) - **FIXED** via validation scripts (2026-01-30)
 - JSON comments (#3) - causes silent failures
 - Story-geometry loading (#1) - affects workflow
 
@@ -183,6 +263,21 @@ const mapPath = mapName.includes('/') ? mapName : `test-maps/${mapName}`;
 
 **Low Priority (Defer):**
 - [None currently]
+
+---
+
+## Session Continuity Alert
+
+**For Future Claude Sessions:**
+
+⚠️ **CRITICAL:** Issue #4 (Hex Colors) is a RECURRING problem across sessions. Before creating or modifying test map JSON files:
+
+1. **Read TEST-JSON-STANDARD.md** for format specification
+2. **ALWAYS use decimal colors**, never hex (0x...)
+3. **Run validation** before committing: `python3 validate-test-json.py <file>`
+4. If you see "syntax error" when loading JSON, check for hex colors first
+
+This issue has been fixed multiple times. The validation scripts prevent regression.
 
 ---
 

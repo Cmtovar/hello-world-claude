@@ -3,6 +3,7 @@
 **Purpose:** Isolated test environments for character models, movement, and cutscene elements
 
 **Created:** 2026-01-30
+**Updated:** 2026-01-30 (Added cutscene system tests)
 
 ---
 
@@ -14,6 +15,28 @@ http://100.93.126.24:8080/?test=character-01-scholar
 ```
 
 These are **separate from the complete map** - isolated blank environments for testing individual elements.
+
+---
+
+## Cutscene System Tests
+
+### Cutscene Test 01 - Parallel Forward Movement
+**File:** `test-maps/cutscene-test-01-parallel.json`
+**URL:** `http://100.93.126.24:8080/?test=cutscene-test-01-parallel`
+**Description:** First cutscene system test - 5 characters moving forward in parallel
+**Tests:**
+- Action queue consumption
+- Parallel character movement
+- Player interface pattern
+- Smooth animation (1 second per action)
+- Auto-progression through action queues
+
+**Expected Behavior:**
+- 5 characters spawn in rows (Z=-2 to Z=2)
+- All move forward together (4 moves each, to X=18)
+- 1.5 second delay between action consumption
+- Animations complete before next action
+- Console logs action consumption and completion
 
 ---
 

@@ -678,7 +678,12 @@
             animationRunning: false,
             animationInterval: null,
             manualPlayMode: false,
-            previewKeys: {}
+            previewKeys: {},
+            // Cutscene system
+            cutsceneMode: false,
+            characterGroup: null,
+            cutsceneAnimating: false,
+            cutsceneActionDelay: 1500 // ms between action consumption
         };
 
         // Expose game state globally for testing
@@ -1860,8 +1865,12 @@
                 createTerrain();
             }
 
-            // Create player
-            createPlayer();
+            // Create player (unless in cutscene mode)
+            if (!game.cutsceneMode) {
+                createPlayer();
+            } else {
+                console.log('Cutscene mode - skipping player creation');
+            }
 
             // Event listeners
             window.addEventListener('resize', onResize);
@@ -1878,14 +1887,17 @@
         // Load test map configuration
         async function loadTestMap(mapName) {
             try {
-                // Support both test-maps/ and story-geometry/ paths
-                // Allow relative paths like "../story-geometry/mapName"
-                const mapPath = mapName.includes('/') ? mapName : `test-maps/${mapName}`;
-                const response = await fetch(`${mapPath}.json`);
+                const response = await fetch(`test-maps/${mapName}.json`);
                 const config = await response.json();
                 game.testConfig = config;
 
                 console.log('Loading test map:', config);
+
+                // Check if this is a cutscene
+                if (config.cutsceneMode) {
+                    game.cutsceneMode = true;
+                    console.log('Cutscene mode enabled');
+                }
 
                 // Set player start position
                 if (config.playerStart) {
@@ -1902,6 +1914,17 @@
                 // Create goal marker if specified
                 if (config.goal) {
                     createGoalMarker(config.goal.x, config.goal.y, config.goal.z);
+                }
+
+                // Initialize character group if cutscene
+                if (config.characterGroup) {
+                    initCharacterGroup(config.characterGroup);
+
+                    // Start cutscene after short delay
+                    setTimeout(() => {
+                        console.log('Starting cutscene...');
+                        consumeNextActions();
+                    }, 1000);
                 }
 
                 console.log('Test map loaded successfully');
@@ -2128,6 +2151,424 @@
             game.scene.add(game.player);
         }
 
+        // ========================================
+        // CUTSCENE SYSTEM
+        // ========================================
+        // Character-based cutscene system for parallel movement choreography
+        // Uses action queue consumption pattern (see DECLARATIVE-EVENT-SYSTEM-NOTES.md)
+
+        // Create a 3-voxel tall character (boots, body, head)
+        function createCharacter(characterData) {
+            const { id, name, startPosition, colors } = characterData;
+
+            // Create character as a group of 3 voxels
+            const characterGroup = new THREE.Group();
+            characterGroup.name = id;
+
+            const voxelSize = 1;
+
+            // Boots (Y=0)
+            const bootsGeometry = new THREE.BoxGeometry(voxelSize, voxelSize, voxelSize);
+            const bootsMaterial = new THREE.MeshLambertMaterial({ color: colors.boots });
+            const boots = new THREE.Mesh(bootsGeometry, bootsMaterial);
+            boots.position.set(0, 0, 0);
+            boots.castShadow = true;
+            characterGroup.add(boots);
+
+            // Body (Y=1)
+            const bodyGeometry = new THREE.BoxGeometry(voxelSize, voxelSize, voxelSize);
+            const bodyMaterial = new THREE.MeshLambertMaterial({ color: colors.body });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.set(0, voxelSize, 0);
+            body.castShadow = true;
+            characterGroup.add(body);
+
+            // Head (Y=2)
+            const headGeometry = new THREE.BoxGeometry(voxelSize, voxelSize, voxelSize);
+            const headMaterial = new THREE.MeshLambertMaterial({ color: colors.head });
+            const head = new THREE.Mesh(headGeometry, headMaterial);
+            head.position.set(0, voxelSize * 2, 0);
+            head.castShadow = true;
+            characterGroup.add(head);
+
+            // Position the character group in the world
+            characterGroup.position.set(
+                startPosition.x,
+                startPosition.y - 0.5, // Offset so boots are at Y position
+                startPosition.z
+            );
+
+            return {
+                id,
+                name,
+                model: characterGroup,
+                position: { ...startPosition },
+                actionQueue: [...characterData.actionQueue],
+                currentAnimation: null
+            };
+        }
+
+        // Initialize character group from test map data
+        function initCharacterGroup(characterGroupData) {
+            const characters = characterGroupData.characters.map(charData => {
+                const character = createCharacter(charData);
+                game.scene.add(character.model);
+                return character;
+            });
+
+            game.characterGroup = { characters };
+            console.log('Character group initialized:', game.characterGroup);
+        }
+
+        // Player Interface: Consume next action from each character's queue
+        function consumeNextActions() {
+            if (!game.characterGroup || game.cutsceneAnimating) {
+                return;
+            }
+
+            const { characters } = game.characterGroup;
+            let actionsConsumed = 0;
+
+            // Consume one action from each character in parallel
+            characters.forEach(character => {
+                if (character.actionQueue.length > 0) {
+                    const action = character.actionQueue.shift(); // Pop first action
+                    executeAction(character, action);
+                    actionsConsumed++;
+                }
+            });
+
+            if (actionsConsumed > 0) {
+                console.log(`Consumed ${actionsConsumed} actions`);
+                game.cutsceneAnimating = true;
+            } else {
+                console.log('All action queues empty - cutscene complete');
+            }
+        }
+
+        // ========================================
+        // MOVEMENT STRATEGY PATTERN
+        // ========================================
+        // Context-aware movement validation and transformation
+        // See: MOVEMENT-STRATEGY-PATTERN.md
+
+        // Base strategy class
+        class MovementStrategy {
+            canExecute(character, targetPos) {
+                return true; // Override in subclasses
+            }
+
+            transform(character, targetPos) {
+                return { type: 'move', to: targetPos }; // Default: no transform
+            }
+
+            postProcess(character, finalPos) {
+                // Override in subclasses for post-move effects
+            }
+        }
+
+        // Strategy 1: Character Collision (Highest Priority - Blocking)
+        class CharacterCollisionStrategy extends MovementStrategy {
+            canExecute(character, targetPos) {
+                if (!game.characterGroup) return true;
+
+                // Check if another character occupies OR is moving to target position
+                const occupied = game.characterGroup.characters.some(other => {
+                    if (other.id === character.id) return false;
+
+                    // Check current position
+                    const atCurrentPos =
+                           Math.floor(other.position.x) === Math.floor(targetPos.x) &&
+                           Math.floor(other.position.y) === Math.floor(targetPos.y) &&
+                           Math.floor(other.position.z) === Math.floor(targetPos.z);
+
+                    // Check if character is animating to this position
+                    const movingToPos = other.currentAnimation &&
+                                       other.currentAnimation.type === 'move' &&
+                                       other.currentAnimation.targetPos &&
+                                       Math.floor(other.currentAnimation.targetPos.x) === Math.floor(targetPos.x) &&
+                                       Math.floor(other.currentAnimation.targetPos.y) === Math.floor(targetPos.y) &&
+                                       Math.floor(other.currentAnimation.targetPos.z) === Math.floor(targetPos.z);
+
+                    return atCurrentPos || movingToPos;
+                });
+
+                if (occupied) {
+                    console.log(`${character.name}: blocked by another character at (${targetPos.x}, ${targetPos.y}, ${targetPos.z})`);
+                }
+
+                return !occupied;
+            }
+        }
+
+        // Strategy 2: Terrain Constraint (High Priority - Blocking)
+        class TerrainConstraintStrategy extends MovementStrategy {
+            canExecute(character, targetPos) {
+                // Check if target position is INSIDE a solid block
+                const isInsideBlock = game.terrain.has(
+                    `${Math.floor(targetPos.x)},${Math.floor(targetPos.y)},${Math.floor(targetPos.z)}`
+                );
+
+                // Block moves INTO solid blocks (unless auto-climb will handle it)
+                // But ALLOW moves to unsupported positions (gravity will handle falling)
+                if (isInsideBlock) {
+                    console.log(`${character.name}: position blocked by solid terrain at (${targetPos.x}, ${targetPos.y}, ${targetPos.z})`);
+                    return false;
+                }
+
+                // Allow all other moves (including stepping off edges)
+                // Gravity will handle falling if no ground support
+                return true;
+            }
+        }
+
+        // Strategy 3: Auto-Climb (Medium Priority - Transforming)
+        class AutoClimbStrategy extends MovementStrategy {
+            canExecute(character, targetPos) {
+                // Check if there's a 1-block obstacle at target position
+                const hasVoxelAtTarget = game.terrain.has(
+                    `${Math.floor(targetPos.x)},${Math.floor(targetPos.y)},${Math.floor(targetPos.z)}`
+                );
+
+                return hasVoxelAtTarget; // Can transform if obstacle exists
+            }
+
+            transform(character, targetPos) {
+                // Transform horizontal move to climb move
+                const climbTarget = {
+                    x: targetPos.x,
+                    y: targetPos.y + 1, // Climb up one block
+                    z: targetPos.z
+                };
+
+                console.log(`${character.name}: auto-climb triggered at (${targetPos.x}, ${targetPos.y}, ${targetPos.z}) → (${climbTarget.x}, ${climbTarget.y}, ${climbTarget.z})`);
+
+                return {
+                    type: 'move',
+                    to: climbTarget,
+                    visualEffect: 'auto-climb'
+                };
+            }
+        }
+
+        // Strategy 4: Gravity (Lowest Priority - Post-processing)
+        class GravityStrategy extends MovementStrategy {
+            postProcess(character, finalPos) {
+                // After move completes, check if ground beneath
+                let fallDistance = 0;
+                let checkY = Math.floor(finalPos.y - 1);
+
+                console.log(`${character.name}: gravity check at (${finalPos.x}, ${finalPos.y}, ${finalPos.z})`);
+
+                // Check downward until we hit ground or Y=0
+                while (checkY >= 0) {
+                    const terrainKey = `${Math.floor(finalPos.x)},${checkY},${Math.floor(finalPos.z)}`;
+                    const hasGround = game.terrain.has(terrainKey);
+
+                    console.log(`  Checking Y=${checkY}: ${hasGround ? 'GROUND FOUND' : 'no ground'}`);
+
+                    if (hasGround) {
+                        break; // Found ground
+                    }
+
+                    fallDistance++;
+                    checkY--;
+                }
+
+                // If no ground beneath, apply gravity (fall)
+                if (fallDistance > 0) {
+                    const fallTarget = {
+                        x: finalPos.x,
+                        y: finalPos.y - fallDistance,
+                        z: finalPos.z
+                    };
+
+                    console.log(`${character.name}: GRAVITY APPLIED! Falling ${fallDistance} blocks from Y=${finalPos.y} to Y=${fallTarget.y}`);
+
+                    // Apply gravity immediately (postProcess is already called after move completes)
+                    animateCharacterMove(character, fallTarget);
+                } else {
+                    console.log(`${character.name}: on solid ground, no fall`);
+                }
+            }
+        }
+
+        // Movement Pipeline Orchestrator
+        class MovementPipeline {
+            constructor() {
+                // Ordered strategies (execution order matters!)
+                this.validators = [
+                    new CharacterCollisionStrategy(),
+                    new TerrainConstraintStrategy()
+                ];
+
+                this.transformers = [
+                    new AutoClimbStrategy()
+                ];
+
+                this.postProcessors = [
+                    new GravityStrategy()
+                ];
+            }
+
+            // Execute full pipeline for a movement action
+            processMovement(character, targetPos) {
+                // [1] PRE-MOVE VALIDATION
+                for (const validator of this.validators) {
+                    if (!validator.canExecute(character, targetPos)) {
+                        console.log(`${character.name}: movement blocked by ${validator.constructor.name}`);
+                        return null; // Movement blocked
+                    }
+                }
+
+                // [2] MOVEMENT TRANSFORMATION
+                let finalAction = { type: 'move', to: targetPos };
+
+                for (const transformer of this.transformers) {
+                    if (transformer.canExecute(character, targetPos)) {
+                        finalAction = transformer.transform(character, targetPos);
+                        break; // Use first applicable transformation
+                    }
+                }
+
+                // [3] POST-MOVE PROCESSING (after execution)
+                // Wait for animation to complete (1000ms) before checking gravity
+                const finalPos = finalAction.to;
+                setTimeout(() => {
+                    for (const processor of this.postProcessors) {
+                        processor.postProcess(character, finalPos);
+                    }
+                }, 1050); // After move animation completes (1000ms + small buffer)
+
+                return finalAction; // Return transformed action
+            }
+        }
+
+        // Global pipeline instance
+        const movementPipeline = new MovementPipeline();
+
+        // ========================================
+        // END MOVEMENT STRATEGY PATTERN
+        // ========================================
+
+        // Execute a specific action (move, climb, wait, etc.)
+        function executeAction(character, action) {
+            console.log(`${character.name}: executing ${action.type}`, action);
+
+            switch (action.type) {
+                case 'move':
+                    // Use movement pipeline for validation and transformation
+                    const processedAction = movementPipeline.processMovement(character, action.to);
+
+                    if (processedAction === null) {
+                        // Movement blocked, create short wait animation to stay in sync
+                        character.currentAnimation = {
+                            type: 'wait',
+                            startTime: Date.now(),
+                            duration: 100
+                        };
+                    } else {
+                        // Execute transformed movement
+                        animateCharacterMove(character, processedAction.to);
+                    }
+                    break;
+
+                case 'wait':
+                    animateCharacterWait(character, action.duration || 1000);
+                    break;
+
+                default:
+                    console.warn(`Unknown action type: ${action.type}`);
+            }
+        }
+
+        // Animate character movement (similar to existing player movement)
+        function animateCharacterMove(character, targetPos) {
+            const startPos = { ...character.position };
+            const duration = 1000; // 1 second movement
+            const startTime = Date.now();
+
+            character.currentAnimation = {
+                type: 'move',
+                startPos,
+                targetPos,
+                startTime,
+                duration
+            };
+        }
+
+        // Animate character wait (character stays still but participates in timing)
+        function animateCharacterWait(character, duration) {
+            const startTime = Date.now();
+
+            character.currentAnimation = {
+                type: 'wait',
+                startTime,
+                duration
+            };
+
+            console.log(`${character.name}: waiting for ${duration}ms`);
+        }
+
+        // Update all character animations (called each frame)
+        function updateCharacterAnimations() {
+            if (!game.characterGroup) return;
+
+            const now = Date.now();
+            let allAnimationsComplete = true;
+
+            game.characterGroup.characters.forEach(character => {
+                if (character.currentAnimation) {
+                    const anim = character.currentAnimation;
+                    const elapsed = now - anim.startTime;
+                    const progress = Math.min(elapsed / anim.duration, 1.0);
+
+                    // Handle different animation types
+                    if (anim.type === 'move') {
+                        // Ease out cubic for smooth deceleration
+                        const eased = 1 - Math.pow(1 - progress, 3);
+
+                        // Interpolate position
+                        character.position.x = anim.startPos.x + (anim.targetPos.x - anim.startPos.x) * eased;
+                        character.position.y = anim.startPos.y + (anim.targetPos.y - anim.startPos.y) * eased;
+                        character.position.z = anim.startPos.z + (anim.targetPos.z - anim.startPos.z) * eased;
+
+                        // Update model position
+                        character.model.position.set(
+                            character.position.x,
+                            character.position.y - 0.5, // Offset for boots
+                            character.position.z
+                        );
+                    } else if (anim.type === 'wait') {
+                        // Wait action - no position update, just wait for duration
+                        // Character stays still
+                    }
+
+                    // Check if animation complete
+                    if (progress >= 1.0) {
+                        character.currentAnimation = null;
+                        console.log(`${character.name}: ${anim.type} complete`);
+                    } else {
+                        allAnimationsComplete = false;
+                    }
+                }
+            });
+
+            // If all animations complete, allow next action consumption
+            if (allAnimationsComplete && game.cutsceneAnimating) {
+                game.cutsceneAnimating = false;
+
+                // Auto-consume next actions after delay
+                setTimeout(() => {
+                    consumeNextActions();
+                }, game.cutsceneActionDelay);
+            }
+        }
+
+        // ========================================
+        // END CUTSCENE SYSTEM
+        // ========================================
+
         // Get terrain height at x, z position
         function getTerrainHeightAt(x, z) {
             let maxY = -1;
@@ -2343,13 +2784,19 @@
             if (game.menuOpen) {
                 const time = Date.now() * 0.0001;
                 const radius = 20;
-                game.camera.position.x = Math.cos(time) * radius;
-                game.camera.position.z = Math.sin(time) * radius;
-                game.camera.lookAt(0, 5, 0);
+                game.camera.position.x = 12 + Math.cos(time) * radius;
+                game.camera.position.z = 0 + Math.sin(time) * radius;
+                game.camera.lookAt(12, 2, 0);
                 game.controls.enabled = false;
             } else {
                 game.controls.enabled = true;
-                handleMovement(delta);
+
+                // Handle cutscene animations or player movement
+                if (game.cutsceneMode) {
+                    updateCharacterAnimations();
+                } else {
+                    handleMovement(delta);
+                }
             }
 
             game.controls.update();

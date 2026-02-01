@@ -19,11 +19,34 @@ This is a **3D tactical Fire Emblem-inspired game** with vertical traversal, bui
 **⚠️ Recovery Infrastructure:**
 - **SESSION-CONTINUITY.md** - Critical practices for session recovery (tested 2026-01-30)
 - **COMMON-ISSUES.md** - Known problems and solutions
+- **TEST-JSON-STANDARD.md** - ⚠️ CRITICAL: JSON format standard (prevents recurring hex color errors)
 - **.claude/dev-server.md** - Dev server config (tailscale IP: 100.93.126.24)
 
 ---
 
-## What Was Just Accomplished (2026-01-29)
+## What Was Just Accomplished (2026-01-30)
+
+**Cutscene system implementation** with action queue pattern and JSON validation:
+
+1. **Cutscene Infrastructure** - Action queue consumption, parallel character movement
+2. **Test 01 Complete** - 5 characters moving in parallel (working reference)
+3. **JSON Standard & Validation** - Prevention system for recurring hex color errors
+   - **validate-test-json.py** - Detect hex colors before they break
+   - **fix-hex-colors.py** - Auto-convert hex → decimal
+   - **TEST-JSON-STANDARD.md** - Complete format specification
+
+**⚠️ CRITICAL for future sessions:**
+- ALWAYS use decimal colors in JSON (2263842), NEVER hex (0x228b22)
+- Hex notation breaks JSON parsing with cryptic error
+- This has been a recurring issue across sessions - now prevented
+
+**Status:** Test 01 working, ready for Test 02 (complex choreography) or Acts 1-3
+
+**See:** CUTSCENE-SYSTEM-STATUS.md for details
+
+---
+
+## What Was Accomplished (2026-01-29)
 
 **Major design session** that created comprehensive game system architecture:
 
