@@ -29,12 +29,25 @@ Tactical strategy game with full 3D movement mechanics inspired by:
 - **Constraint system** for declarative test rules
 
 ### 📚 Complete Documentation
+
+```
+Onboarding:          Documentation Directories:
+QUICK-START.md  →    docs/protocol/  (how we work)
+START-HERE.md   →    docs/design/    (game systems)
+README.md       →    docs/status/    (current state)
+                     docs/guides/    (how-to reference)
+                     docs/sessions/  (history)
+```
+
+**Key Reference Documents:**
 - Architecture design (`docs/design/ARCHITECTURE.md`)
 - Design decisions (`docs/design/DESIGN-DECISIONS.md`)
 - Code structure guide (`docs/guides/CODE-STRUCTURE.md`)
 - Test patterns (`docs/guides/TEST-PATTERNS.md`)
 - Methodology (`docs/guides/METHODOLOGY.md`)
-- **Start here:** `QUICK-START.md` (5 min to productivity)
+- Coordinate system (`docs/guides/COORDINATE_SYSTEM.md`)
+
+**Start here:** `QUICK-START.md` (5 min to productivity)
 
 ### 🔮 Future Unit Types
 - **Ground Units** - Standard movement (mechanics complete)
@@ -113,14 +126,31 @@ See `mechanics-graph.json` for:
 
 ## Architecture
 
-### Files
+### Repository Structure
+
+```
+/
+├── index.html              Main game (Three.js, standalone)
+├── mechanics-graph.json    Mechanic dependency graph
+│
+├── test-maps/              Micro-map test scenarios (JSON)
+├── story-geometry/         Scene voxel data + generation scripts
+├── concepts/               Deep design explorations
+├── tests/                  Playwright test suite
+│
+└── docs/                   All documentation (see QUICK-START.md)
+    ├── protocol/
+    ├── design/
+    ├── status/
+    ├── guides/
+    └── sessions/
+```
+
+### Key Technical Files
 - `index.html` - Main game (Three.js, standalone)
-- `test-maps/` - Micro map configurations (JSON)
-- `story-geometry/` - Scene voxel data and generation scripts
-- `tests/` - Playwright test suite
+- `test-builder.js` - Test generation factory
 - `mechanics-graph.json` - Mechanic dependency graph
 - `docs/guides/COORDINATE_SYSTEM.md` - Position/voxel documentation
-- `docs/` - All documentation (organized by category)
 
 ### Coordinate System
 - Voxel at `y=0` is ground level

@@ -2,6 +2,22 @@
 
 **Goal:** 5 minutes to productivity. Start working, read details later.
 
+```
+┌──────────────────────────────────────────────────────────┐
+│  Session Workflow (The 3 Rules)                         │
+└──────────────────────────────────────────────────────────┘
+         ↓
+    Initialize          Check status, get oriented
+         ↓
+    Build Feature       CURRENT-WORK.md or ask user
+         ↓
+    Commit Every 90min  WIP commits preserve work
+         ↓
+    Before Questions    Commit, then ask user
+         ↓
+    Feature Complete    Final commit, update docs
+```
+
 ---
 
 ## 🏗️ Just Want to Start Building?
@@ -235,9 +251,14 @@ git reset --hard HEAD~1  # Undo commit, DELETE changes (dangerous!)
 ## 🎯 That's It - Start Building
 
 **Need more info?**
-- Full protocol: `docs/AI-AGENT-CONDUCT.md`
-- Design docs: `docs/design/`
-- Session history: `docs/sessions/`
+```
+docs/
+├── protocol/    Full working rules (git, commits, patterns)
+├── design/      Game systems and narrative
+├── status/      What's done, what's next
+├── guides/      Troubleshooting and standards
+└── sessions/    Development history
+```
 
 **Most important:**
 - Ask me questions when unsure
@@ -251,19 +272,23 @@ git reset --hard HEAD~1  # Undo commit, DELETE changes (dangerous!)
 ## 🧭 Common Questions
 
 **Q: What should I work on?**
-A: Ask me! Or check `CURRENT-WORK.md` if it exists.
+A: Ask me! Or check `CURRENT-WORK.md` if it exists, or `docs/status/IMPLEMENTATION-STATUS.md`
 
 **Q: I broke something, what do I do?**
 A: Commit it anyway (WIP), then fix it. Broken commits are fine.
 
-**Q: Do I really need to read 1000 lines of protocol?**
-A: No. This file is enough. Read the full protocol when you have questions.
+**Q: Where do I find [X]?**
+A:
+- Rules/protocol → `docs/protocol/`
+- Design docs → `docs/design/`
+- Current priorities → `docs/status/`
+- How-to guides → `docs/guides/`
 
 **Q: What if I forget a rule?**
 A: I'll remind you if needed. Just commit often and ask questions.
 
 ---
 
-**Version:** 1.0
-**For detailed protocol:** See `docs/AI-AGENT-CONDUCT.md`
-**For project context:** See `START-HERE.md`
+**For detailed protocol:** `docs/protocol/AI-AGENT-CONDUCT.md`
+**For full context:** `START-HERE.md`
+**For project overview:** `README.md`

@@ -87,95 +87,153 @@ Plus: Complete narrative framework for first map "The Bridge at Old Fort Crossin
 
 ---
 
-## Documentation Structure
+## Navigation Guide
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  New Session Flow                                           │
+└─────────────────────────────────────────────────────────────┘
+                           ↓
+              ┌────────────────────────┐
+              │   QUICK-START.md       │  ← Start here (5 min)
+              │   (3 rules, get going) │
+              └────────────────────────┘
+                           ↓
+        ┌──────────────────┴──────────────────┐
+        ↓                                     ↓
+┌───────────────┐                    ┌────────────────┐
+│ START-HERE.md │                    │ CURRENT-WORK.md│
+│ (full context)│                    │ (active task)  │
+└───────────────┘                    └────────────────┘
+        ↓                                     ↓
+┌──────────────────────────────────────────────────────┐
+│                   docs/ folders                      │
+└──────────────────────────────────────────────────────┘
+```
+
+### Root Files (Mainstays)
 
 ```
 /
-├── QUICK-START.md              ← Start here (5 min)
-├── START-HERE.md               ← You are here (context)
-├── README.md                   ← Project overview
-├── CURRENT-WORK.md             ← Active feature (if exists)
-│
-├── docs/
-│   ├── protocol/               ← How we work
-│   │   ├── AI-AGENT-CONDUCT.md      (Full rules)
-│   │   └── PROTOCOL-EVOLUTION-NOTES.md
-│   │
-│   ├── design/                 ← What we're building
-│   │   ├── FIRST-MAP-NARRATIVE.md
-│   │   ├── DEVELOPER-STYLE-GUIDE.md
-│   │   └── [design docs]
-│   │
-│   ├── status/                 ← Current state
-│   │   ├── IMPLEMENTATION-STATUS.md
-│   │   ├── CUTSCENE-SYSTEM-STATUS.md
-│   │   └── PROGRESS-METRICS.md
-│   │
-│   ├── guides/                 ← How-to references
-│   │   ├── COMMON-ISSUES.md
-│   │   └── TEST-JSON-STANDARD.md
-│   │
-│   └── sessions/               ← Historical notes
-│       └── SESSION-*.md
-│
-├── index.html                  ← The game
-├── test-maps/                  ← Test scenarios
-└── story-geometry/             ← Scene voxel data
+├── QUICK-START.md          ← 5-minute onboarding
+├── START-HERE.md           ← Full context (you are here)
+├── README.md               ← Project overview
+├── CURRENT-WORK.md         ← Active feature scope (ephemeral)
+└── index.html              ← The game itself
 ```
 
-**Most files are optional. Start with QUICK-START.md.**
+### Documentation Directories
+
+```
+docs/
+├── protocol/      How we work together
+│   └── AI-AGENT-CONDUCT.md (git rules, commit patterns)
+│
+├── design/        What we're building
+│   └── [game systems, narrative, architecture]
+│
+├── status/        Current state of features
+│   └── IMPLEMENTATION-STATUS.md (main tracker)
+│
+├── guides/        How-to references
+│   └── [troubleshooting, standards, patterns]
+│
+└── sessions/      Historical development notes
+    └── SESSION-*.md (day-by-day records)
+```
+
+### Asset Directories
+
+```
+test-maps/         Micro-maps for testing mechanics (JSON)
+story-geometry/    Scene voxel data + generation scripts
+concepts/          Deep design explorations
+tests/             Playwright test suite (future)
+```
+
+**Navigation Tips:**
+- **Stuck?** → `docs/guides/`
+- **What's next?** → `docs/status/IMPLEMENTATION-STATUS.md`
+- **How do we work?** → `docs/protocol/AI-AGENT-CONDUCT.md`
+- **Design questions?** → `docs/design/`
+- **What happened?** → `docs/sessions/`
 
 ---
 
-## File Organization
+## Detailed Repository Organization
+
+### Root Level Files (Beyond the Mainstays)
+
+The root may contain session-specific or design files like:
+- `SESSION-YYYY-MM-DD.md` - Comprehensive session summaries
+- Design documents from major sessions (e.g., `ARCHITECTURE.md`, `FIRST-MAP-NARRATIVE.md`, `MAP-DESIGN-CONCEPTS.md`, `CONSTRAINT-INTERFACE-PATTERN.md`)
+
+These get created during design sessions and may later be organized into `docs/` folders.
+
+### The concepts/ Directory - Anthropological Pattern
 
 ```
-/
-├── START-HERE.md                    # This file
-├── SESSION-2026-01-29.md            # Today's comprehensive summary
-├── DEVELOPER-STYLE-GUIDE.md         # Working patterns for future sessions
-├── README.md                        # Project overview
-├── ARCHITECTURE.md                  # Technical architecture
-├── FIRST-MAP-NARRATIVE.md           # Complete first map story
-├── MAP-DESIGN-CONCEPTS.md           # Map design philosophy
-├── CONSTRAINT-INTERFACE-PATTERN.md  # Core system foundation
-│
-├── concepts/                        # System design documents
-│   ├── blueprint-mode-design.md               # Primary source
-│   ├── blueprint-mode-interpretation.md       # Analysis
-│   ├── template-composition-system.md         # Primary source
-│   ├── template-composition-interpretation.md # Analysis
-│   ├── progression-through-units.md           # Primary source
-│   ├── progression-through-units-interpretation.md
-│   ├── techniques-and-environment.md          # Primary source
-│   ├── techniques-and-environment-interpretation.md
-│   ├── almanac-and-template-ide.md            # Primary source
-│   ├── almanac-and-template-ide-interpretation.md
-│   ├── rainbow-unicorn.md                     # Future unit concept
-│   ├── odm-gear.md                            # Future unit concept
-│   └── llm-visual-testing.md                  # Future testing concept
-│
-├── index.html                       # Main game (Three.js)
-├── test-builder.js                  # Test generation factory
-├── mechanics-graph.json             # Mechanic dependency graph
-│
-├── story-geometry/                  # Story content + generation tools
-│   ├── *.json                       # Scene files (complete-scene, ruins, river, etc.)
-│   ├── *.py                         # Scene generation scripts (22 scripts)
-│   └── README.md                    # Story geometry documentation
-│
-├── test-maps/                       # Micro-map tests + cutscene elements (JSON)
-│   ├── testBasicMovement.json
-│   ├── testDiagonalMovement.json
-│   ├── character-01-scholar.json
-│   ├── enemy-zombie.json
-│   └── ... (many more)
-│
-└── tests/                           # Playwright test suite (future)
-    ├── package.json
-    ├── playwright.config.js
-    └── specs/
+concepts/
+├── blueprint-mode-design.md               # Primary source
+├── blueprint-mode-interpretation.md       # Analysis
+├── template-composition-system.md         # Primary source
+├── template-composition-interpretation.md # Analysis
+├── progression-through-units.md           # Primary source
+├── progression-through-units-interpretation.md
+├── techniques-and-environment.md          # Primary source
+├── techniques-and-environment-interpretation.md
+├── almanac-and-template-ide.md            # Primary source
+├── almanac-and-template-ide-interpretation.md
+├── rainbow-unicorn.md                     # Future unit concept
+├── odm-gear.md                            # Future unit concept
+└── llm-visual-testing.md                  # Future testing concept
 ```
+
+**Pattern:** Each major system has TWO files:
+- **Primary Source** - User's exact words, unedited (design intent)
+- **Interpretation** - Claude's analysis, implications, implementation notes
+
+This preserves both vision and technical understanding for future sessions.
+
+### The story-geometry/ Directory
+
+```
+story-geometry/
+├── *.json    Scene voxel data (complete-scene, ruins, river, bridge, etc.)
+├── *.py      Scene generation scripts (22 Python scripts)
+└── README.md Documentation for geometry system
+```
+
+Contains both hand-crafted scenes and procedural generation tools.
+
+### The test-maps/ Directory - Dual Purpose
+
+```
+test-maps/
+├── testBasicMovement.json      # Mechanic validation maps
+├── testDiagonalMovement.json
+├── testDescendOneBlock.json
+├── ...
+├── character-01-scholar.json   # Cutscene character definitions
+├── enemy-zombie.json           # Enemy definitions
+└── ... (many more test + cutscene files)
+```
+
+Serves TWO purposes:
+1. Micro-map tests for movement mechanics
+2. Character/enemy definitions for cutscenes
+
+### The tests/ Directory
+
+```
+tests/
+├── package.json
+├── playwright.config.js
+└── specs/
+    └── [Playwright test files - future]
+```
+
+Playwright test suite infrastructure (for future automated testing).
 
 ---
 
@@ -197,13 +255,30 @@ Plus: Complete narrative framework for first map "The Bridge at Old Fort Crossin
 
 ## What to Do Next
 
+**Quick Decision Tree:**
+
+```
+New session starts
+    ↓
+CURRENT-WORK.md exists? ──YES──→ Continue that feature
+    ↓ NO
+    ↓
+Read docs/status/IMPLEMENTATION-STATUS.md
+    ↓
+Pick highest priority OR choose from options below
+    ↓
+Create CURRENT-WORK.md from template
+    ↓
+Start building
+```
+
 ### Option A: Implement First Map
 **Goal:** Create "The Bridge at Old Fort Crossing" as playable level
 
 **Steps:**
-1. Read `FIRST-MAP-NARRATIVE.md` (complete narrative)
+1. Read `docs/design/FIRST-MAP-NARRATIVE.md` (complete narrative)
 2. Design voxel layout (20x20 grid with elevation)
-3. Create `first-map-voxels.json` (exact terrain)
+3. Create first-map-voxels.json (exact terrain)
 4. Define constraints for bridge, ruins, river
 5. Implement rain weather system
 6. Add zombie spawn mechanic
@@ -239,7 +314,7 @@ Plus: Complete narrative framework for first map "The Bridge at Old Fort Crossin
 **Goal:** Design remaining systems or new features
 
 **Approach:**
-1. Read `DEVELOPER-STYLE-GUIDE.md` for working style
+1. Read `docs/design/DEVELOPER-STYLE-GUIDE.md` for working style
 2. Start with collaborative discussion
 3. Let objectives emerge naturally
 4. Use primary source + interpretation pattern
