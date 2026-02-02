@@ -19,6 +19,76 @@
 
 ---
 
+## Complete Onboarding Map
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     NEW CLAUDE SESSION STARTS                       │
+└─────────────────────────────────────────────────────────────────────┘
+                                ↓
+        ┌───────────────────────────────────────────────────┐
+        │  QUICK-START.md (5 min - get productive)          │
+        │  • 3 core rules                                   │
+        │  • Ultra-quick commands                           │
+        │  • Testing setup                                  │
+        └───────────────────────────────────────────────────┘
+                                ↓
+                    ┌───────────┴───────────┐
+                    │                       │
+        ┌───────────▼──────────┐   ┌───────▼────────────┐
+        │  START-HERE.md       │   │ CURRENT-WORK.md    │
+        │  (Full context)      │   │ (Active task)      │
+        │  • Project overview  │   │ If exists: do this │
+        │  • Recent work       │   │ If not: choose     │
+        │  • Navigation guide  │   │ from options       │
+        └──────────────────────┘   └────────────────────┘
+                    │
+                    ↓
+        ┌───────────────────────────────────────────────┐
+        │  What kind of information do you need?        │
+        └───────────────────────────────────────────────┘
+                    ↓
+        ┌───────────┴───────────┬──────────────┬──────────────┐
+        ↓                       ↓              ↓              ↓
+┌───────────────┐   ┌──────────────┐  ┌─────────────┐  ┌──────────────┐
+│ docs/protocol/│   │ docs/design/ │  │docs/status/ │  │ docs/guides/ │
+│               │   │              │  │             │  │              │
+│ HOW WE WORK   │   │ WHAT TO BUILD│  │ WHAT'S DONE │  │ HOW TO DO IT │
+│               │   │              │  │             │  │              │
+│ • Git rules   │   │ • Game       │  │ • Feature   │  │ • Common     │
+│ • Commit      │   │   systems    │  │   tracker   │  │   issues     │
+│   patterns    │   │ • Narrative  │  │ • Progress  │  │ • Standards  │
+│ • Session     │   │ • Architecture│ │   metrics   │  │ • Patterns   │
+│   continuity  │   │ • Style guide│  │ • Cutscene  │  │ • Coordinate │
+│               │   │              │  │   status    │  │   system     │
+└───────────────┘   └──────────────┘  └─────────────┘  └──────────────┘
+        │                   │              │                  │
+        └───────────────────┴──────────────┴──────────────────┘
+                                ↓
+                    ┌───────────────────────┐
+                    │  BUILD THE FEATURE    │
+                    │  • Follow 3 rules     │
+                    │  • Commit every 90min │
+                    │  • Test as you go     │
+                    └───────────────────────┘
+                                ↓
+                    ┌───────────────────────┐
+                    │  docs/sessions/       │
+                    │  Record what happened │
+                    └───────────────────────┘
+```
+
+### Information Access Patterns
+
+**"I need to get oriented"** → QUICK-START.md → START-HERE.md
+**"What am I working on?"** → CURRENT-WORK.md (or docs/status/)
+**"How do I work here?"** → docs/protocol/AI-AGENT-CONDUCT.md
+**"What should I build?"** → docs/design/ + docs/status/
+**"I'm stuck on [X]"** → docs/guides/
+**"What happened before?"** → docs/sessions/
+
+---
+
 ## Project Overview
 
 **3D tactical Fire Emblem-inspired game** with vertical traversal, built with Three.js + voxels.
