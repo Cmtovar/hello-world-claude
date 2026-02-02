@@ -1865,11 +1865,13 @@
                 createTerrain();
             }
 
-            // Create player (unless in cutscene mode)
-            if (!game.cutsceneMode) {
-                createPlayer();
-            } else {
-                console.log('Cutscene mode - skipping player creation');
+            // Create player (always create for camera control)
+            createPlayer();
+
+            // Make player invisible in cutscene mode (keeps camera control)
+            if (game.cutsceneMode && game.player) {
+                game.player.visible = false;
+                console.log('Cutscene mode - player invisible (camera controllable)');
             }
 
             // Event listeners
