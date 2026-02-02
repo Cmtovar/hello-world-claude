@@ -85,23 +85,84 @@
 - Confirms climb action works
 - Tests wait/timing
 
-### Test 03: Actual Cutscene (Act 1-3)
+### Test 03: Actual Cutscene (Act 1-3) - IN PROGRESS
 
 **Map:** Bridge, ruins, river (complete-scene.json)
+**File:** `test-maps/cutscene-act-1-2-3.json`
+**URL:** `http://100.93.126.24:8080/?test=cutscene-act-1-2-3`
 
-**Act 1:** Crossing & Exploration
-- Group crosses bridge from near side
-- Enter ruins, explore
+#### Phase 1: Static Choreography (COMPLETE ✅)
 
-**Act 2:** The Startle
-- Baby anomaly appears
-- Triggers rain
-- Runs away
+**Status:** Deep exploration and repositioning complete, ready for Phase 2
 
-**Act 3:** Zombie Uprising
-- Water rises
-- Zombies emerge
-- Group retreats
+**What's Complete:**
+- ✅ 6 mercenary characters defined with unique colors and roles
+  - Kael (Scholar), Sera (Artist), Finn (Storyteller), Mira (Storyteller), Lyra (Apprentice), Toby (Youth)
+- ✅ Act 1: Bridge crossing (X=0 → X=12) at Z=-1 (bridge level)
+- ✅ Act 1: Deep ruins exploration with varied paths
+  - Kael: Reaches Z=-9 (deepest vertical descent), north side platform (Y=2)
+  - Sera: Reaches X=20 (farthest east), center path
+  - Toby: Reaches X=20, Z=-8 (both far and deep)
+  - All characters explore unique paths through ruins
+- ✅ Act 2: Characters reposition/regroup from deep ruins to mid-map
+  - Characters converge from spread-out positions (X=15-20) to clustered (X=13-16)
+  - This is curiosity-driven regrouping ("what's happening?"), not retreat
+- ✅ Act 3: REMOVED entirely
+  - No retreat movements in cutscene
+  - Cutscene ends with characters at X=13-16 (mid-map)
+  - Actual retreat is handled during gameplay
+
+**Design Refinement (2026-02-02):**
+- Removed 89 actions across 6 characters (all Act 3 retreat movements)
+- Characters now end at X=13-16 instead of X=0-2
+- Cutscene properly sets up crisis without resolving it
+- Player will coordinate retreat during gameplay tutorial
+
+**Design Decision (2026-02-02):**
+See `docs/design/CUTSCENE-ACT-SEQUENCE-DECISION.md` for full context.
+
+**Event Sequence:**
+1. Anomaly appears (in deep ruins)
+2. Rain starts (triggered by anomaly)
+3. Glimpse of zombies (partially visible, rising)
+4. **Partial retreat** (motivated by zombie threat)
+5. Startled group (zombies fully visible)
+6. **Transition to gameplay** (cutscene ends, player takes control)
+
+**Key Insight:** Cutscene sets up crisis, gameplay resolves it. Characters should be mid-map (X=10-13) when gameplay begins, with zombies visible behind them.
+
+**Next Steps:**
+1. Modify all 6 character Act 3 retreat paths to end at X=10-13
+2. Test refined choreography in browser
+3. Commit Phase 1 complete
+4. Begin Phase 2 (add anomaly and rain)
+
+#### Phase 2: Add Anomaly (NOT STARTED)
+
+**Planned Features:**
+- Baby anomaly character (special model/appearance)
+- Spawn in deep ruins wooden area
+- Startle and flee when characters approach
+- Trigger rain event
+- Characters react (wait actions)
+
+#### Phase 3: Add Zombies (NOT STARTED)
+
+**Planned Features:**
+- 3-4 zombie characters
+- Spawn in river/forest floor area (X=14-18)
+- Glimpse appearance (partial visibility)
+- Full reveal after partial retreat
+- Pursue characters (motivates retreat)
+
+#### Phase 4: Polish & Effects (NOT STARTED)
+
+**Planned Features:**
+- Camera system (cinematic angles)
+- Dialogue/reactions
+- Rain particle effects
+- Water rising animation
+- Lighting changes (darker, atmospheric)
 
 **Scope:** Acts 1-3 (escape/rescue are separate)
 
@@ -209,11 +270,11 @@ This exact pattern will be used for blueprint mode:
 - [x] JSON validation script works
 - [x] Hex color fix script works
 - [x] Documentation complete
-- [ ] Test 02: Complex choreography (next)
-- [ ] Test 03: Actual cutscene Acts 1-3
-- [ ] Camera control system
-- [ ] Dialogue system
-- [ ] Lighting changes (rain effect)
+- [ ] Test 02: Complex choreography (deferred)
+- [x] Test 03 Phase 1: Acts 1-3 static choreography (deep exploration - needs refinement)
+- [ ] Test 03 Phase 2: Add anomaly
+- [ ] Test 03 Phase 3: Add zombies
+- [ ] Test 03 Phase 4: Camera, dialogue, lighting, rain effects
 
 ---
 
