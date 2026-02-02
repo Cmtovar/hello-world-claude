@@ -77,22 +77,27 @@ Ready to work.
 
 **What's next (Priority Order):**
 
-**If you're unsure what to work on, pick one:**
+**⭐ Recommended Next: Cutscene Test 02** (completes in-progress cutscene work)
 
-1. **Bridge Rope Railings** (visual detail, ~2 hours)
+**OR pick a different priority:**
+
+1. **Cutscene Test 02** (complex choreography, ~2 hours) ⭐ RECOMMENDED
+   - Test varied actions (diagonal, climb, wait, path crossing)
+   - Validates action variety and independence
+   - Status: JSON stub exists, needs characters + actions
+   - Why: Unblocks Acts 1-3, continues cutscene momentum from Test 01
+
+2. **Bridge Rope Railings** (visual detail, ~2 hours)
    - Add visible rope railings along bridge sides
    - Increases bridge presence from 3% → 8% of scene
    - Status: Designed, not implemented
-
-2. **Cutscene Test 02** (complex choreography, ~2 hours)
-   - Test varied actions (diagonal, climb, wait, path crossing)
-   - Validates action variety and independence
-   - Status: JSON stub exists, not implemented
+   - Why: Visual polish, independent of cutscene work
 
 3. **Cutscene Acts 1-3** (story beats, ~4 hours)
    - First map narrative: crossing bridge, anomaly, zombies
    - Uses complete-scene.json (bridge + river + ruins)
-   - Status: Designed in FIRST-MAP-NARRATIVE.md, not implemented
+   - Status: Designed in FIRST-MAP-NARRATIVE.md, needs Test 02 first
+   - Why: Main narrative cutscene (depends on Test 02 validation)
 
 **Or just ask me:** "What should I work on?"
 

@@ -53,6 +53,27 @@
 
 ---
 
+## What Changed Since Last Session
+
+**Quick orientation (run these):**
+```bash
+git log --oneline -5          # Last 5 commits
+git log --since="24 hours ago" --oneline  # Last 24 hours
+```
+
+**Current commit:** Check with `git log -1 --format="%h - %s"`
+
+**Files changed recently:**
+```bash
+git diff --stat HEAD~3..HEAD  # Changes in last 3 commits
+```
+
+This helps orient to what happened since you last worked.
+
+---
+
+## Major Design Session (2026-01-29)
+
 **Major design session** that created comprehensive game system architecture:
 
 1. **Constraint Interface Pattern** - Objects as affordances with interchangeable signatures
@@ -277,20 +298,22 @@ A: Player can design any template from the start. But templates require specific
 ## Git Information
 
 **Repository:** https://github.com/Cmtovar/hello-world-claude.git
-**Current Commit:** 47f4253 (Project reorganization - scene generation tools)
 **Branch:** master
 
-**Recent Commits:**
-- `47f4253` - Organize project structure - consolidate scene generation tools (48 files, 19,540 insertions)
-- `ab8cc59` - Combine bridge and forest floor into complete scene
-- `4950403` - Major game systems design (14,731 insertions!)
-
-**To Continue Work:**
+**To Check Current State:**
 ```bash
 cd /data/data/com.termux/files/home/projects/claude-code/1
-git status  # Check current state
-git log     # See commit history
+git status              # Check current state
+git log -1              # See latest commit
+git log --oneline -5    # See last 5 commits
 ```
+
+**Example Recent Commits (may be outdated - run git log):**
+- `052d31a` - Fix all missing pieces - complete onboarding
+- `f285c07` - Simplify onboarding - reduce overwhelm
+- `ef2ed4b` - Protocol v1.1 - Evolution Notes and Commit Frequency Adjustment
+
+**Note:** Commit hashes above are examples. Run `git log` for current state.
 
 ---
 
