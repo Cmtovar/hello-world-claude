@@ -226,7 +226,7 @@ Based on what I gravitate toward, I likely get frustrated by:
 - Functions as composable units
 
 ### Documentation-Heavy
-- ARCHITECTURE.md, DESIGN-DECISIONS.md, METHODOLOGY.md
+- `docs/design/ARCHITECTURE.md`, `docs/design/DESIGN-DECISIONS.md`, `docs/guides/METHODOLOGY.md`
 - Capture *why*, not just *what*
 - Documentation as thinking tool, not afterthought
 

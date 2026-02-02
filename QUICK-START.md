@@ -4,6 +4,27 @@
 
 ---
 
+## 🏗️ Just Want to Start Building?
+
+**Ultra-quick version (60 seconds):**
+```bash
+cd ~/projects/claude-code/1
+git status                    # Make sure it's clean
+# Edit index.html or create files
+# When you make progress:
+git add -A && git commit -m "WIP: what you did" && git push
+```
+
+**Test your changes:**
+```bash
+python -m http.server -b 100.93.126.24 8080
+# Open: http://100.93.126.24:8080/
+```
+
+**Ask me questions anytime. The rest of this file is helpful context.**
+
+---
+
 ## 1️⃣ Run These Commands (30 seconds)
 
 ```bash
@@ -32,6 +53,17 @@ Ready to work.
 
 **That's it. You know enough to start.**
 
+### 🤔 Why These Rules?
+
+**Commit every 90min + before questions**
+→ If session crashes while waiting for my response, your work is safe in git
+
+**One feature at a time**
+→ Actually finish things instead of scattered progress (cutscene 1/3, map 75%, blueprint 0%)
+
+**Check CURRENT-WORK.md**
+→ Know what you're building, don't waste time guessing or duplicating work
+
 ---
 
 ## 3️⃣ Current Project Status
@@ -43,10 +75,28 @@ Ready to work.
 - ✅ Cutscene system (Test 01 working)
 - ✅ Scene geometry (river, ruins, bridge ~75%)
 
-**What's next:**
-- 🎯 **First map integration** (bridge details OR cutscene Test 02)
+**What's next (Priority Order):**
 
-**See:** `docs/status/IMPLEMENTATION-STATUS.md` for specifics
+**If you're unsure what to work on, pick one:**
+
+1. **Bridge Rope Railings** (visual detail, ~2 hours)
+   - Add visible rope railings along bridge sides
+   - Increases bridge presence from 3% → 8% of scene
+   - Status: Designed, not implemented
+
+2. **Cutscene Test 02** (complex choreography, ~2 hours)
+   - Test varied actions (diagonal, climb, wait, path crossing)
+   - Validates action variety and independence
+   - Status: JSON stub exists, not implemented
+
+3. **Cutscene Acts 1-3** (story beats, ~4 hours)
+   - First map narrative: crossing bridge, anomaly, zombies
+   - Uses complete-scene.json (bridge + river + ruins)
+   - Status: Designed in FIRST-MAP-NARRATIVE.md, not implemented
+
+**Or just ask me:** "What should I work on?"
+
+**See:** `docs/status/IMPLEMENTATION-STATUS.md` for full details
 
 ---
 
@@ -98,8 +148,81 @@ git commit -m "[Feature Name] - Complete
 Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 git push origin master
 
-# Update docs
+# Update docs (START-HERE.md, relevant status files)
 # Delete CURRENT-WORK.md
+```
+
+---
+
+## 7️⃣ Testing Your Changes
+
+**Start dev server:**
+```bash
+cd ~/projects/claude-code/1
+python -m http.server -b 100.93.126.24 8080
+```
+
+**Open in browser:**
+```
+http://100.93.126.24:8080/                      # Main game
+http://100.93.126.24:8080/?test=<test-name>     # Specific test
+```
+
+**Common tests:**
+- `?test=cutscene-test-01-parallel` - Cutscene system (5 characters)
+- `?test=complete-scene` - Full first map scene
+- `?test=testBasicMovement` - Movement mechanics
+- See `test-maps/` folder for all available tests
+
+**Visual validation:**
+- Characters should move smoothly
+- Voxels should render correctly
+- Console should show no errors
+
+---
+
+## 8️⃣ If Things Go Wrong
+
+**Git is confused:**
+```bash
+git status               # See what's happening
+git diff                 # See uncommitted changes
+git log -3 --oneline     # See recent commits
+```
+
+**Want to save work temporarily:**
+```bash
+git stash                # Save changes
+git stash pop            # Restore saved changes
+```
+
+**Commit failed:**
+```bash
+git status               # Check what went wrong
+git add -A               # Stage everything
+git commit -m "WIP: describe current state"
+git push origin master
+```
+
+**Session crashed mid-work:**
+1. Don't panic - check what was committed
+2. `git log -1` - See last commit
+3. `git status` - See uncommitted changes
+4. Commit what you have: `git add -A && git commit -m "WIP: recovered work"`
+5. Even if it's broken, commit it - you can fix it next
+
+**Merge conflict (rare):**
+```bash
+git status               # See conflicted files
+# Edit files, resolve conflicts
+git add -A
+git commit -m "Resolve merge conflict"
+```
+
+**Need to undo last commit (careful!):**
+```bash
+git reset --soft HEAD~1  # Undo commit, keep changes
+git reset --hard HEAD~1  # Undo commit, DELETE changes (dangerous!)
 ```
 
 ---

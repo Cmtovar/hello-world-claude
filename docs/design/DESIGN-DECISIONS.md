@@ -692,7 +692,7 @@ console.log(`Input "${key}" blocked by constraints`);
 
 ### Advice for Future Sessions
 
-1. **Read ARCHITECTURE.md First:** Understand system before changing
+1. **Read ARCHITECTURE.md First:** Understand system before changing (in this folder)
 2. **Update Documentation:** Don't let docs fall behind code
 3. **Test After Refactoring:** Even "simple" changes can break mechanics
 4. **Console.log Liberally:** Better verbose than blind
@@ -701,7 +701,7 @@ console.log(`Input "${key}" blocked by constraints`);
 ---
 
 **Related Documents:**
-- `ARCHITECTURE.md` - Overall system design
+- `docs/design/ARCHITECTURE.md` - Overall system design
 - `METHODOLOGY.md` - Test-driven development workflow
 - `TEST-PATTERNS.md` - Test creation patterns
 - `CODE-STRUCTURE.md` - Detailed code organization

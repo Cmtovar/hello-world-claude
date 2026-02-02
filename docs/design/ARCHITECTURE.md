@@ -1026,4 +1026,4 @@ python -m http.server 8080 --bind 100.93.126.24
 
 ---
 
-**Next Steps:** Read `DESIGN-DECISIONS.md` for rationale behind specific implementation choices, and `CODE-STRUCTURE.md` for detailed code organization.
+**Next Steps:** Read `DESIGN-DECISIONS.md` (in this folder) for rationale behind specific implementation choices, and `../guides/CODE-STRUCTURE.md` for detailed code organization.

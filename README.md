@@ -29,11 +29,12 @@ Tactical strategy game with full 3D movement mechanics inspired by:
 - **Constraint system** for declarative test rules
 
 ### 📚 Complete Documentation
-- Architecture design (ARCHITECTURE.md)
-- Design decisions (DESIGN-DECISIONS.md)
-- Code structure guide (CODE-STRUCTURE.md)
-- Test patterns (TEST-PATTERNS.md)
-- Methodology (METHODOLOGY.md)
+- Architecture design (`docs/design/ARCHITECTURE.md`)
+- Design decisions (`docs/design/DESIGN-DECISIONS.md`)
+- Code structure guide (`docs/guides/CODE-STRUCTURE.md`)
+- Test patterns (`docs/guides/TEST-PATTERNS.md`)
+- Methodology (`docs/guides/METHODOLOGY.md`)
+- **Start here:** `QUICK-START.md` (5 min to productivity)
 
 ### 🔮 Future Unit Types
 - **Ground Units** - Standard movement (mechanics complete)
@@ -115,9 +116,11 @@ See `mechanics-graph.json` for:
 ### Files
 - `index.html` - Main game (Three.js, standalone)
 - `test-maps/` - Micro map configurations (JSON)
+- `story-geometry/` - Scene voxel data and generation scripts
 - `tests/` - Playwright test suite
 - `mechanics-graph.json` - Mechanic dependency graph
-- `COORDINATE_SYSTEM.md` - Position/voxel documentation
+- `docs/guides/COORDINATE_SYSTEM.md` - Position/voxel documentation
+- `docs/` - All documentation (organized by category)
 
 ### Coordinate System
 - Voxel at `y=0` is ground level
@@ -167,12 +170,14 @@ See `mechanics-graph.json` for:
 
 ## Next Steps
 
-1. Add mobile touch controls (for phone testing)
-2. Test remaining basic mechanics
-3. Implement turn-based grid movement
-4. Add multiple units
-5. Movement range visualization
-6. Terrain hazards
+**Current Focus:** First map integration (bridge details, cutscenes, blueprint intro)
+
+See `docs/status/IMPLEMENTATION-STATUS.md` for detailed status.
+
+**Quick start for new contributors:**
+1. Read `QUICK-START.md` (5 minutes)
+2. Check `docs/status/IMPLEMENTATION-STATUS.md` for current priorities
+3. Pick a feature and start building
 
 ## Contributing
 

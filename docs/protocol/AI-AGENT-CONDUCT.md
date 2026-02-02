@@ -241,9 +241,9 @@ The first map is THE integration point. It demonstrates:
 
 ```bash
 # Files to update
-START-HERE.md           # Update "What Was Just Accomplished"
-IMPLEMENTATION-STATUS.md # Update relevant system status
-[FEATURE]-STATUS.md     # Update if feature has dedicated status file
+START-HERE.md                      # Update "What Was Just Accomplished"
+docs/status/IMPLEMENTATION-STATUS.md # Update relevant system status
+docs/status/[FEATURE]-STATUS.md    # Update if feature has dedicated status file
 ```
 
 **Template addition to START-HERE.md:**
