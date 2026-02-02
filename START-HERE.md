@@ -1,106 +1,57 @@
 # START HERE - For Future Claude Sessions
 
-**Last Updated:** 2026-02-01 (AI Agent Conduct established)
+**Last Updated:** 2026-02-01 (Simplified onboarding)
 **Current Branch:** master
-**Status:** Clean working tree - all work committed and pushed to GitHub
+**Status:** Clean working tree
 
 ---
 
-## ⚠️ MANDATORY SESSION INITIALIZATION
+## 🚀 New Here? Start Fast
 
-**BEFORE doing ANY work, you MUST:**
+**Read this first:** **[QUICK-START.md](QUICK-START.md)** (5 minutes to productivity)
 
-```bash
-cd ~/projects/claude-code/1
-git log -1 --format="%ar | %h | %s"
-git status
-```
+**The 3 core rules:**
+1. Commit every ~90min and before asking questions
+2. Work on one feature until done
+3. Check `CURRENT-WORK.md` for current task
 
-**Then respond with:**
-```
-Session initialized - [DATE TIME]
-
-Last commit: [TIME] ago ([HASH])
-Working tree: [clean / X files changed]
-Action: [Committed changes / Clean, proceeding / Asking user about uncommitted work]
-
-Current focus: [from CURRENT-WORK.md or "What Was Just Accomplished"]
-```
-
-**REQUIRED READING (15 minutes):**
-1. **AI-AGENT-CONDUCT.md** ⚠️ MANDATORY - Code of conduct for all sessions
-2. **CURRENT-WORK.md** (if exists) - In-progress feature
-3. This file - Project context
-
-**Core Rules:**
-- ✅ Commit every 30-60 minutes (WIP commits allowed)
-- ✅ Commit BEFORE asking user questions
-- ✅ Push after every commit
-- ✅ Complete one feature before starting another
-- ✅ Define "done" before starting work
-
-**See AI-AGENT-CONDUCT.md for complete protocol**
+**That's enough to start building.** Everything below is optional context.
 
 ---
 
-## Quick Context
+## Project Overview
 
-This is a **3D tactical Fire Emblem-inspired game** with vertical traversal, built with Three.js.
+**3D tactical Fire Emblem-inspired game** with vertical traversal, built with Three.js + voxels.
 
-**Current State:**
-- ✅ Movement mechanics fully implemented (7/7 core mechanics)
-- ✅ Complete game systems designed (6 major interconnected systems)
-- ✅ First map narrative framework complete
-- 🚧 Ready to implement: First map OR AP/blueprint system
+**Status:**
+- ✅ Movement mechanics (7/7 done)
+- ✅ Cutscene system (Test 01 working)
+- 🚧 First map integration (bridge, scenes, blueprint intro)
 
-**⚠️ Recovery Infrastructure:**
-- **SESSION-CONTINUITY.md** - Critical practices for session recovery (tested 2026-01-30)
-- **COMMON-ISSUES.md** - Known problems and solutions
-- **TEST-JSON-STANDARD.md** - ⚠️ CRITICAL: JSON format standard (prevents recurring hex color errors)
-- **.claude/dev-server.md** - Dev server config (tailscale IP: 100.93.126.24)
+**Current Focus:** Complete first playable map with integrated systems
 
 ---
 
-## What Was Just Accomplished (2026-02-01)
+## Recent Work (Last 3 Sessions)
 
-**Session recovery + AI Agent Conduct established:**
+**2026-02-01** - Simplified onboarding
+- Created QUICK-START.md (5min to productivity)
+- Organized docs into folders (less overwhelming)
+- Reduced reading burden from 30min → 5min
 
-1. **Recovered Uncommitted Work** - 5375 lines from Jan 30-31 cutscene implementation
-2. **Committed Cutscene System** - Action queue pattern, Test 01 working, JSON validation
-3. **Established Code of Conduct** - AI-AGENT-CONDUCT.md with mandatory protocols
-4. **Enhanced Git Hygiene** - WIP commit pattern, 30-60min frequency, commit-before-ask rule
+**2026-02-01** - Protocol & recovery
+- Recovered 5375 lines of cutscene work
+- Established AI-AGENT-CONDUCT.md
+- Created PROTOCOL-EVOLUTION-NOTES.md
 
-**Files Changed:**
-- AI-AGENT-CONDUCT.md (NEW) - Mandatory protocols for all sessions
-- START-HERE.md - Added session initialization checklist
-- SESSION-RECOVERY-2026-02-01.md - Recovery analysis
-- SESSION-SUMMARY-2026-02-01.md - Health assessment
+**2026-01-30** - Cutscene system
+- Implemented action queue pattern
+- Test 01 working (5 characters in parallel)
+- JSON validation system
 
-**Next Step:** Complete CURRENT-WORK.md template, then choose feature to complete (first map bridge OR cutscene Test 02)
-
-**Critical Change:** All future sessions MUST follow AI-AGENT-CONDUCT.md protocols
-
----
-
-## What Was Accomplished (2026-01-30)
-
-**Cutscene system implementation** with action queue pattern and JSON validation:
-
-1. **Cutscene Infrastructure** - Action queue consumption, parallel character movement
-2. **Test 01 Complete** - 5 characters moving in parallel (working reference)
-3. **JSON Standard & Validation** - Prevention system for recurring hex color errors
-
-**⚠️ CRITICAL for future sessions:**
-- ALWAYS use decimal colors in JSON (2263842), NEVER hex (0x228b22)
-- Hex notation breaks JSON parsing with cryptic error
-
-**Status:** Test 01 working, ready for Test 02 (complex choreography) or Acts 1-3
-
-**See:** CUTSCENE-SYSTEM-STATUS.md for details
+**See:** `docs/sessions/` for detailed session notes
 
 ---
-
-## What Was Accomplished (2026-01-29)
 
 **Major design session** that created comprehensive game system architecture:
 
@@ -115,30 +66,43 @@ Plus: Complete narrative framework for first map "The Bridge at Old Fort Crossin
 
 ---
 
-## Essential Reading Order
+## Documentation Structure
 
-### If You Need Full Context:
-1. **This file** (you are here)
-2. `SESSION-2026-01-29.md` - Comprehensive summary of what was designed
-3. `DEVELOPER-STYLE-GUIDE.md` - How the developer thinks and works
-4. `README.md` - Project overview
-5. `ARCHITECTURE.md` - Technical architecture (from previous session)
+```
+/
+├── QUICK-START.md              ← Start here (5 min)
+├── START-HERE.md               ← You are here (context)
+├── README.md                   ← Project overview
+├── CURRENT-WORK.md             ← Active feature (if exists)
+│
+├── docs/
+│   ├── protocol/               ← How we work
+│   │   ├── AI-AGENT-CONDUCT.md      (Full rules)
+│   │   └── PROTOCOL-EVOLUTION-NOTES.md
+│   │
+│   ├── design/                 ← What we're building
+│   │   ├── FIRST-MAP-NARRATIVE.md
+│   │   ├── DEVELOPER-STYLE-GUIDE.md
+│   │   └── [design docs]
+│   │
+│   ├── status/                 ← Current state
+│   │   ├── IMPLEMENTATION-STATUS.md
+│   │   ├── CUTSCENE-SYSTEM-STATUS.md
+│   │   └── PROGRESS-METRICS.md
+│   │
+│   ├── guides/                 ← How-to references
+│   │   ├── COMMON-ISSUES.md
+│   │   └── TEST-JSON-STANDARD.md
+│   │
+│   └── sessions/               ← Historical notes
+│       └── SESSION-*.md
+│
+├── index.html                  ← The game
+├── test-maps/                  ← Test scenarios
+└── story-geometry/             ← Scene voxel data
+```
 
-### If Implementing First Map:
-1. `FIRST-MAP-NARRATIVE.md` - Complete story, encounter sequence, world questions
-2. `MAP-DESIGN-CONCEPTS.md` - Rope bridge geometry, map distinctiveness
-3. `CONSTRAINT-INTERFACE-PATTERN.md` - Foundation system for everything
-
-### If Implementing Game Systems:
-1. `concepts/blueprint-mode-design.md` + interpretation - AP system & parallel coordination
-2. `concepts/template-composition-system.md` + interpretation - Template IDE system
-3. `concepts/techniques-and-environment.md` + interpretation - Offset system & environmental weapons
-4. `concepts/almanac-and-template-ide.md` + interpretation - Learning tools
-
-### If Exploring/Designing New Systems:
-1. `DEVELOPER-STYLE-GUIDE.md` - Working style, design patterns, communication preferences
-2. All files in `concepts/` directory - See how systems were designed
-3. Note the **anthropological documentation pattern**: primary source + interpretation side-by-side
+**Most files are optional. Start with QUICK-START.md.**
 
 ---
 
