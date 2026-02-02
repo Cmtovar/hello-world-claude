@@ -3715,7 +3715,7 @@
           },
           {
             "type": "comment",
-            "text": "Enter ruins, explore"
+            "text": "Enter ruins DEEP - reach wooden hiding area"
           },
           {
             "type": "move",
@@ -3730,23 +3730,31 @@
             "to": {
               "x": 14,
               "y": 1,
-              "z": -1
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 2,
+              "z": -2
             }
           },
           {
             "type": "move",
             "to": {
               "x": 15,
-              "y": 1,
-              "z": 0
+              "y": 2,
+              "z": -3
             }
           },
           {
             "type": "move",
             "to": {
               "x": 16,
-              "y": 1,
-              "z": 0
+              "y": 2,
+              "z": -3
             }
           },
           {
@@ -3755,9 +3763,9 @@
           {
             "type": "move",
             "to": {
-              "x": 17,
-              "y": 1,
-              "z": 1
+              "x": 16,
+              "y": 2,
+              "z": -4
             }
           },
           {
@@ -3773,22 +3781,18 @@
           {
             "type": "move",
             "to": {
-              "x": 16,
-              "y": 1,
-              "z": 0
+              "x": 15,
+              "y": 2,
+              "z": -3
             }
           },
           {
             "type": "move",
             "to": {
-              "x": 15,
-              "y": 1,
-              "z": 0
+              "x": 14,
+              "y": 2,
+              "z": -2
             }
-          },
-          {
-            "type": "comment",
-            "text": "ACT 3: Retreat across bridge"
           },
           {
             "type": "move",
@@ -3797,6 +3801,10 @@
               "y": 1,
               "z": -1
             }
+          },
+          {
+            "type": "comment",
+            "text": "ACT 3: Retreat across bridge"
           },
           {
             "type": "move",
@@ -4029,7 +4037,7 @@
           },
           {
             "type": "comment",
-            "text": "Enter ruins, explore north"
+            "text": "Explore deep - collapsed tower"
           },
           {
             "type": "move",
@@ -4056,15 +4064,31 @@
             }
           },
           {
-            "type": "wait"
-          },
-          {
             "type": "move",
             "to": {
               "x": 16,
               "y": 1,
               "z": -2
             }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": -3
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": -3
+            }
+          },
+          {
+            "type": "wait"
           },
           {
             "type": "comment",
@@ -4079,10 +4103,30 @@
           {
             "type": "move",
             "to": {
-              "x": 15,
+              "x": 17,
+              "y": 1,
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
               "y": 1,
               "z": -1
             }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 15,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "comment",
+            "text": "ACT 3: Retreat"
           },
           {
             "type": "move",
@@ -4091,10 +4135,6 @@
               "y": 1,
               "z": 0
             }
-          },
-          {
-            "type": "comment",
-            "text": "ACT 3: Retreat"
           },
           {
             "type": "move",
@@ -4327,14 +4367,14 @@
           },
           {
             "type": "comment",
-            "text": "Enter ruins, explore south area"
+            "text": "Deep south exploration"
           },
           {
             "type": "move",
             "to": {
               "x": 13,
               "y": 1,
-              "z": 1
+              "z": 2
             }
           },
           {
@@ -4342,19 +4382,43 @@
             "to": {
               "x": 14,
               "y": 1,
-              "z": 2
+              "z": 3
             }
-          },
-          {
-            "type": "wait"
           },
           {
             "type": "move",
             "to": {
               "x": 15,
               "y": 1,
-              "z": 2
+              "z": 3
             }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 4
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": 4
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": 4
+            }
+          },
+          {
+            "type": "wait"
           },
           {
             "type": "comment",
@@ -4369,6 +4433,34 @@
           {
             "type": "move",
             "to": {
+              "x": 17,
+              "y": 1,
+              "z": 3
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 15,
+              "y": 1,
+              "z": 1
+            }
+          },
+          {
+            "type": "comment",
+            "text": "ACT 3: Retreat"
+          },
+          {
+            "type": "move",
+            "to": {
               "x": 14,
               "y": 1,
               "z": 1
@@ -4381,10 +4473,6 @@
               "y": 1,
               "z": 1
             }
-          },
-          {
-            "type": "comment",
-            "text": "ACT 3: Retreat"
           },
           {
             "type": "move",
@@ -4509,7 +4597,7 @@
         "actionQueue": [
           {
             "type": "comment",
-            "text": "ACT 1: Wait then follow Finn"
+            "text": "ACT 1: Follow Finn south"
           },
           {
             "type": "wait"
@@ -4604,7 +4692,7 @@
           },
           {
             "type": "comment",
-            "text": "Join Finn in ruins"
+            "text": "Deep ruins with Finn"
           },
           {
             "type": "move",
@@ -4619,19 +4707,35 @@
             "to": {
               "x": 14,
               "y": 1,
-              "z": 1
+              "z": 2
             }
-          },
-          {
-            "type": "wait"
           },
           {
             "type": "move",
             "to": {
               "x": 15,
               "y": 1,
-              "z": 1
+              "z": 2
             }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 3
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": 3
+            }
+          },
+          {
+            "type": "wait"
           },
           {
             "type": "comment",
@@ -4642,6 +4746,22 @@
           },
           {
             "type": "wait"
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 15,
+              "y": 1,
+              "z": 1
+            }
           },
           {
             "type": "move",
@@ -4778,7 +4898,7 @@
         "actionQueue": [
           {
             "type": "comment",
-            "text": "ACT 1: Cross bridge carefully"
+            "text": "ACT 1: Cautious crossing"
           },
           {
             "type": "wait"
@@ -4807,7 +4927,7 @@
             "to": {
               "x": 4,
               "y": 1,
-              "z": 2
+              "z": 1
             }
           },
           {
@@ -4815,7 +4935,7 @@
             "to": {
               "x": 5,
               "y": 1,
-              "z": 2
+              "z": 1
             }
           },
           {
@@ -4823,7 +4943,7 @@
             "to": {
               "x": 6,
               "y": 1,
-              "z": 1
+              "z": 0
             }
           },
           {
@@ -4831,7 +4951,7 @@
             "to": {
               "x": 7,
               "y": 1,
-              "z": 1
+              "z": 0
             }
           },
           {
@@ -4876,7 +4996,7 @@
           },
           {
             "type": "comment",
-            "text": "Cautiously explore ruins center"
+            "text": "Carefully explore center"
           },
           {
             "type": "move",
@@ -4898,14 +5018,66 @@
             }
           },
           {
+            "type": "move",
+            "to": {
+              "x": 15,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
             "type": "wait"
           },
           {
             "type": "comment",
-            "text": "ACT 2: Regroup quickly"
+            "text": "ACT 2: Regroup"
           },
           {
             "type": "wait"
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 15,
+              "y": 1,
+              "z": 0
+            }
+          },
+          {
+            "type": "comment",
+            "text": "ACT 3: Retreat"
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 14,
+              "y": 1,
+              "z": 0
+            }
           },
           {
             "type": "move",
@@ -4914,10 +5086,6 @@
               "y": 1,
               "z": 0
             }
-          },
-          {
-            "type": "comment",
-            "text": "ACT 3: Retreat (diagonal path)"
           },
           {
             "type": "move",
@@ -4940,7 +5108,7 @@
             "to": {
               "x": 10,
               "y": 1,
-              "z": 0
+              "z": 1
             }
           },
           {
@@ -5034,7 +5202,7 @@
         "actionQueue": [
           {
             "type": "comment",
-            "text": "ACT 1: Energetic crossing"
+            "text": "ACT 1: Energetic zigzag"
           },
           {
             "type": "wait"
@@ -5076,7 +5244,7 @@
             "to": {
               "x": 7,
               "y": 1,
-              "z": 0
+              "z": -1
             }
           },
           {
@@ -5084,7 +5252,7 @@
             "to": {
               "x": 8,
               "y": 1,
-              "z": -1
+              "z": 0
             }
           },
           {
@@ -5092,7 +5260,7 @@
             "to": {
               "x": 9,
               "y": 1,
-              "z": -1
+              "z": 0
             }
           },
           {
@@ -5121,14 +5289,14 @@
           },
           {
             "type": "comment",
-            "text": "Explore ruins excitedly"
+            "text": "Run VERY deep into ruins!"
           },
           {
             "type": "move",
             "to": {
               "x": 13,
               "y": 1,
-              "z": 0
+              "z": -1
             }
           },
           {
@@ -5136,7 +5304,7 @@
             "to": {
               "x": 14,
               "y": 1,
-              "z": 1
+              "z": -1
             }
           },
           {
@@ -5144,26 +5312,74 @@
             "to": {
               "x": 15,
               "y": 1,
-              "z": 0
+              "z": -2
             }
-          },
-          {
-            "type": "wait"
           },
           {
             "type": "move",
             "to": {
               "x": 16,
               "y": 1,
-              "z": 1
+              "z": -3
             }
           },
           {
-            "type": "comment",
-            "text": "ACT 2: Regroup (curious about anomaly)"
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": -4
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": -4
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 19,
+              "y": 1,
+              "z": -4
+            }
           },
           {
             "type": "wait"
+          },
+          {
+            "type": "comment",
+            "text": "ACT 2: Regroup (run back)"
+          },
+          {
+            "type": "wait"
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 18,
+              "y": 1,
+              "z": -3
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 17,
+              "y": 1,
+              "z": -2
+            }
+          },
+          {
+            "type": "move",
+            "to": {
+              "x": 16,
+              "y": 1,
+              "z": -1
+            }
           },
           {
             "type": "move",
@@ -5174,16 +5390,16 @@
             }
           },
           {
+            "type": "comment",
+            "text": "ACT 3: Retreat zigzag"
+          },
+          {
             "type": "move",
             "to": {
               "x": 14,
               "y": 1,
               "z": 0
             }
-          },
-          {
-            "type": "comment",
-            "text": "ACT 3: Retreat (zigzag pattern)"
           },
           {
             "type": "move",
@@ -5198,7 +5414,7 @@
             "to": {
               "x": 12,
               "y": 1,
-              "z": 0
+              "z": -1
             }
           },
           {
@@ -5206,7 +5422,7 @@
             "to": {
               "x": 11,
               "y": 1,
-              "z": -1
+              "z": 0
             }
           },
           {
@@ -5214,7 +5430,7 @@
             "to": {
               "x": 10,
               "y": 1,
-              "z": 0
+              "z": 1
             }
           },
           {
@@ -5230,7 +5446,7 @@
             "to": {
               "x": 8,
               "y": 1,
-              "z": 1
+              "z": 0
             }
           },
           {
@@ -5246,7 +5462,7 @@
             "to": {
               "x": 6,
               "y": 1,
-              "z": 0
+              "z": 1
             }
           },
           {
@@ -5254,7 +5470,7 @@
             "to": {
               "x": 5,
               "y": 1,
-              "z": 1
+              "z": 2
             }
           },
           {

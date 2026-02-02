@@ -683,7 +683,7 @@
             cutsceneMode: false,
             characterGroup: null,
             cutsceneAnimating: false,
-            cutsceneActionDelay: 1500 // ms between action consumption
+            cutsceneActionDelay: 750 // ms between action consumption (2x speed for testing)
         };
 
         // Expose game state globally for testing
@@ -2434,13 +2434,13 @@
                 }
 
                 // [3] POST-MOVE PROCESSING (after execution)
-                // Wait for animation to complete (1000ms) before checking gravity
+                // Wait for animation to complete (500ms) before checking gravity
                 const finalPos = finalAction.to;
                 setTimeout(() => {
                     for (const processor of this.postProcessors) {
                         processor.postProcess(character, finalPos);
                     }
-                }, 1050); // After move animation completes (1000ms + small buffer)
+                }, 525); // After move animation completes (500ms + small buffer)
 
                 return finalAction; // Return transformed action
             }
@@ -2487,7 +2487,7 @@
         // Animate character movement (similar to existing player movement)
         function animateCharacterMove(character, targetPos) {
             const startPos = { ...character.position };
-            const duration = 1000; // 1 second movement
+            const duration = 500; // 0.5 second movement (2x speed for testing)
             const startTime = Date.now();
 
             character.currentAnimation = {
